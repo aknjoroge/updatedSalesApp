@@ -34,6 +34,7 @@ public class loginphone extends Fragment {
         forgotpassword=(view).findViewById(R.id.forgotpasswordtxt2);
         resendcode=(view).findViewById(R.id.resendphoneverification);
 
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

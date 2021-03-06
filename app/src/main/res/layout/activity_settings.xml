@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".settings">
+    <androidx.cardview.widget.CardView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="2dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <TableRow
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/arialbd"
+                    android:id="@+id/textViessw25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lock" />
+
+                <Switch
+                    android:layout_weight="1"
+                    android:id="@+id/lockswitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                 />
+            </TableRow>
+
+        </TableLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="2dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
+
+        <TableLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/arialbd"
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/darkmode" />
+
+                <Switch
+                    android:layout_weight="1"
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   />
+            </TableRow>
+
+        </TableLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/arial"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/button"
+        android:background="@drawable/custominput"
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/update" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
+
+
+        app:cardBackgroundColor="@color/red"
+        app:cardCornerRadius="10dp"
+        >
+        <Button
+            android:id="@+id/delbtn"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+android:fontFamily="@font/arial"
+            android:background="@android:color/transparent"
+            android:text="Delete Account?"
+            android:textColor="@color/purewhite"
+            android:textSize="13sp" />
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

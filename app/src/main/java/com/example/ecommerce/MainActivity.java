@@ -8,13 +8,23 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class MainActivity extends AppCompatActivity {
+import io.paperdb.Paper;
 
+public class MainActivity extends AppCompatActivity {
+lanchermanager lanchermanager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        lanchermanager=new lanchermanager(this);
+        Paper.init(this);
+        if(lanchermanager.isFirstTime()){
 
+            String sec="unlocked";
+            Paper.book().write(prevalent.lockstatkey,sec);
+        }else{
+
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override

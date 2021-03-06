@@ -67,6 +67,12 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        bottomNavigation.show(1,true);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -106,6 +112,11 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
             @Override
             public void onReselectItem(MeowBottomNavigation.Model item) {
+                switch (item.getId()){
+                    case 1:
+                        startActivity(new Intent(getApplicationContext(),categories.class));
+                        break;
+                }
 
             }
         });
@@ -134,10 +145,10 @@ bottomNavigation.show(1,true);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+              startActivity(new Intent(getApplicationContext(),cart.class));
             }
         });
+
 
         nav = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, nav, toolbar, R.string.nav_opener, R.string.nav_closer);
@@ -236,12 +247,12 @@ try{
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.home, menu);
+//        return true;
+//    }
     @Override
     public void onBackPressed() {
         if(nav.isDrawerOpen(GravityCompat.START)){
@@ -253,15 +264,24 @@ try{
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.nav_home:
+            case R.id.nav_cart:
 
-                Snackbar.make(findViewById(R.id.recyclermenumain), "techkey", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
+//                Snackbar.make(findViewById(R.id.recyclermenumain), "techkey", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                startActivity(new Intent(getApplicationContext(),cart.class));
 
                 break;
-            case R.id.nav_gallery:
-                Toast.makeText(this, "hi", Toast.LENGTH_SHORT).show();
+            case R.id.nav_feed:
+                startActivity(new Intent(getApplicationContext(),feed.class));
+                break;
+            case  R.id.nav_settings:
+                startActivity(new Intent(getApplicationContext(),settings.class));
+                break;
+            case R.id.nav_about:
+                startActivity(new Intent(getApplicationContext(),about.class));
+                break;
+            case R.id.nav_category:
+                startActivity(new Intent(getApplicationContext(),categories.class));
                 break;
 
         }

@@ -55,7 +55,7 @@ public class cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         fAuth = FirebaseAuth.getInstance();
-        recyclerView=findViewById(R.id.recyclermenucart);
+        recyclerView=findViewById(R.id.cartrecycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         call=findViewById(R.id.placecallcartimage);
@@ -92,50 +92,16 @@ public class cart extends AppCompatActivity {
 
         fStore = FirebaseFirestore.getInstance();
         userid = fAuth.getCurrentUser().getUid();
+        try {
+            loaddocs();
+        }catch (Exception e){
+            Toast.makeText(this, "Error: "+e, Toast.LENGTH_LONG).show();
+        }
 
 
     }
 
-
-
-    public void oncartclick(final String key){
-
-        android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
-                .setTitle("Cart Opptions")
-                .setMessage("Remove Product?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        fStore.collection("CartList").document("orders").collection(userid).document(key)
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(cart.this, "Error deleting document", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-
-                    }
-                })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .show();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void loaddocs() {
 
         FirestoreRecyclerOptions<forcart> options = new FirestoreRecyclerOptions.Builder<forcart>()
                 .setQuery(fStore.collection("CartList").document("orders").collection(userid),forcart.class).build();
@@ -143,7 +109,7 @@ public class cart extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull cartviewholder holder, int position, @NonNull final forcart model) {
 
-                holder.txtpname.setText("Name :"+model.getName()+".");
+                holder.txtpname.setText("Name: "+model.getName()+".");
                 holder.txtpprice.setText("Price: "+model.getPrice()+"/=");
 
                 keptkey=model.getKey();
@@ -160,7 +126,7 @@ public class cart extends AppCompatActivity {
 
                 int perquant=((Integer.parseInt(model.getPrice()))) * Integer.parseInt(model.getAmount());
 
-               //total value
+                //total value
                 String forqtotal= String.valueOf(perquant);
 
                 totalprice=totalprice+perquant;
@@ -192,6 +158,51 @@ public class cart extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+        totalprice=0;
+    }
+
+
+    public void oncartclick(final String key){
+
+        android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
+                .setTitle("Cart Opptions")
+                .setMessage("Remove Product?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fStore.collection("CartList").document("orders").collection(userid).document(key)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                        loaddocs();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(cart.this, "Error deleting document", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
 
     }
     public void callone(){

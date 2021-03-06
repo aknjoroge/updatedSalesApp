@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -69,7 +70,7 @@ public class productdetails extends AppCompatActivity {
     String userid;
     FirebaseFirestore fStore;
     String pid,cid;
-
+ProgressDialog loadBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +91,12 @@ callone();
             }
         });
 
+        loadBar=new ProgressDialog(this);
+        loadBar.setTitle("ADDING TO CART.");
+        loadBar.setMessage("Adding item to cart...");
+        loadBar.setIcon(R.drawable.cart_24);
+        loadBar.setCanceledOnTouchOutside(false);
+        loadBar.hide();
         recyclerView=findViewById(R.id.recyclerproductdetail);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
@@ -116,7 +123,7 @@ callone();
         tocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+loadBar.show();
                 Calendar calendar= Calendar.getInstance();
                 SimpleDateFormat currentdate = new SimpleDateFormat("MMM dd,yyyy");
                 cdate =currentdate.format(calendar.getTime());
@@ -159,10 +166,11 @@ callone();
                         cartitem.put("price",takeprice);
                         cartitem.put("date",cdate);
                         cartitem.put("time",ctime);
-                        fStore.collection("CartList").document("orders").collection(userid).document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        fStore.collection("CartList").document("usercartlistitems").collection(userid).document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(productdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
+                                loadBar.hide();
                                 startActivity(new Intent(getApplicationContext(),cart.class));
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -271,7 +279,7 @@ callone();
         android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
                 .setTitle("PLACE CALL")
                 .setMessage("Contact Support On :+254710664418?")
-
+                .setIcon(R.drawable.call_24)
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

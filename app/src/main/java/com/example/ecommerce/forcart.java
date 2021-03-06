@@ -1,6 +1,10 @@
 package com.example.ecommerce;
 
 public class forcart {
+    public forcart(){
+
+    }
+
     private String name,price,category,randomKey,amount,key;
 
     public String getName() {

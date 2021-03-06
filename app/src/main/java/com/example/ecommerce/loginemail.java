@@ -1,5 +1,6 @@
 package com.example.ecommerce;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -29,9 +30,10 @@ import io.paperdb.Paper;
 public class loginemail extends Fragment {
 EditText email,password;
 CheckBox remlogin;
-ProgressBar progressBar;
+
 Button login;
 TextView forgotpassword,resendcode;
+    ProgressDialog loadBar2;
     private FirebaseAuth fAuth;
     FirebaseFirestore fStore;
 
@@ -44,7 +46,13 @@ TextView forgotpassword,resendcode;
         email=(view).findViewById(R.id.loginemailtxt);
         password=(view).findViewById(R.id.loginpasswordtxt);
         remlogin=(view).findViewById(R.id.checkBox);
-        progressBar=(view).findViewById(R.id.emailloginprogressabar);
+        loadBar2=new ProgressDialog(getContext());
+        loadBar2.setTitle("CHECKING CREDENTIALS.");
+        loadBar2.setMessage("Working...");
+        loadBar2.setCanceledOnTouchOutside(false);
+        loadBar2.setIcon(R.drawable.login_24);
+        loadBar2.hide();
+
         login=(view).findViewById(R.id.emailloginbtn);
         forgotpassword=(view).findViewById(R.id.forgotpasswordtxt);
         resendcode=(view).findViewById(R.id.resendmailverification);
@@ -58,7 +66,7 @@ TextView forgotpassword,resendcode;
               if(!checkfields()){
 
               } else{
-progressBar.setVisibility(View.VISIBLE);
+                  loadBar2.show();
 final String useremail=email.getText().toString();
 final String userpassword=password.getText().toString();
 
@@ -72,13 +80,14 @@ final String userpassword=password.getText().toString();
                                   Paper.book().write(prevalent.useremailkey, useremail);
 
                               }
+                              loadBar2.hide();
                               Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
                               startActivity(new Intent(getContext(),emailverification.class));
                           } else {
-
+                              loadBar2.hide();
                               Toast.makeText(getContext(), "An error occured"
                                       + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                              progressBar.setVisibility(View.INVISIBLE);
+
 
                           }
 
