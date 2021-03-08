@@ -70,6 +70,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     protected void onStart() {
         super.onStart();
         bottomNavigation.show(1,true);
+        bottomNavigation.setCount(2,"1");
     }
 
     @Override

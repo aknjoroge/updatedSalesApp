@@ -29,14 +29,17 @@
                     <TextView
                         android:id="@+id/textView61"
                         android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
                         android:layout_height="wrap_content"
                         android:text="CONTACT"
+                        android:fontFamily="@font/fontone"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/textView68"
+                        android:fontFamily="@font/arial"
                         android:layout_margin="10dp"
                         android:layout_width="match_parent"
                         android:textColor="@color/blue"
@@ -47,6 +50,7 @@
                         android:id="@+id/button1c"
                         android:layout_margin="5dp"
                         android:layout_width="match_parent"
+                        android:fontFamily="@font/arial"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custominput"
                         android:text="call : +254710664418" />
@@ -54,6 +58,7 @@
                     <Button
                         android:layout_margin="5dp"
                         android:id="@+id/button2c"
+                        android:fontFamily="@font/arial"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/custominput"
@@ -63,6 +68,7 @@
                         android:layout_marginTop="10dp"
                         android:id="@+id/textView10"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/arialbd"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="ABOUT:"
@@ -72,6 +78,7 @@
                     <TextView
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/arial"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="DESIGN AND BUILT BY TECHKEY A COMPANY OF
@@ -84,28 +91,31 @@ TUWASHOW AFRICA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-
+                        android:fontFamily="@font/arial"
                         android:layout_marginRight="8dp"
-                        android:text="tuwashowmedia.ac.ke"
+                        android:text="www.tuwashowmedia.ac.ke"
                         android:textColor="@color/black" />
                     <TextView
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-
+                        android:fontFamily="@font/arial"
                         android:layout_marginRight="8dp"
-                        android:text="techkey.co.ke"
+                        android:text="www.techkey.co.ke"
                         android:textColor="@color/black" />
                     <TextView
                         android:id="@+id/textView20"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+
 android:textAlignment="center"
+                        android:fontFamily="@font/arialbd"
                         android:layout_marginRight="8dp"
                         android:text="A DIGITAL PLATFORM est MMXVIII"
-                        android:textColor="@color/black" />
+                        />
 
                     <TextView
                         android:id="@+id/textView37SSS"
@@ -114,6 +124,7 @@ android:textAlignment="center"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:text="LICENSE:"
+                        android:fontFamily="@font/arialbd"
                         android:textColor="@color/red"
                         android:textSize="24sp" />
 

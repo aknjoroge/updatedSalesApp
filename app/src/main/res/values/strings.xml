@@ -27,6 +27,9 @@
     <string name="salad">SALAD</string>
     <string name="empydescription">Description: null</string>
     <string name="ugali">UGALI</string>
+    <string name="fed">FEED</string>
+    <string name="viewproduct">VIEW PRODUCT</string>
+    <string name="socialfeed">SOCIAL F E E D</string>
     <string name="addtocart">ADD TO CART</string>
     <string name="accompaniments">ACCOMPANIMENTS</string>
     <string name="changephone">change phone</string>

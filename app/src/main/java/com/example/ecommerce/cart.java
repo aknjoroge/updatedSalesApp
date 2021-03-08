@@ -134,7 +134,7 @@ public class cart extends AppCompatActivity {
 
 
                 fortotalview.setText(setttprice);
-                holder.txtpamount.setText("No: "+model.getAmount());
+                holder.txtpamount.setText("Amount: "+model.getAmount());
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -202,7 +202,11 @@ public class cart extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-
+        try {
+            loaddocs();
+        }catch (Exception e){
+            Toast.makeText(this, "Error: "+e, Toast.LENGTH_LONG).show();
+        }
 
     }
     public void callone(){

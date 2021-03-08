@@ -37,8 +37,8 @@ Button dells;
         fAuth = FirebaseAuth.getInstance();
 
         using = fAuth.getCurrentUser();
-        forlocks=findViewById(R.id.lockswitch);
-
+        forlocks=findViewById(R.id.lockswitch1);
+        Paper.init(this);
         takechecklock = Paper.book().read(prevalent.lockstatkey);
         if(takechecklock.equals("locked")){
             forlocks.setChecked(true);
@@ -59,6 +59,7 @@ Button dells;
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(forlocks.isChecked()){
+
                     Toast.makeText(settings.this, "App locked", Toast.LENGTH_SHORT).show();
                     String sec="locked";
                     Paper.book().write(prevalent.lockstatkey,sec);

@@ -302,8 +302,8 @@ call=findViewById(R.id.placecallaccounts);
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 String nametake=documentSnapshot.getString("name");
                 String mailtake =documentSnapshot.getString("mail");
-                String locatake=documentSnapshot.getString("Main City");
-                String locatake2=documentSnapshot.getString("local Town");
+                String locatake=documentSnapshot.getString("loation");
+                String locatake2=documentSnapshot.getString("Estate");
                 String alllocs =locatake2+" in "+locatake;
                 String phonetake =documentSnapshot.getString("phone");
 

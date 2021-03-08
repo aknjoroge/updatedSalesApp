@@ -22,6 +22,7 @@ lanchermanager lanchermanager;
 
             String sec="unlocked";
             Paper.book().write(prevalent.lockstatkey,sec);
+            lanchermanager.setFirstLunch(false);
         }else{
 
         }

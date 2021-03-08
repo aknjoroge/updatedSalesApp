@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+
+    android:layout_margin="8dp"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="10dp"
+    android:padding="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_margin="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:layout_margin="7dp"
+                    android:id="@+id/imageView6"
+                    android:scaleType="centerCrop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    app:srcCompat="@drawable/techkey" />
+            </TableRow>
+            <TableRow
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:textAlignment="center"
+                    android:fontFamily="@font/arial"
+                    android:layout_margin="3dp"
+                    android:id="@+id/feednametxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+            </TableRow>
+
+            <TableRow
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                <Button
+                    android:layout_weight="10"
+                    android:id="@+id/feedmorebtn"
+                    android:layout_margin="3dp"
+android:fontFamily="@font/arial"
+                    android:layout_width="0dp"
+                    android:background="@drawable/custominput"
+                    android:layout_height="wrap_content"
+                    android:text="@string/viewproduct" />
+
+                <ImageButton
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/feedlike"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/likeup_24" />
+                <TextView
+                    android:textAlignment="center"
+                    android:fontFamily="@font/arial"
+                   android:layout_margin="1dp"
+                    android:id="@+id/feedlikeno"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="10" />
+
+
+                <ImageButton
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:id="@+id/feedshare"
+                    android:background="@android:color/transparent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/share_24" />
+
+
+            </TableRow>
+
+
+
+        </TableLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
