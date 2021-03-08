@@ -13,6 +13,7 @@ public class feedviewholder extends RecyclerView.ViewHolder implements View.OnCl
     ImageView profile;
     Button viewmore;
     TextView name,likesno;
+    Boolean isliked=false;
     ImageButton share,like;
     itemclicklistener listener;
 

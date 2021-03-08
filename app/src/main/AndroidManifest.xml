@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".settings"></activity>
+        <activity android:name=".finalcheckout"></activity>
+        <activity android:name=".payment" />
+        <activity android:name=".settings" />
         <activity android:name=".about" />
         <activity android:name=".changepassword" />
         <activity android:name=".changelocation" />
@@ -26,9 +28,8 @@
         <activity android:name=".cart" />
         <activity
             android:name=".home"
-
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"  />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".howwework" />
         <activity android:name=".categories" />
         <activity android:name=".resendverificationpage" />
@@ -41,7 +42,9 @@
         <activity android:name=".signuppage" />
         <activity android:name=".loginpage" />
         <activity android:name=".start" />
-        <activity android:name=".MainActivity" android:noHistory="true">
+        <activity
+            android:name=".MainActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

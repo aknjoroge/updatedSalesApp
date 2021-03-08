@@ -1,14 +1,247 @@
 package com.example.ecommerce;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class checkout extends AppCompatActivity {
+    ImageView settingdp;
+    String takenews;
+    TextView town,estate,changeloc,shipping,cart,total;
+    TextView formenuone,formenutwo,formenuthree;
+    FirebaseFirestore fStore;
+    String userid;
+    Uri imageuri;
+    ImageButton call;
+    Button topayment;
+    String locationone,locationtwo,locationthree,locationfour,locationfive,locationsix;
+    String generallocation;
+    String setprice,data;
 
+    Button setforname,setforphone,setforpass,setforemail,setforlocation;
+    FirebaseAuth fAuth;
+    FirebaseUser using;
+
+    StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        using=fAuth.getCurrentUser();
+        userid = fAuth.getCurrentUser().getUid();
+        town=findViewById(R.id.checkouttowntxt);
+        total=findViewById(R.id.checkouttotaltxt);
+        topayment=findViewById(R.id.topaybtn);
+
+        estate=findViewById(R.id.checkoutestatetxt);
+        data=getIntent().getStringExtra("ttprice");
+
+        shipping=findViewById(R.id.checkoutshippingfee);
+        cart=findViewById(R.id.checkoutfromcarttxt);
+
+        formenuone=findViewById(R.id.menuone);
+        formenutwo=findViewById(R.id.menutwo);
+        formenuthree=findViewById(R.id.menuthree);
+        formenuone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        formenutwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(checkout.this,payment.class);
+                intent.putExtra("shipping",shipping.getText().toString());
+                intent.putExtra("cart",cart.getText().toString());
+                intent.putExtra("total",total.getText().toString());
+                startActivity(intent);
+            }
+        });
+        formenuthree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(findViewById(R.id.linearsum), "Fill in Payment Page First", Snackbar.LENGTH_LONG)
+                       .setAction("Action", null).show();
+            }
+        });
+
+
+
+
+        changeloc=findViewById(R.id.checkoutchangetxt);
+
+        changeloc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+confirm();
+
+            }
+        });
+
+        try {
+            shippingprices();
+            autochangeprofile2();
+
+
+        }catch (Exception e){
+            Toast.makeText(this, "error: "+e, Toast.LENGTH_SHORT).show();
+        }
+        topayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(checkout.this,payment.class);
+                intent.putExtra("shipping",shipping.getText().toString());
+                intent.putExtra("cart",cart.getText().toString());
+                intent.putExtra("total",total.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void shippingprices() {
+
+        final DocumentReference documentReference = fStore.collection("locations").document("prices");
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+
+               locationone=documentSnapshot.getString("Nairobi");
+                 locationtwo=documentSnapshot.getString("Ruaka");
+                locationthree=documentSnapshot.getString("Kikuyu");
+                locationfour=documentSnapshot.getString("Dagoretti");
+                locationfive=documentSnapshot.getString("Uthiru");
+                locationsix=documentSnapshot.getString("Wangige");
+
+            }
+        });
+
+
+    }
+
+    private void autochangeprofile2() {
+        final DocumentReference documentReference = fStore.collection("users").document(userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                String locatake=documentSnapshot.getString("loation");
+                generallocation=locatake;
+                String locatake2=documentSnapshot.getString("Estate");
+                town.setText(locatake);
+                estate.setText(locatake2);
+            }
+        });
+
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setlocationprice();
+            }
+        },500);
+
+
+    }
+
+    private void totalcalculations() {
+        shipping.setText(setprice);
+        cart.setText(data);
+
+        int one= Integer.parseInt(setprice);
+        int two=Integer.parseInt(data);
+        int three =one+two;
+        String amount=String.valueOf(three);
+        total.setText(amount);
+
+
+
+    }
+
+    private void setlocationprice() {
+
+        switch (generallocation){
+            case "Nairobi":
+                 setprice=locationone;
+                break;
+            case "Ruaka":
+                 setprice=locationtwo;
+                break;
+            case "Kikuyu":
+                 setprice=locationthree;
+                break;
+            case "Dagoretti":
+                 setprice=locationfour;
+                break;
+            case "Uthiru":
+                 setprice=locationfive;
+                break;
+            case "Wangige":
+                 setprice=locationsix;
+                break;
+
+
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                totalcalculations();
+            }
+        },500);
+
+
+
+    }
+
+    private void confirm() {
+
+        android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
+                .setTitle("Change Location Address?")
+                .setMessage("Continue")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(getApplicationContext(),changepassword.class));
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+
+
     }
 }

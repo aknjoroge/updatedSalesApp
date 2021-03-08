@@ -133,7 +133,7 @@ public class cart extends AppCompatActivity {
                 setttprice= String.valueOf(totalprice);
 
 
-                fortotalview.setText(setttprice);
+                fortotalview.setText("Total: "+setttprice);
                 holder.txtpamount.setText("Amount: "+model.getAmount());
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {

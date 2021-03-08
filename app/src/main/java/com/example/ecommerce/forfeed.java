@@ -5,7 +5,20 @@ public class forfeed {
 
     }
 
+    public Boolean getIsliked() {
+        return isliked;
+    }
+
+    public void setIsliked(Boolean isliked) {
+        this.isliked = isliked;
+    }
+
+    public forfeed(Boolean isliked) {
+        this.isliked = isliked;
+    }
+
     String name,filepath,category,likes,randomKey;
+    Boolean isliked=false;
 
     public forfeed(String randomKey) {
         this.randomKey = randomKey;

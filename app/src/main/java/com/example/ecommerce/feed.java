@@ -39,6 +39,7 @@ public class feed extends AppCompatActivity {
     DrawerLayout nav;
     FirebaseAuth fAuth;
     String htm;
+
     String loc ;
     String delkey;
     StorageReference storageReference;
@@ -158,28 +159,70 @@ public class feed extends AppCompatActivity {
                 holder.share.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Snackbar.make(findViewById(R.id.feedrecysler), "techkey is working on it", Snackbar.LENGTH_LONG)
-                     .setAction("Action", null).show();
+
+                        Intent intent= new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plain");
+
+                        String sharebody="Download the E_commerce app from www.techkey.co.ke/app to get access to the best" +
+                                "available sales system. ";
+                        intent.putExtra(Intent.EXTRA_SUBJECT,"subject here");
+                        intent.putExtra(Intent.EXTRA_TEXT,sharebody);
+                        startActivity(Intent.createChooser(intent,"Share via"));
+
+
+//                        Snackbar.make(findViewById(R.id.feedrecysler), "techkey is working on it", Snackbar.LENGTH_LONG)
+//                     .setAction("Action", null).show();
+
                     }
                 });
+
                 holder.like.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(feed.this, "liked", Toast.LENGTH_SHORT).show();
 
-                        String likestake=model.getLikes();
-                        int getlikes=Integer.parseInt(likestake);
-                        int add= getlikes+1;
-                        String value=String.valueOf(add);
-                        holder.likesno.setText(value);
 
-                        try {
-                           updatedata(add,model.getRandomKey());
-                        }catch (Exception e){
-                            Toast.makeText(feed.this, "error in likes: "+e, Toast.LENGTH_SHORT).show();
+                        if(!holder.isliked){
+
+
+                            String likestake = model.getLikes();
+                            int getlikes = Integer.parseInt(likestake);
+                            int add = getlikes + 1;
+                            String value = String.valueOf(add);
+                            holder.likesno.setText(value);
+                            model.isliked=true;
+
+                            try {
+                                updatedata(add, model.getRandomKey());
+                            } catch (Exception e) {
+                                Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
+                            }
+                            holder.isliked=true;
+                        }else {
+
+
+
+                            String likestake = holder.likesno.getText().toString();
+                            int getlikes = Integer.parseInt(likestake);
+                            int minus = getlikes - 1;
+                            String valuenew = String.valueOf(minus);
+                            holder.likesno.setText(valuenew);
+                            model.isliked=false;
+
+                            try {
+                                updatedata(minus, model.getRandomKey());
+                            } catch (Exception e) {
+                                Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
+                            }
+                            holder.isliked=false;
                         }
 
-                    }
+
+
+
+
+                        }
+
+
                 });
 
 
