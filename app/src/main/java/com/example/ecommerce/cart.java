@@ -136,7 +136,7 @@ public class cart extends AppCompatActivity {
                 fortotalview.setText("Total: "+setttprice);
                 holder.txtpamount.setText("Amount: "+model.getAmount());
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                holder.remove.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -170,6 +170,7 @@ public class cart extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        deletesingleitem(key);
                         fStore.collection("CartList").document("orders").collection(userid).document(key)
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -196,6 +197,12 @@ public class cart extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    private void deletesingleitem(String keymain) {
+        fStore.collection("CartList").document("usercartlistitems").collection(userid).document(keymain)
+                .delete();
+
     }
 
     @Override

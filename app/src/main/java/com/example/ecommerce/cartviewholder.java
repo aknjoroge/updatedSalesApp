@@ -1,6 +1,7 @@
 package com.example.ecommerce;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,12 +11,14 @@ public class cartviewholder extends RecyclerView.ViewHolder implements View.OnCl
 
 public TextView txtpname,txtpprice,txtpamount;
         itemclicklistener listener;
+        Button remove;
 
 public cartviewholder(@NonNull View itemView) {
         super(itemView);
 
         txtpname = itemView.findViewById(R.id.cartproductname);
         txtpprice = itemView.findViewById(R.id.cartproductprice);
+        remove=itemView.findViewById(R.id.cartremovebtn);
 
         txtpamount=itemView.findViewById(R.id.cartproductquantity);
 

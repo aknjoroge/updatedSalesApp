@@ -30,6 +30,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -176,54 +178,81 @@ public class feed extends AppCompatActivity {
                     }
                 });
 
-                holder.like.setOnClickListener(new View.OnClickListener() {
+                holder.like.setOnLikeListener(new OnLikeListener() {
                     @Override
-                    public void onClick(View v) {
-
-
-                        if(!holder.isliked){
-
-
-                            String likestake = model.getLikes();
+                    public void liked(LikeButton likeButton) {
+                        String likestake = model.getLikes();
                             int getlikes = Integer.parseInt(likestake);
                             int add = getlikes + 1;
                             String value = String.valueOf(add);
                             holder.likesno.setText(value);
-                            model.isliked=true;
-
                             try {
                                 updatedata(add, model.getRandomKey());
                             } catch (Exception e) {
                                 Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
                             }
-                            holder.isliked=true;
-                        }else {
+                        holder.like.setLiked(true);
 
+                    }
 
-
-                            String likestake = holder.likesno.getText().toString();
+                    @Override
+                    public void unLiked(LikeButton likeButton) {
+                        String likestake = holder.likesno.getText().toString();
                             int getlikes = Integer.parseInt(likestake);
                             int minus = getlikes - 1;
                             String valuenew = String.valueOf(minus);
                             holder.likesno.setText(valuenew);
-                            model.isliked=false;
-
                             try {
                                 updatedata(minus, model.getRandomKey());
                             } catch (Exception e) {
                                 Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
                             }
-                            holder.isliked=false;
-                        }
 
-
-
-
-
-                        }
-
-
+                    }
                 });
+
+
+
+
+//                        if(!holder.isliked){
+//
+//
+//                            String likestake = model.getLikes();
+//                            int getlikes = Integer.parseInt(likestake);
+//                            int add = getlikes + 1;
+//                            String value = String.valueOf(add);
+//                            holder.likesno.setText(value);
+//                            model.isliked=true;
+//
+//                            try {
+//                                updatedata(add, model.getRandomKey());
+//                            } catch (Exception e) {
+//                                Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
+//                            }
+//                            holder.isliked=true;
+//                        }else {
+//
+//
+//
+//                            String likestake = holder.likesno.getText().toString();
+//                            int getlikes = Integer.parseInt(likestake);
+//                            int minus = getlikes - 1;
+//                            String valuenew = String.valueOf(minus);
+//                            holder.likesno.setText(valuenew);
+//                            model.isliked=false;
+//
+//                            try {
+//                                updatedata(minus, model.getRandomKey());
+//                            } catch (Exception e) {
+//                                Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
+//                            }
+//                            holder.isliked=false;
+//                        }
+
+
+
+
+
 
 
             }

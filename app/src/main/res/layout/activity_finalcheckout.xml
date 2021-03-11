@@ -265,5 +265,20 @@
             android:layout_height="wrap_content"
             android:text="@string/pay" />
     </androidx.cardview.widget.CardView>
+    <ImageView
+        android:layout_margin="6dp"
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:srcCompat="@drawable/porkpitlogo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="@string/copyright"
+        android:layout_margin="3dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/arial"
+        android:layout_height="wrap_content"
+></TextView>
 
 </LinearLayout>

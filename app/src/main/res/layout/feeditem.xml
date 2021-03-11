@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
 
     android:layout_margin="8dp"
-    app:cardElevation="10dp"
-    app:cardMaxElevation="10dp"
+    app:cardElevation="2dp"
+    app:cardMaxElevation="2dp"
     android:padding="10dp"
     app:cardCornerRadius="10dp"
     android:layout_height="wrap_content">
@@ -64,14 +64,21 @@ android:fontFamily="@font/arial"
                     android:layout_height="wrap_content"
                     android:text="@string/viewproduct" />
 
-                <ImageButton
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
+
+                <com.like.LikeButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+
+                    app:icon_type="heart"
+                    app:icon_size="15dp"
+                    android:layout_margin="4dp"
+                    app:anim_scale_factor="2"
+                    app:circle_start_color="@color/colorPrimary"
                     android:id="@+id/feedlike"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:srcCompat="@drawable/likeup_24" />
+                    >
+
+                </com.like.LikeButton>
                 <TextView
                     android:textAlignment="center"
                     android:fontFamily="@font/arial"

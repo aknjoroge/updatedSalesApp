@@ -24,7 +24,7 @@ Button sigupmail,signupphone;
         sigupmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sigupmail.setTextColor(getResources().getColor(R.color.blue));
+                sigupmail.setTextColor(getResources().getColor(R.color.white));
                 signupphone.setTextColor(getResources().getColor(R.color.grey));
                 Fragment mail =new signupemail();
                 getSupportFragmentManager().beginTransaction().replace(R.id.framesignup,mail).commit();
@@ -35,7 +35,7 @@ Button sigupmail,signupphone;
             public void onClick(View v) {
                 Fragment phone =new signupphone();
                 sigupmail.setTextColor(getResources().getColor(R.color.grey));
-                signupphone.setTextColor(getResources().getColor(R.color.blue));
+                signupphone.setTextColor(getResources().getColor(R.color.white));
                 getSupportFragmentManager().beginTransaction().replace(R.id.framesignup,phone).commit();
             }
         });

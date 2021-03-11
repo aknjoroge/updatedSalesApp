@@ -45,7 +45,7 @@ android:fontFamily="@font/arialbd"
             android:layout_marginBottom="3dp"
 android:textSize="14dp"
 
-            android:fontFamily="@font/arialbd"
+            android:fontFamily="@font/arial"
             android:text="price"
             android:textAlignment="center"
             android:textColor="#D50E26FF" />

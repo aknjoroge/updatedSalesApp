@@ -1,7 +1,10 @@
 package com.example.ecommerce;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,13 +12,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class checkout extends AppCompatActivity {
     ImageView settingdp;
@@ -37,6 +45,8 @@ public class checkout extends AppCompatActivity {
     Uri imageuri;
     ImageButton call;
     Button topayment;
+    public RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
     String locationone,locationtwo,locationthree,locationfour,locationfive,locationsix;
     String generallocation;
     String setprice,data;
@@ -62,8 +72,14 @@ public class checkout extends AppCompatActivity {
         estate=findViewById(R.id.checkoutestatetxt);
         data=getIntent().getStringExtra("ttprice");
 
+
         shipping=findViewById(R.id.checkoutshippingfee);
         cart=findViewById(R.id.checkoutfromcarttxt);
+
+        recyclerView=findViewById(R.id.checkoutrecycler);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
         formenuone=findViewById(R.id.menuone);
         formenutwo=findViewById(R.id.menutwo);
@@ -108,7 +124,7 @@ confirm();
         try {
             shippingprices();
             autochangeprofile2();
-
+            loadaction();
 
         }catch (Exception e){
             Toast.makeText(this, "error: "+e, Toast.LENGTH_SHORT).show();
@@ -123,6 +139,8 @@ confirm();
                 startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -244,4 +262,37 @@ confirm();
 
 
     }
+
+
+    private void loadaction() {
+        //To load products to the page
+
+        FirestoreRecyclerOptions<forcheckout> options = new FirestoreRecyclerOptions.Builder<forcheckout>()
+                .setQuery(fStore.collection("CartList").document("orders").collection(userid),forcheckout.class).build();
+        FirestoreRecyclerAdapter<forcheckout,checkoutviewholder> adapter= new FirestoreRecyclerAdapter<forcheckout, checkoutviewholder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull checkoutviewholder holder, int position, @NonNull final forcheckout model) {
+                holder.txtname.setText(model.getName()+".");
+                holder.txtprice.setText(model.getPrice()+".");
+
+            }
+
+            @NonNull
+            @Override
+            public checkoutviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.checkoutitem,parent,false);
+                checkoutviewholder holder =new checkoutviewholder(view);
+                return holder;
+
+
+
+            }
+        };
+
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
+
+
+    }
+
 }

@@ -40,7 +40,7 @@ public class signupemail extends Fragment implements AdapterView.OnItemSelectedL
     EditText name,estate,email,password;
     CheckBox remember;
     Spinner forlocation;
-    ProgressBar progressBar;
+
     String userlocation;
     String userid;
     Button signup;
@@ -58,7 +58,7 @@ public class signupemail extends Fragment implements AdapterView.OnItemSelectedL
         remember=(view).findViewById(R.id.checkBox3);
         forlocation=(view).findViewById(R.id.locationspinnerformail);
         signup=(view).findViewById(R.id.signupemail);
-        progressBar=(view).findViewById(R.id.emailsignupprogressBar);
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         Paper.init(getContext());
@@ -76,7 +76,7 @@ signup.setOnClickListener(new View.OnClickListener() {
         if(!Check_fields()){
 
         }else {
-            progressBar.setVisibility(View.VISIBLE);
+
             final String username = name.getText().toString();
             final String userestate = estate.getText().toString();
             final String userpassword = password.getText().toString();
@@ -124,10 +124,10 @@ signup.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(getContext(), "", Toast.LENGTH_LONG).show();
-                                progressBar.setVisibility(View.INVISIBLE);
+
                             }
                         });
-                        progressBar.setVisibility(View.INVISIBLE);
+
 
                         fAuth.signInWithEmailAndPassword(useremail, userpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -145,7 +145,7 @@ signup.setOnClickListener(new View.OnClickListener() {
 
                                     Toast.makeText(getContext(), "An error occured"
                                             + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                    progressBar.setVisibility(View.INVISIBLE);
+
 
                                 }
 
@@ -154,7 +154,7 @@ signup.setOnClickListener(new View.OnClickListener() {
 
                     } else {
                         Toast.makeText(getContext(), "An error occured" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.INVISIBLE);
+
                     }
                 }
             });

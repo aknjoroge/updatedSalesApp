@@ -27,7 +27,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="8dp"
 
-                app:cardBackgroundColor="#54AA07"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="30dp">
 
             </androidx.cardview.widget.CardView>
@@ -37,10 +37,13 @@
                 android:id="@+id/loginemailtxt"
                 android:layout_width="260dp"
                 android:layout_height="60dp"
+                android:textColorHint="@color/white"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="@drawable/custominput"
+                android:textColor="@color/white"
+                android:background="@drawable/inputtwo"
                 android:ems="10"
+                android:fontFamily="@font/arial"
                 android:hint="@string/mail"
                 android:inputType="textPersonName"
                 android:padding="5dp"
@@ -52,8 +55,11 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:background="@drawable/custominput"
+                android:background="@drawable/inputtwo"
                 android:ems="10"
+                android:fontFamily="@font/arial"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:hint="@string/Password"
                 android:inputType="textPassword"
                 android:padding="5dp"
@@ -70,6 +76,7 @@
                     android:padding="5dp">
 
                     <TextView
+                        android:textColor="@color/white"
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -77,6 +84,8 @@
                         android:text="@string/remembermettxt" />
 
                     <CheckBox
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/white"
                         android:id="@+id/checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -120,13 +129,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:fontFamily="@font/arial"
+                android:textAlignment="center"
                 android:text="@string/forgotxt"
-                android:textColor="@color/red" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/resendmailverification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/arial"
+                android:textSize="13dp"
+                android:visibility="gone"
                 android:text="@string/resendverification"
                 android:textAlignment="center"
                 android:textColor="#54AA07" />

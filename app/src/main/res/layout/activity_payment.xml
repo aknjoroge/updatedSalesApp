@@ -102,7 +102,7 @@
                             android:layout_height="match_parent" >
 
                             <TextView
-                                android:textColor="@color/black"
+                                android:textColor="@color/orange"
                                 android:layout_margin="5dp"
                                 android:fontFamily="@font/arialbd"
                                 android:textSize="16dp"
@@ -232,11 +232,11 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:fontFamily="@font/arialbd"
-                        android:textColor="@color/black"
+                        android:textColor="@color/orange"
                         android:text="@string/entervoucher" />
 
                     <EditText
-                        android:background="@drawable/custominput"
+                        android:background="@drawable/inputtwo"
 
                         android:id="@+id/voucherboxplace"
                         android:layout_width="match_parent"
@@ -361,13 +361,13 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="8dp"
                 android:elevation="2dp"
                 app:cardBackgroundColor="@color/blue"
-                app:cardCornerRadius="0dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
                 <Button
                     android:background="@android:color/transparent"
@@ -379,6 +379,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/next" />
             </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_margin="6dp"
+                android:id="@+id/imageView10"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                app:srcCompat="@drawable/porkpitlogo" />
 
         </LinearLayout>
     </ScrollView>

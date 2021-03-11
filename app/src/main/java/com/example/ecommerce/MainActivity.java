@@ -31,8 +31,10 @@ lanchermanager lanchermanager;
             @Override
             public void run() {
                 startActivity(new Intent(getApplicationContext(),start.class));
+
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
-        },3000);
+        },2000);
 
     }
 }

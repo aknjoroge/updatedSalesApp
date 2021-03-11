@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="5dp"
+    android:background="@drawable/cropmain"
     android:layout_height="match_parent"
     tools:context=".start">
 
@@ -16,16 +18,16 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
+           android:scaleType="centerCrop"
             android:layout_margin="7dp"
             android:layout_height="150dp"
-            app:srcCompat="@drawable/techkey" />
+            app:srcCompat="@drawable/porkpitlogo" />
     </LinearLayout>
 
 
     <TextView
         android:id="@+id/textView"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
@@ -36,7 +38,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/fontone"
         android:text="@string/welcome"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="50sp" />
 
     <Button
@@ -46,11 +48,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textView15"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:textSize="15dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/custominput"
+        android:background="@drawable/inputtwo"
         android:fontFamily="@font/arialbd"
         android:text="@string/logintxt" />
 
@@ -62,9 +66,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
+        android:textColor="@color/white"
+        android:textSize="15dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/custominput"
+        android:background="@drawable/inputtwo"
         android:fontFamily="@font/arialbd"
         android:text="@string/signuptxt" />
 
@@ -73,16 +79,19 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/textView21"
+        android:textSize="10dp"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/arial"
         android:layout_height="wrap_content"
         android:text="@string/copyright" />
 
     <TextView
         android:layout_below="@id/signupbutton"
         android:layout_centerHorizontal="true"
-        android:textSize="13dp"
-        android:textColor="@color/black"
+        android:textSize="10dp"
+        android:textColor="@color/white"
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/arial"
         android:id="@+id/howtxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,12 +104,14 @@
         android:layout_below="@id/textView"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="13dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/arial"
         android:padding="3dp"
+        android:textSize="9dp"
+
         android:text="@string/loginadvertisement"
         android:textAlignment="center"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 </RelativeLayout>

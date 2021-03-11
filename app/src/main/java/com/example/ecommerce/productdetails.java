@@ -91,7 +91,7 @@ callone();
             }
         });
 
-        loadBar=new ProgressDialog(this);
+        loadBar=new ProgressDialog(this,R.style.ProgressbarStyle);
         loadBar.setTitle("ADDING TO CART.");
         loadBar.setMessage("Adding item to cart...");
         loadBar.setIcon(R.drawable.cart_24);
@@ -158,7 +158,7 @@ loadBar.show();
                         SimpleDateFormat currenttime = new SimpleDateFormat("HH:mm:ss a");
                         ctime =currenttime.format(calendar.getTime());
 
-                        cartkey= ctime+cdate;
+
 
                         Map<String,Object> cartitem = new HashMap<>();
                         cartitem.put("key",cartkey);

@@ -27,7 +27,7 @@ Button showphone,showemail;
             public void onClick(View v) {
                 Fragment phone =new loginphone();
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelogin,phone).commit();
-                showphone.setTextColor(getResources().getColor(R.color.blue));
+                showphone.setTextColor(getResources().getColor(R.color.white));
                 showemail.setTextColor(getResources().getColor(R.color.grey));
 
             }
@@ -38,7 +38,7 @@ Button showphone,showemail;
             public void onClick(View v) {
                 Fragment mail =new loginemail();
                 showphone.setTextColor(getResources().getColor(R.color.grey));
-                showemail.setTextColor(getResources().getColor(R.color.blue));
+                showemail.setTextColor(getResources().getColor(R.color.white));
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelogin,mail).commit();
             }
         });

@@ -46,7 +46,7 @@ TextView forgotpassword,resendcode;
         email=(view).findViewById(R.id.loginemailtxt);
         password=(view).findViewById(R.id.loginpasswordtxt);
         remlogin=(view).findViewById(R.id.checkBox);
-        loadBar2=new ProgressDialog(getContext());
+        loadBar2=new ProgressDialog(getContext(),R.style.ProgressbarStyle);
         loadBar2.setTitle("CHECKING CREDENTIALS.");
         loadBar2.setMessage("Working...");
         loadBar2.setCanceledOnTouchOutside(false);

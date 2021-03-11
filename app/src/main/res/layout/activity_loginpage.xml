@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
+    android:background="@drawable/cropmain"
     android:layout_width="match_parent"
     android:padding="13px"
     android:layout_height="match_parent"
@@ -25,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
-                android:background="@drawable/custominput"
+                android:textColor="@color/white"
+                android:background="@drawable/inputtwo"
                 android:fontFamily="@font/arialbd"
                 android:text="@string/mail" />
 
@@ -35,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
-                android:background="@drawable/custominput"
+                android:textColor="@color/white"
+                android:background="@drawable/inputtwo"
                 android:fontFamily="@font/arialbd"
                 android:text="@string/phone" />
         </TableRow>
@@ -45,7 +47,7 @@
     <FrameLayout
         android:layout_below="@id/tablelogin"
         android:id="@+id/framelogin"
-android:background="@drawable/custominputtwo"
+android:background="@drawable/inputtwo"
         android:layout_width="match_parent"
         android:layout_margin="6dp"
         android:padding="5dp"
@@ -69,8 +71,9 @@ android:background="@drawable/custominputtwo"
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="100dp"
+            android:scaleType="centerCrop"
             android:layout_height="100dp"
-            app:srcCompat="@drawable/techkey" />
+            app:srcCompat="@drawable/porkpitlogo" />
     </LinearLayout>
 
 
@@ -87,8 +90,8 @@ android:background="@drawable/custominputtwo"
         android:fontFamily="@font/fontone"
         android:text="@string/lo"
 
-        android:textColor="@color/black"
-        android:textSize="50dp" />
+        android:textColor="@color/white"
+        android:textSize="40dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -97,9 +100,11 @@ android:background="@drawable/custominputtwo"
         android:layout_below="@id/textView18"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
+        android:textSize="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/white"
         android:fontFamily="@font/arialbd"
         android:text="@string/loginlabel1" />
 
@@ -114,27 +119,18 @@ android:background="@drawable/custominputtwo"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <TextView
-                android:layout_weight="1"
-                android:textSize="50dp"
-                android:textColor="@color/black"
-                android:textAlignment="textEnd"
-                android:layout_margin="3dp"
-                android:fontFamily="@font/fontone"
-                android:id="@+id/textView22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/i" />
+
 
             <TextView
+                android:gravity="center"
                 android:layout_margin="3dp"
                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/fontone"
                 android:text="@string/in"
-                android:textColor="@color/black"
-                android:textSize="50dp" />
+                android:textColor="@color/white"
+                android:textSize="40dp" />
         </TableRow>
 
 

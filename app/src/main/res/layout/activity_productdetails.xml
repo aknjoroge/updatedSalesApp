@@ -178,7 +178,8 @@ android:layout_gravity="left"
                             android:layout_height="wrap_content"
                             android:numStars="5"
 
-                            android:progressTint="#BBFF00"
+
+                            android:progressTint="#A6FF00"
                             android:isIndicator="true"
                             android:rating="3"
                             />

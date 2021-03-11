@@ -27,7 +27,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="8dp"
 
-                app:cardBackgroundColor="#54AA07"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="30dp">
 
             </androidx.cardview.widget.CardView>
@@ -37,8 +37,11 @@
                 android:layout_width="260dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:textColorHint="@color/white"
                 android:layout_margin="5dp"
-                android:background="@drawable/custominput"
+                android:background="@drawable/inputtwo"
+                android:fontFamily="@font/arial"
+                android:textColor="@color/white"
                 android:ems="10"
                 android:hint="@string/phone"
                 android:inputType="phone"
@@ -50,8 +53,11 @@
                 android:layout_width="260dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:textColor="@color/white"
                 android:layout_margin="5dp"
-                android:background="@drawable/custominput"
+                android:background="@drawable/inputtwo"
+                android:fontFamily="@font/arial"
+                android:textColorHint="@color/white"
                 android:ems="10"
                 android:hint="@string/Password"
                 android:inputType="textPassword"
@@ -70,12 +76,15 @@
 
                     <TextView
                         android:id="@+id/textView4"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/remembermettxt" />
 
                     <CheckBox
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/white"
                         android:id="@+id/checkBoxphone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -120,13 +129,18 @@
                 android:id="@+id/forgotpasswordtxt2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/arial"
                 android:layout_margin="5dp"
+                android:textAlignment="center"
                 android:text="@string/forgotxt"
-                android:textColor="@color/red" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/resendphoneverification"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/arial"
+                android:textSize="13dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="@string/resendverification"
                 android:textAlignment="center"

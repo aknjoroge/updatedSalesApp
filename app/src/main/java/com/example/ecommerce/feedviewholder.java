@@ -9,12 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.like.LikeButton;
+
 public class feedviewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
     ImageView profile;
     Button viewmore;
     TextView name,likesno;
-    Boolean isliked=false;
-    ImageButton share,like;
+    LikeButton like;
+
+    ImageButton share;
     itemclicklistener listener;
 
     public feedviewholder(@NonNull View itemView) {

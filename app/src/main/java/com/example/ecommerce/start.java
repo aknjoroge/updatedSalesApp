@@ -35,6 +35,12 @@ ProgressDialog loadBar;
 String takeusermail,takeuserpass,takeuserphone,takephonepass,takechecklock;
 
     @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
@@ -45,7 +51,7 @@ String takeusermail,takeuserpass,takeuserphone,takephonepass,takechecklock;
         tosignup=findViewById(R.id.signupbutton);
         howwe=findViewById(R.id.howtxt);
 
-        loadBar=new ProgressDialog(this);
+        loadBar=new ProgressDialog(this,R.style.ProgressbarStyle);
         loadBar.setTitle("LOADING.");
         loadBar.setMessage("Logging in please wait...");
         loadBar.setCanceledOnTouchOutside(false);

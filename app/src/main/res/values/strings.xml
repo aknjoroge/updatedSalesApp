@@ -4,11 +4,12 @@
     <string name="logintxt">LOGIN</string>
     <string name="signuptxt">SIGNUP</string>
     <string name="loginlabel1">LOGIN WITH EMAIL OR PHONE NUMBER?</string>
-    <string name="signuplabel1">SELECT EMAIL OR PHONE NUMBER TO SIGNUP WITH</string>
+    <string name="signuplabel1">SIGNUP WITH EMAIL OR PHONE NUMBER? </string>
     <string name="signuplabel2">YOU WILL HAVE TO VERIFY THE PHONE OR EMAIL BEFORE CONTINUING</string>
     <string name="loginlabel2">LOGIN</string>
 
     <string name="nav_opener">open_nav</string>
+    <string name="remove">REMOVE</string>
     <string name="nav_closer">close_nav</string>
     <string name="soup">SOUP</string>
     <string name="setpic">set proflle picture?</string>
@@ -24,6 +25,13 @@
     <string name="pay">PAY</string>
     <string name="exit">EXIT</string>
     <string name="lock">LOCK APP?</string>
+    <string name="howone">This app provides direct access to the PorkPit Ruaka Products ie Meals, Drinks etc.</string>
+    <string name="howtwo">Create an account with us that we use to identify you so as to give our value to you and only to you.
+    Your information is kept private from third parties and due to our customer passion this App is Add free and will remain to be
+    Add free in future developments</string>
+    <string name="howthree">Any errors reported to us will be greatly Appreciated.If you like the app feel free to suggest it to your friends
+    .Lets Grow together</string>
+    <string name="poweredby">POWERED BY TUWASHOW MEDIA</string>
     <string name="shipp">shippingfee</string>
     <string name="next">NEXT</string>
     <string name="entervoucher">VOUCHER</string>
@@ -69,7 +77,7 @@
     <string name="co">CO</string>
     <string name="lo">LOG</string>
     <string name="category">CATEGORY</string>
-    <string name="in">IN</string>
+    <string name="in">I N</string>
     <string name="i">I</string>
     <string name="DE">DE</string>
     <string name="code">CODE</string>
@@ -85,7 +93,7 @@
     <string name="fullname">Full Name</string>
     <string name="location">Location</string>
     <string name="estate">Estate</string>
-    <string name="copyright">A TechKey Product</string>
+    <string name="copyright">Powered By TuwashowMedia</string>
     <string name="title_activity_home">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
