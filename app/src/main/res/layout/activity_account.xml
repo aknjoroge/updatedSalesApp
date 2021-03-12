@@ -57,7 +57,7 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/techkey" />
+                            app:srcCompat="@drawable/porkpitlogo" />
                     </androidx.cardview.widget.CardView>
 
                     <TextView

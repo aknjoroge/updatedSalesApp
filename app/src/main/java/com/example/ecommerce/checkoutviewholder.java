@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class checkoutviewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    public TextView txtname,txtprice;
+    public TextView txtname,txtprice,txtamount;
     itemclicklistener listener;
 
 
@@ -18,6 +18,7 @@ public class checkoutviewholder extends RecyclerView.ViewHolder implements View.
 
         txtname = itemView.findViewById(R.id.checkoutitemname);
         txtprice = itemView.findViewById(R.id.checkoutitemprice);
+        txtamount = itemView.findViewById(R.id.checkoutitemamount);
 
 
     }

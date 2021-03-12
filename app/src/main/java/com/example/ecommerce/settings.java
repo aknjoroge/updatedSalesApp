@@ -1,33 +1,50 @@
 package com.example.ecommerce;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import io.paperdb.Paper;
 
 public class settings extends AppCompatActivity {
 Button dells;
     FirebaseUser using;
-    String newpp;
+    String userid;
+    FirebaseFirestore fStore;
+    TextView name;
+    ImageView settingsdp;
+    ImageView pit,tuwashow,techkey;
     String takechecklock;
     FirebaseAuth fAuth;
+    StorageReference storageReference;
     Switch forlocks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +52,41 @@ Button dells;
         setContentView(R.layout.activity_settings);
         Paper.init(this);
         fAuth = FirebaseAuth.getInstance();
-
+        fStore=FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
         using = fAuth.getCurrentUser();
+        userid=fAuth.getCurrentUser().getUid();
+
+        pit=findViewById(R.id.porkpitimg);
+        tuwashow=findViewById(R.id.tuwashowmimg);
+        techkey=findViewById(R.id.techkeyimg);
+
+        pit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(findViewById(R.id.settinglayout), "THE PORK PIT", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        tuwashow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(findViewById(R.id.settinglayout), "TUWASHOW AFRICA", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        techkey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(findViewById(R.id.settinglayout), "TECHKEY Ltd", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        name=findViewById(R.id.insettingname);
+        settingsdp=findViewById(R.id.dptwoinsetting);
         forlocks=findViewById(R.id.lockswitch1);
         Paper.init(this);
         takechecklock = Paper.book().read(prevalent.lockstatkey);
@@ -71,9 +121,38 @@ Button dells;
                 }
             }
         });
-
+        autochangeprofile2();
+        loadprofilepic();
     }
 
+    public void loadprofilepic(){
+
+
+        StorageReference profileref = storageReference.child("Userprofile/"+fAuth.getCurrentUser().getUid()+"/profile.jpg");
+        profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                //  Toast.makeText(settings.this, "Loading profile", Toast.LENGTH_SHORT).show();
+                Picasso.get().load(uri).into(settingsdp);
+                // Picasso.get().load(uri).into(nav_image);
+
+            }
+        });
+
+    }
+    private void autochangeprofile2() {
+        final DocumentReference documentReference = fStore.collection("users").document(userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                String nametake=documentSnapshot.getString("name");
+
+                name.setText(nametake);
+
+
+            }
+        });
+    }
 
     public void dellaccounts() {
 

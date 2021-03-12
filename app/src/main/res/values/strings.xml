@@ -35,7 +35,7 @@
     <string name="shipp">shippingfee</string>
     <string name="next">NEXT</string>
     <string name="entervoucher">VOUCHER</string>
-    <string name="copyvoucher">ENTER A TECHKEY VOUCHER</string>
+    <string name="copyvoucher">ENTER A PIT VOUCHER</string>
 
     <string name="voucher">VOUCHER</string>
     <string name="summary">SUMMARY</string>
@@ -57,7 +57,8 @@
     <string name="ugali">UGALI</string>
     <string name="addressdetail">ADDRESS DETAILS</string>
     <string name="fed">FEED</string>
-    <string name="viewproduct">VIEW PRODUCT</string>
+    <string name="viewproduct">VIEW CATEGORY</string>
+    <string name="payondelivery">PAY ON DELIVERY</string>
     <string name="socialfeed">SOCIAL F E E D</string>
     <string name="addtocart">ADD TO CART</string>
     <string name="accompaniments">ACCOMPANIMENTS</string>

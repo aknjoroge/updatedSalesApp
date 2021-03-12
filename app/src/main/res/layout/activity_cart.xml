@@ -13,11 +13,15 @@
         android:layout_width="match_parent"
         android:textAlignment="center"
         android:fontFamily="@font/fontone"
-        android:textSize="15dp"
-        android:background="@color/white"
-        android:padding="4dp"
-        android:layout_height="wrap_content"
+
+        android:textSize="19dp"
+        android:textColor="@color/white"
+        android:background="@color/blue"
+        android:paddingTop="10dp"
+        android:layout_height="40dp"
         android:text="@string/cart" />
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartrecycler"

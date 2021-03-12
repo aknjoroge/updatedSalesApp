@@ -272,8 +272,9 @@ confirm();
         FirestoreRecyclerAdapter<forcheckout,checkoutviewholder> adapter= new FirestoreRecyclerAdapter<forcheckout, checkoutviewholder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull checkoutviewholder holder, int position, @NonNull final forcheckout model) {
-                holder.txtname.setText(model.getName()+".");
-                holder.txtprice.setText(model.getPrice()+".");
+                holder.txtname.setText("Item: "+model.getName()+".");
+                holder.txtprice.setText(model.getPrice()+"/=");
+                holder.txtamount.setText("No: "+model.getAmount()+".");
 
             }
 

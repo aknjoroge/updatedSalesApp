@@ -33,5 +33,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="price" />
+
+        <TextView
+            android:id="@+id/checkoutitemamount"
+            android:fontFamily="@font/arial"
+            android:textAlignment="center"
+            android:layout_margin="1dp"
+            android:textSize="11dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="amount" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

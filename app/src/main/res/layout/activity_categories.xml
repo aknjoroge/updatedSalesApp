@@ -43,4 +43,13 @@
         android:textColor="@color/white"
         android:textSize="9dp" />
 
+    <ImageView
+
+        android:id="@+id/imageView13"
+        android:layout_width="wrap_content"
+        android:layout_alignBottom="@+id/textView14"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/roastandchopslogo" />
+
 </RelativeLayout>

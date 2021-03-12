@@ -163,6 +163,7 @@ loadBar.show();
                         Map<String,Object> cartitem = new HashMap<>();
                         cartitem.put("key",cartkey);
                         cartitem.put("name",takename);
+                        pdets.put("amount",amounts);
                         cartitem.put("price",takeprice);
                         cartitem.put("date",cdate);
                         cartitem.put("time",ctime);
