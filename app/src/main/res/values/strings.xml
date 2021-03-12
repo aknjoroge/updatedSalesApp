@@ -12,9 +12,10 @@
     <string name="remove">REMOVE</string>
     <string name="nav_closer">close_nav</string>
     <string name="soup">SOUP</string>
+    <string name="logout">LOGOUT</string>
     <string name="setpic">set proflle picture?</string>
     <string name="total">TOTAL</string>
-    <string name="checkout">PROCEED TO CHECKOUT</string>
+    <string name="checkout">CHECKOUT</string>
     <string name="name">NAME</string>
     <string name="similar">OTHER PRODUCTS</string>
     <string name="update">CHECK UPDATE</string>

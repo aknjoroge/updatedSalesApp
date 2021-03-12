@@ -1,7 +1,10 @@
 package com.example.ecommerce;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
@@ -16,19 +19,43 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Callback;
+
+import io.paperdb.Paper;
+
 public class signupphone extends Fragment implements AdapterView.OnItemSelectedListener{
 
     EditText name,estate,phone,password;
     CheckBox remember;
     Spinner forlocation;
     String userlocation;
+    private FirebaseAuth fAuth;
+
+    FirebaseFirestore fStore;
     Button signup;
+    ProgressDialog loadBar2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_signupphone, container, false);
-
+        final View view= inflater.inflate(R.layout.fragment_signupphone, container, false);
+        loadBar2=new ProgressDialog(getContext(),R.style.ProgressbarStyle);
+        loadBar2.setTitle("CHECKING CREDENTIALS.");
+        loadBar2.setMessage("Working...");
+        loadBar2.setCanceledOnTouchOutside(false);
+        loadBar2.setIcon(R.drawable.login_24);
+        loadBar2.hide();
+        error();
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        Paper.init(getContext());
         name=(view).findViewById(R.id.signupusernameforphone);
         estate=(view).findViewById(R.id.signupuserestateforphone);
         phone=(view).findViewById(R.id.userphonenumber);
@@ -49,10 +76,23 @@ public class signupphone extends Fragment implements AdapterView.OnItemSelectedL
                 if(!Check_fields()){
 
                 }else {
-                    String username= name.getText().toString();
-                    String userestate=estate.getText().toString();
-                    String userpaassword=password.getText().toString();
-                    String userphone=phone.getText().toString();
+                    Snackbar.make(view.findViewById(R.id.phonelayout), "UNDER DEVELOPMENT PLEASE USE EMAIL", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+//                    loadBar2.show();
+//                    String username= name.getText().toString();
+//                    String userestate=estate.getText().toString();
+//                    String userpaassword=password.getText().toString();
+//                    String userphone=phone.getText().toString();
+//                    Intent intent = new Intent(getContext(), phoneverification.class);
+//                    intent.putExtra("username",username);
+//                    intent.putExtra("estate",userestate);
+//                    intent.putExtra("password",userpaassword);
+//                    intent.putExtra("phone",userphone);
+//                    startActivity(intent);
+
+
+
 
                 }
 
@@ -65,6 +105,11 @@ public class signupphone extends Fragment implements AdapterView.OnItemSelectedL
 
         return view;
     }
+
+    private void error() {
+        Toast.makeText(getContext(), "SIGN UP WITH PHONE IS UNDER DEVELOPMENT PLEASE USE EMAIL ", Toast.LENGTH_LONG).show();
+    }
+
 
     private boolean Check_fields() {
         if(TextUtils.isEmpty(name.getText().toString())){

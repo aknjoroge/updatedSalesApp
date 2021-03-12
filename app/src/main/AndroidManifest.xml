@@ -16,12 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".finalcheckout" android:noHistory="true"></activity>
-        <activity android:name=".payment" />
+        <activity android:name=".payment" android:noHistory="true" />
         <activity android:name=".settings" />
         <activity android:name=".about" />
         <activity android:name=".changepassword" />
         <activity android:name=".changelocation" />
-        <activity android:name=".checkout" />
+        <activity android:name=".checkout" android:noHistory="true" />
         <activity android:name=".account" />
         <activity android:name=".feed" />
         <activity android:name=".productdetails" />

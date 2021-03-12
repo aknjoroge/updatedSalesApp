@@ -1,5 +1,6 @@
 package com.example.ecommerce;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -46,6 +47,7 @@ public class signupemail extends Fragment implements AdapterView.OnItemSelectedL
     Button signup;
     private FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+    ProgressDialog loadBar2;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,6 +60,13 @@ public class signupemail extends Fragment implements AdapterView.OnItemSelectedL
         remember=(view).findViewById(R.id.checkBox3);
         forlocation=(view).findViewById(R.id.locationspinnerformail);
         signup=(view).findViewById(R.id.signupemail);
+
+        loadBar2=new ProgressDialog(getContext(),R.style.ProgressbarStyle);
+        loadBar2.setTitle("CHECKING CREDENTIALS.");
+        loadBar2.setMessage("Working...");
+        loadBar2.setCanceledOnTouchOutside(false);
+        loadBar2.setIcon(R.drawable.login_24);
+        loadBar2.hide();
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -76,6 +85,7 @@ signup.setOnClickListener(new View.OnClickListener() {
         if(!Check_fields()){
 
         }else {
+            loadBar2.show();
 
             final String username = name.getText().toString();
             final String userestate = estate.getText().toString();
@@ -93,11 +103,12 @@ signup.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onSuccess(Void aVoid) {
 
-
+                                loadBar2.hide();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                loadBar2.hide();
                                 Toast.makeText(getContext(), "Error sending verification , Contact Admin", Toast.LENGTH_LONG).show();
                             }
                         });
@@ -139,6 +150,7 @@ signup.setOnClickListener(new View.OnClickListener() {
                                         Paper.book().write(prevalent.useremailkey, useremail);
 
                                     }
+                                    loadBar2.hide();
                                     Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
                                    startActivity(new Intent(getContext(),emailverification.class));
                                 } else {
@@ -153,6 +165,7 @@ signup.setOnClickListener(new View.OnClickListener() {
                         });
 
                     } else {
+                        loadBar2.hide();
                         Toast.makeText(getContext(), "An error occured" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                     }

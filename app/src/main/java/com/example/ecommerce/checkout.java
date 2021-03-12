@@ -56,6 +56,13 @@ public class checkout extends AppCompatActivity {
     FirebaseUser using;
 
     StorageReference storageReference;
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +105,7 @@ public class checkout extends AppCompatActivity {
                 intent.putExtra("cart",cart.getText().toString());
                 intent.putExtra("total",total.getText().toString());
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
         formenuthree.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +145,7 @@ confirm();
                 intent.putExtra("cart",cart.getText().toString());
                 intent.putExtra("total",total.getText().toString());
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 

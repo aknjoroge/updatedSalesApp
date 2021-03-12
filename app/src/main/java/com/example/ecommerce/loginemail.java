@@ -83,6 +83,7 @@ final String userpassword=password.getText().toString();
                               loadBar2.hide();
                               Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
                               startActivity(new Intent(getContext(),emailverification.class));
+
                           } else {
                               loadBar2.hide();
                               Toast.makeText(getContext(), "An error occured"

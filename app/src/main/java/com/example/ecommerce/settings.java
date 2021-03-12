@@ -46,6 +46,13 @@ Button dells;
     FirebaseAuth fAuth;
     StorageReference storageReference;
     Switch forlocks;
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

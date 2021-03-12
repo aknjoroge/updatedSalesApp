@@ -71,6 +71,13 @@ public class productdetails extends AppCompatActivity {
     FirebaseFirestore fStore;
     String pid,cid;
 ProgressDialog loadBar;
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,6 +180,7 @@ loadBar.show();
                                 Toast.makeText(productdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
                                 loadBar.hide();
                                 startActivity(new Intent(getApplicationContext(),cart.class));
+                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -254,6 +262,8 @@ loadBar.show();
                         Intent intent=new Intent(productdetails.this,home.class);
                         intent.putExtra("categoryname",model.getCategory());
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
                     }
                 });
             }

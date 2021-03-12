@@ -67,6 +67,12 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         bottomNavigation.show(1,true);
@@ -98,12 +104,15 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
                 switch (item.getId()){
                     case 1:
                        startActivity(new Intent(getApplicationContext(),categories.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(),feed.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         break;
                     case 3:
                         startActivity(new Intent(getApplicationContext(),account.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         break;
 
                 }
@@ -147,6 +156,7 @@ bottomNavigation.show(1,true);
             @Override
             public void onClick(View view) {
               startActivity(new Intent(getApplicationContext(),cart.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
@@ -224,6 +234,8 @@ try{
                         intent.putExtra("cid",model.getCategory());
 
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
                     }
                 });
             }
@@ -270,19 +282,31 @@ try{
 //                Snackbar.make(findViewById(R.id.recyclermenumain), "techkey", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
                 startActivity(new Intent(getApplicationContext(),cart.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
                 break;
             case R.id.nav_feed:
                 startActivity(new Intent(getApplicationContext(),feed.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             case  R.id.nav_settings:
                 startActivity(new Intent(getApplicationContext(),settings.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             case R.id.nav_about:
                 startActivity(new Intent(getApplicationContext(),about.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             case R.id.nav_category:
                 startActivity(new Intent(getApplicationContext(),categories.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                break;
+            case R.id.nav_logout:
+                Paper.book().write(prevalent.userpasskey,"");
+                Paper.book().write(prevalent.useremailkey,"");
+                startActivity(new Intent(getApplicationContext(),start.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                finish();
                 break;
 
         }

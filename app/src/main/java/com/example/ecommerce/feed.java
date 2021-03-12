@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class feed extends AppCompatActivity {
+
     DrawerLayout nav;
     FirebaseAuth fAuth;
     String htm;
@@ -55,6 +56,14 @@ public class feed extends AppCompatActivity {
     TextView pname, pmail;
 
     MeowBottomNavigation bottomNavigation;
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -154,8 +163,8 @@ public class feed extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent intent=new Intent(feed.this,home.class);
                         intent.putExtra("categoryname",model.getCategory());
-
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                     }
                 });
                 holder.share.setOnClickListener(new View.OnClickListener() {

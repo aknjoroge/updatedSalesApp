@@ -24,6 +24,12 @@ TextView formenuone,formenutwo,formenuthree;
 Switch aSwitch;
 TextView forshipping,forcart,fortotal;
     @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
@@ -43,6 +49,8 @@ TextView forshipping,forcart,fortotal;
             @Override
             public void onClick(View v) {
 startActivity(new Intent(getApplicationContext(),cart.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
             }
         });
         formenutwo.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +67,7 @@ startActivity(new Intent(getApplicationContext(),cart.class));
                 intent.putExtra("cart",forcart.getText().toString());
                 intent.putExtra("total",fortotal.getText().toString());
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
@@ -103,6 +112,7 @@ startActivity(new Intent(getApplicationContext(),cart.class));
                 intent.putExtra("cart",forcart.getText().toString());
                 intent.putExtra("total",fortotal.getText().toString());
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
             }
         });

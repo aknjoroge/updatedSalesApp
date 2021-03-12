@@ -47,6 +47,13 @@ TextView finalshipping,finalcart,finaltotal;
     TextView formenuone,formenutwo,formenuthree;
 
     @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalcheckout);
@@ -81,6 +88,7 @@ TextView finalshipping,finalcart,finaltotal;
             @Override
             public void onClick(View v) {
                 process();
+
             }
         });
 
@@ -95,6 +103,7 @@ TextView finalshipping,finalcart,finaltotal;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(),cart.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
         formenutwo.setOnClickListener(new View.OnClickListener() {

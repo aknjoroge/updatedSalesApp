@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+android:id="@+id/phonelayout"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".signupphone">
@@ -86,7 +86,7 @@
                 android:ems="10"
                 android:fontFamily="@font/arial"
                 android:hint="@string/phone"
-                android:inputType="textPersonName"
+                android:inputType="phone"
                 android:padding="5dp"
                 android:textAlignment="center" />
 

@@ -55,6 +55,13 @@ public class account extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseUser using;
     StorageReference storageReference;
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

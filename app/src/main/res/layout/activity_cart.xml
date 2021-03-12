@@ -36,7 +36,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="310dp"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:id="@+id/cardcart"
        android:layout_alignParentBottom="true"
@@ -46,19 +46,21 @@
         android:layout_marginBottom="10dp"
         android:elevation="1dp"
 
-     app:cardBackgroundColor="#FCF4FAF1"
-        app:cardCornerRadius="10dp"
+     app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="0dp"
        >
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp">
 
+
+            <TableRow
+                android:gravity="center"
+                android:layout_margin="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/carttotaltxt"
                     android:layout_width="match_parent"
@@ -69,39 +71,41 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="250dp"
+
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="2dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="2dp"
+
                     android:layout_weight="1"
 
                     app:cardBackgroundColor="@color/blue"
-                    app:cardCornerRadius="10dp"
+                    app:cardCornerRadius="0dp"
                    >
 
                     <Button
                         android:id="@+id/checkoutbtn"
                         android:fontFamily="@font/arial"
                         android:layout_width="match_parent"
+
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:text="@string/checkout"
                         android:textColor="@color/purewhite" />
 
                 </androidx.cardview.widget.CardView>
+
+
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent">
 
                 <ImageButton

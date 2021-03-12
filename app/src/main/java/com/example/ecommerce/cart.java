@@ -49,6 +49,11 @@ public class cart extends AppCompatActivity {
     String userid;
     int totalprice=0;
     TextView pname,pmail,fortotalview;
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +89,7 @@ public class cart extends AppCompatActivity {
 
                     intent.putExtra("ttprice", setinpricea);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 }
             }
         });

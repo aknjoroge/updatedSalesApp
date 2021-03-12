@@ -13,6 +13,13 @@ import android.widget.Toast;
 
 public class about extends AppCompatActivity {
 Button one,two;
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

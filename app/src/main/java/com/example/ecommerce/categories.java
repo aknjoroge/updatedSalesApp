@@ -30,6 +30,14 @@ public class categories extends AppCompatActivity {
     StorageReference storageReference;
     FirebaseFirestore fStore;
     String keptkey;
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +86,7 @@ try {
                         Intent intent=new Intent(categories.this,home.class);
                         intent.putExtra("categoryname",model.getCategory());
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                     }
                 });
             }
