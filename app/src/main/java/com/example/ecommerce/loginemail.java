@@ -1,6 +1,8 @@
 package com.example.ecommerce;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -19,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,6 +59,12 @@ TextView forgotpassword,resendcode;
 
         login=(view).findViewById(R.id.emailloginbtn);
         forgotpassword=(view).findViewById(R.id.forgotpasswordtxt);
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendlink();
+            }
+        });
         resendcode=(view).findViewById(R.id.resendmailverification);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -110,6 +120,47 @@ final String userpassword=password.getText().toString();
 
 
         return  view;
+    }
+
+    private void sendlink() {
+        final EditText dellac = new EditText(getContext());
+        android.app.AlertDialog dialog = new AlertDialog.Builder(getContext(), R.style.AlertDialogStyle)
+                .setTitle("ENTER EMAIL TO SEND RESET LINK TO")
+                .setMessage("Send Reset link to your Email Account")
+                .setView(dellac)
+                .setPositiveButton("SEND", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!TextUtils.isEmpty(dellac.getText().toString())) {
+                            String in = dellac.getText().toString();
+                        fAuth.sendPasswordResetEmail(in).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(getContext(), "LINK SENT", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), "Sending link failed Check your internet", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+
+
+                        } else {
+                            Toast.makeText(getContext(), "Field is empty", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
     }
 
     private boolean checkfields() {

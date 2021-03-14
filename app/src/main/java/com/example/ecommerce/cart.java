@@ -1,6 +1,7 @@
 package com.example.ecommerce;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,9 +24,15 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.SetOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,6 +46,8 @@ public class cart extends AppCompatActivity {
     String usercname=" ",usercprice= " ",usercno= " ";
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+    String generalstate;
+    String initialbalance;
     String keptkey;
     ImageButton call;
     String nameoforder =" ";
@@ -76,6 +85,20 @@ public class cart extends AppCompatActivity {
         tocheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (generalstate.equals("present")){
+                    Snackbar.make(findViewById(R.id.cartlayout), "YOU HAVE A PENDING ORDER WAIT UNTIL ORDER IS COMPLETED", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    fortotalview.setText("You have Pending Order");
+                    tocheck.setVisibility(View.INVISIBLE);
+
+                    return;
+
+                }else{
+
+                }
+
+
                 if(totalprice == 0){
                     Toast.makeText(cart.this, "First add item To cart", Toast.LENGTH_SHORT).show();
                     tocheck.setVisibility(View.INVISIBLE);
@@ -87,7 +110,6 @@ public class cart extends AppCompatActivity {
                     totalprice=0;
                     Intent intent = new Intent(cart.this, checkout.class);
 
-                    intent.putExtra("ttprice", setinpricea);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 }
@@ -99,6 +121,8 @@ public class cart extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         userid = fAuth.getCurrentUser().getUid();
         try {
+            getorderstate();
+            getbalance();
             loaddocs();
         }catch (Exception e){
             Toast.makeText(this, "Error: "+e, Toast.LENGTH_LONG).show();
@@ -107,10 +131,43 @@ public class cart extends AppCompatActivity {
 
     }
 
+
+    public void getorderstate() {
+
+        final DocumentReference documentReference = fStore.collection("CartList")
+                .document("orderdetails").collection(userid).document("state");
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+generalstate=documentSnapshot.getString("orders");
+
+
+            }
+        });
+    }
+
+    public void getbalance() {
+
+        final DocumentReference documentReference = fStore.collection("CartList")
+                .document("cartamounts").collection("general").document(userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                initialbalance=documentSnapshot.getString("cartamount");
+                fortotalview.setText("Total: "+initialbalance);
+                int genprice= Integer.parseInt(initialbalance);
+                totalprice =genprice;
+
+            }
+        });
+        tocheck.setVisibility(View.VISIBLE);
+    }
+
     private void loaddocs() {
 
         FirestoreRecyclerOptions<forcart> options = new FirestoreRecyclerOptions.Builder<forcart>()
-                .setQuery(fStore.collection("CartList").document("orders").collection(userid),forcart.class).build();
+                .setQuery(fStore.collection("CartList").document(userid).collection("orders"),forcart.class).build();
         FirestoreRecyclerAdapter<forcart,cartviewholder> adapter= new FirestoreRecyclerAdapter<forcart, cartviewholder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull cartviewholder holder, int position, @NonNull final forcart model) {
@@ -133,13 +190,12 @@ public class cart extends AppCompatActivity {
                 int perquant=((Integer.parseInt(model.getPrice()))) * Integer.parseInt(model.getAmount());
 
                 //total value
-                String forqtotal= String.valueOf(perquant);
+//                String forqtotal= String.valueOf(perquant);
+//                totalprice=totalprice+perquant;
+//                setttprice= String.valueOf(totalprice);
 
-                totalprice=totalprice+perquant;
-                setttprice= String.valueOf(totalprice);
 
 
-                fortotalview.setText("Total: "+setttprice);
                 holder.txtpamount.setText("Amount: "+model.getAmount());
 
                 holder.remove.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +203,9 @@ public class cart extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        oncartclick(model.getKey());
+                        removeamount(model.getAmount(),model.getPrice(),model.getKey());
+
+
 
                     }
                 });
@@ -164,11 +222,10 @@ public class cart extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         adapter.startListening();
-        totalprice=0;
+
     }
 
-
-    public void oncartclick(final String key){
+    private void removeamount(final String amount, final String price, final String key) {
 
         android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
                 .setTitle("Cart Opptions")
@@ -177,12 +234,29 @@ public class cart extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         deletesingleitem(key);
+                        int revprice=Integer.parseInt(price);
+                        int revamount =Integer.parseInt(amount);
+                        int sum = revamount*revprice;
+                        totalprice=totalprice-sum;
+                        String rem=String.valueOf(totalprice);
+                        fortotalview.setText("Total: "+rem);
+
+                        Map<String,Object> newsum =new HashMap<>();
+                        newsum.put("cartamount",rem);
+                        final DocumentReference documentReference = fStore.collection("CartList")
+                                .document("cartamounts").collection("general").document(userid);
+
+                        documentReference.set(newsum, SetOptions.merge());
+
                         fStore.collection("CartList").document("orders").collection(userid).document(key)
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+
+                                        Snackbar.make(findViewById(R.id.cartlayout), "Item Deleted", Snackbar.LENGTH_LONG)
+                                                .setAction("Action", null).show();
+                                        //Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
                                         loaddocs();
                                     }
                                 })
@@ -203,9 +277,55 @@ public class cart extends AppCompatActivity {
                     }
                 })
                 .show();
+
+
+
+
     }
 
+
+//    public void oncartclick(final String key){
+//
+//        android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
+//                .setTitle("Cart Opptions")
+//                .setMessage("Remove Product?")
+//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        deletesingleitem(key);
+//
+//
+//                        fStore.collection("CartList").document("orders").collection(userid).document(key)
+//                                .delete()
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+//                                        loaddocs();
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        Toast.makeText(cart.this, "Error deleting document", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                });
+//
+//
+//                    }
+//                })
+//                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                })
+//                .show();
+//    }
+
     private void deletesingleitem(String keymain) {
+
+
         fStore.collection("CartList").document("usercartlistitems").collection(userid).document(keymain)
                 .delete();
 

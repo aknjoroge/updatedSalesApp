@@ -50,6 +50,6 @@
         android:layout_alignBottom="@+id/textView14"
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
-        app:srcCompat="@drawable/roastandchopslogo" />
+        app:srcCompat="@drawable/porkpitlogo" />
 
 </RelativeLayout>

@@ -26,18 +26,22 @@ public class phoneverification extends AppCompatActivity {
 
     String userid;
     FirebaseFirestore fStore;
+    String phonenumber;
     String codebysystem;
+    PhoneAuthProvider.ForceResendingToken token;
     PinView pinView;
     Button verify;
+    String contrycode="+254";
 String name,estate,password,phone;
     private FirebaseAuth fAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phoneverification);
 
-
+        fAuth = FirebaseAuth.getInstance();
         name=getIntent().getStringExtra("username");
         estate=getIntent().getStringExtra("estate");
         password=getIntent().getStringExtra("password");
@@ -46,7 +50,6 @@ String name,estate,password,phone;
 
 
 
-        fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userid = fAuth.getCurrentUser().getUid();
         pinView=findViewById(R.id.phonecode);
@@ -54,12 +57,21 @@ String name,estate,password,phone;
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verifymaually();
+                try {
+                    phoneaccount(phonenumber);
+                }catch (Exception e){
+                    Toast.makeText(phoneverification.this, "eroor "+e, Toast.LENGTH_LONG).show();
+                }
+
+                //verifymaually();
             }
         });
 
-        phoneaccount(phone);
+         phonenumber=contrycode+phone;
+        Toast.makeText(this, phonenumber, Toast.LENGTH_LONG).show();
+
     }
+
 
     private void verifymaually() {
         String input =pinView.getText().toString();
@@ -73,62 +85,71 @@ String name,estate,password,phone;
 
 
     private void phoneaccount( String phoneNo) {
-        try {
-            PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                    phoneNo,
-                    60,
-                    TimeUnit.SECONDS,
-                    this,
-                    fcallbacks
 
-            );
-//            PhoneAuthOptions options = PhoneAuthOptions.newBuilder(fAuth)
-//                    .setPhoneNumber(phone)
-//                    .setTimeout(60L, TimeUnit.SECONDS)
-//                    .setActivity(this)
-//                    .setCallbacks(fcallbacks)
-//                    .build();
-//            PhoneAuthProvider.verifyPhoneNumber(options);
-        }catch (Exception e){
-            Toast.makeText(this, "error main "+e, Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(this, "Entered here ", Toast.LENGTH_SHORT).show();
+try {
+    PhoneAuthOptions options =
+            PhoneAuthOptions.newBuilder(fAuth)
+                    .setPhoneNumber("+254 727732542")       // Phone number to verify
+                    .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                    .setActivity(this)                 // Activity (for callback binding)
+                    .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                    .build();
+    PhoneAuthProvider.verifyPhoneNumber(options);
+}catch (Exception e){
+    Toast.makeText(this, "error" +e, Toast.LENGTH_SHORT).show();
+}
+
 
 
     }
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks  mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-    private  PhoneAuthProvider.OnVerificationStateChangedCallbacks fcallbacks= new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            try {
-                String code= phoneAuthCredential.getSmsCode();
-                if(code!= null){
-                    pinView.setText(code);
-                    verifycode(code);
-                }
-            }catch (Exception e){
-                Toast.makeText(phoneverification.this, "error four", Toast.LENGTH_SHORT).show();
+        public void onCodeAutoRetrievalTimeOut(@NonNull String s) {
+            super.onCodeAutoRetrievalTimeOut(s);
+            Toast.makeText(phoneverification.this, "Timeout", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onVerificationCompleted(PhoneAuthCredential credential) {
+
+            String sms=credential.getSmsCode();
+            if(sms!=null){
+                pinView.setText(sms);
+
+                signincretedntial(credential);
             }
 
         }
 
         @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            codebysystem=s;
+        public void onVerificationFailed(FirebaseException e) {
+            Toast.makeText(phoneverification.this, "Error in creating account check internet", Toast.LENGTH_SHORT).show();
+
+            // Show a message and update the UI
         }
 
         @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(phoneverification.this, "Error in verifying"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        public void onCodeSent(@NonNull String verificationId,
+                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
+            //super.onCodeSent(verificationId, token);
+            codebysystem=verificationId;
+            token=token;
+            Toast.makeText(phoneverification.this, "sent code", Toast.LENGTH_SHORT).show();
         }
     };
 
+
+
+
+
     private void verifycode(String code) {
         try {
-            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codebysystem,code);
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codebysystem, code);
             signincretedntial(credential);
         }catch (Exception e){
-            Toast.makeText(this, "Manual Test failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "failed Building credentials check Your internet", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -145,11 +166,11 @@ String name,estate,password,phone;
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(phoneverification.this, "verification Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(phoneverification.this, "Failed singing in", Toast.LENGTH_SHORT).show();
                 }
             });
         }catch (Exception e){
-            Toast.makeText(this, "exception three", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "signing in Error", Toast.LENGTH_SHORT).show();
         }
 
 

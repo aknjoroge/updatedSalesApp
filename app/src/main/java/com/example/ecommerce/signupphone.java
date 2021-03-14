@@ -76,20 +76,19 @@ public class signupphone extends Fragment implements AdapterView.OnItemSelectedL
                 if(!Check_fields()){
 
                 }else {
-                    Snackbar.make(view.findViewById(R.id.phonelayout), "UNDER DEVELOPMENT PLEASE USE EMAIL", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
 
-//                    loadBar2.show();
-//                    String username= name.getText().toString();
-//                    String userestate=estate.getText().toString();
-//                    String userpaassword=password.getText().toString();
-//                    String userphone=phone.getText().toString();
-//                    Intent intent = new Intent(getContext(), phoneverification.class);
-//                    intent.putExtra("username",username);
-//                    intent.putExtra("estate",userestate);
-//                    intent.putExtra("password",userpaassword);
-//                    intent.putExtra("phone",userphone);
-//                    startActivity(intent);
+
+                    loadBar2.show();
+                    String username= name.getText().toString();
+                    String userestate=estate.getText().toString();
+                    String userpaassword=password.getText().toString();
+                    String userphone=phone.getText().toString();
+                    Intent intent = new Intent(getContext(), phoneverification.class);
+                    intent.putExtra("username",username);
+                    intent.putExtra("estate",userestate);
+                    intent.putExtra("password",userpaassword);
+                    intent.putExtra("phone",userphone);
+                    startActivity(intent);
 
 
 
@@ -133,6 +132,14 @@ public class signupphone extends Fragment implements AdapterView.OnItemSelectedL
         }
         if(userlocation.equals("Choose Location")){
             Toast.makeText(getContext(), "Choose a location", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (phone.getText().toString().length() < 9){
+phone.setError("enter a complete number");
+return false;
+        }
+        if (phone.getText().toString().length() > 9){
+            phone.setError("please remove 0 from the phone number just write 7*********");
             return false;
         }
         else {

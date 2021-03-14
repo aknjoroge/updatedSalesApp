@@ -53,6 +53,8 @@ public class categories extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
         using=fAuth.getCurrentUser();
+
+
 try {
     loadaction();
 }catch (Exception e){

@@ -3,11 +3,14 @@ package com.example.ecommerce;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +38,7 @@ import com.squareup.picasso.Picasso;
 import io.paperdb.Paper;
 
 public class settings extends AppCompatActivity {
-Button dells;
+Button dells,updates;
     FirebaseUser using;
     String userid;
     FirebaseFirestore fStore;
@@ -45,7 +48,14 @@ Button dells;
     String takechecklock;
     FirebaseAuth fAuth;
     StorageReference storageReference;
-    Switch forlocks;
+    Switch forlocks,darkmode;
+    ProgressDialog loadBar;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadBar.hide();
+    }
 
     @Override
     public void finish() {
@@ -59,10 +69,34 @@ Button dells;
         setContentView(R.layout.activity_settings);
         Paper.init(this);
         fAuth = FirebaseAuth.getInstance();
+        darkmode=findViewById(R.id.dakmodeswitch);
         fStore=FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         using = fAuth.getCurrentUser();
         userid=fAuth.getCurrentUser().getUid();
+
+        loadBar=new ProgressDialog(this,R.style.ProgressbarStyle);
+        loadBar.setTitle("");
+        loadBar.setMessage("Checking for updates...");
+        loadBar.setIcon(R.drawable.update_alt_24);
+        loadBar.setCanceledOnTouchOutside(false);
+
+        loadBar.hide();
+
+        updates=findViewById(R.id.checkupdatebtn);
+        updates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadBar.show();
+              new Handler().postDelayed(new Runnable() {
+                  @Override
+                  public void run() {
+                      loadBar.hide();
+                      Toast.makeText(settings.this, "No updates available", Toast.LENGTH_SHORT).show();
+                  }
+              },4000);
+            }
+        });
 
         pit=findViewById(R.id.porkpitimg);
         tuwashow=findViewById(R.id.tuwashowmimg);
@@ -102,6 +136,18 @@ Button dells;
         }else {
 
         }
+
+        darkmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (darkmode.isChecked()){
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }else {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+                }
+            }
+        });
 
         dells = findViewById(R.id.delbtn);
         dells.setOnClickListener(new View.OnClickListener() {

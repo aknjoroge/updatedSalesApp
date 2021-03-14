@@ -30,19 +30,24 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class finalcheckout extends AppCompatActivity {
-String cart,total,shippping;
+String cart,total,shippping,payment;
 TextView finalshipping,finalcart,finaltotal;
     FirebaseFirestore fStore;
     Button finalpay;
     TextView town,estate;
     TextView name,phone;
     String userid;
+    String getname;
+    String cdate,ctime,cartkey;
     FirebaseAuth fAuth;
     ProgressDialog loadBar;
+    String mailtake;
     FirebaseUser using;
     TextView formenuone,formenutwo,formenuthree;
 
@@ -61,6 +66,7 @@ TextView finalshipping,finalcart,finaltotal;
         cart=getIntent().getStringExtra("cart");
         total=getIntent().getStringExtra("total");
         shippping=getIntent().getStringExtra("shipping");
+        payment=getIntent().getStringExtra("paymentmethod");
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -126,6 +132,8 @@ autochangeprofile2();
     private void process() {
 loadBar.show();
 
+
+
    new Handler().postDelayed(new Runnable() {
        @Override
        public void run() {
@@ -135,10 +143,83 @@ loadBar.show();
 
            }
            else {
+               setordersatte();
+               sendtoadmin();
                validated();
            }
        }
-   },1000);
+   },500);
+
+
+    }
+
+    private void setordersatte() {
+
+        Map<String,Object> state =new HashMap<>();
+        state.put("orders","present");
+        final DocumentReference documentReference = fStore.collection("CartList")
+                .document("orderdetails").collection(userid).document("state");
+
+        documentReference.set(state, SetOptions.merge());
+
+        Map<String,Object> newsum =new HashMap<>();
+        newsum.put("cartamount","0");
+
+         DocumentReference doc = fStore.collection("CartList")
+                .document("cartamounts").collection("general").document(userid);
+         doc.set(newsum, SetOptions.merge());
+
+
+    }
+
+    private void sendtoadmin() {
+
+        Calendar calendar= Calendar.getInstance();
+        SimpleDateFormat currentdate = new SimpleDateFormat("MMM dd,yyyy");
+        cdate =currentdate.format(calendar.getTime());
+
+        SimpleDateFormat currenttime = new SimpleDateFormat("HH:mm:ss a");
+        ctime =currenttime.format(calendar.getTime());
+
+        cartkey= ctime+cdate;
+
+
+        Map <String,Object> admin =new HashMap<>();
+        admin.put("username",getname);
+        admin.put("mail",mailtake);
+        admin.put("Totalamount",total);
+        admin.put("key",cartkey);
+        admin.put("totalcartprice",cart);
+        admin.put("shippingcharged",shippping);
+        admin.put("paymentmethod",payment);
+        admin.put("userid",userid);
+        admin.put("date",cdate);
+        admin.put("time",ctime);
+
+
+
+
+        fStore.collection("AdminOrders").document(userid).collection("data").document(cartkey).set(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(finalcheckout.this, "error adding to admin", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        fStore.collection("CartList").document(userid).delete().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(finalcheckout.this, "Error deleting Cart", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
@@ -155,8 +236,8 @@ loadBar.show();
 
     }
     public void endvalidation(){
-        Toast.makeText(this, "PROCESS HAS ENDED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
-        Snackbar.make(findViewById(R.id.finallinear), "DONE", Snackbar.LENGTH_LONG)
+        Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(R.id.finallinear), "ORDER PLACED", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 
@@ -168,7 +249,8 @@ loadBar.show();
 
                 String locatake=documentSnapshot.getString("loation");
                 String locatake2=documentSnapshot.getString("Estate");
-                String getname=documentSnapshot.getString("name");
+                 mailtake =documentSnapshot.getString("mail");
+                 getname=documentSnapshot.getString("name");
                 String getphone=documentSnapshot.getString("phone");
                 name.setText(getname);
                 phone.setText(getphone);
@@ -230,5 +312,7 @@ loadBar.show();
                 .show();
 
     }
+
+
 
 }

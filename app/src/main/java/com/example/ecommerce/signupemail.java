@@ -125,6 +125,7 @@ signup.setOnClickListener(new View.OnClickListener() {
                         user.put("loation", getuserlocation);
                         user.put("mail", useremail);
 
+
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void avoid) {
@@ -136,6 +137,30 @@ signup.setOnClickListener(new View.OnClickListener() {
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(getContext(), "", Toast.LENGTH_LONG).show();
 
+                            }
+                        });
+
+
+                        DocumentReference document = fStore.collection("CartList")
+                                .document("cartamounts").collection("general").document(userid);
+                        Map<String,Object> amount = new HashMap<>();
+                        amount.put("cartamount","0");
+                        document.set(amount).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(),"amount not initialized", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                        DocumentReference documenttwo = fStore.collection("CartList")
+                                .document("orderdetails").collection(userid).document("state");
+                        Map<String,Object> state =new HashMap<>();
+                        state.put("orders","none");
+                        documenttwo.set(state).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(),"State not Set", Toast.LENGTH_SHORT).show();
                             }
                         });
 

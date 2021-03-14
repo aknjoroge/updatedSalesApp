@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/verifylayout"
     android:orientation="vertical"
-    android:layout_margin="5dp"
+
+
     android:padding="5dp"
     android:layout_height="match_parent"
     tools:context=".emailverification">
@@ -12,14 +14,15 @@
     <ImageView
         android:layout_gravity="center"
         android:id="@+id/imageView4"
-        android:layout_margin="15dp"
+        android:layout_margin="25dp"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        app:srcCompat="@drawable/techkey" />
+        app:srcCompat="@drawable/ic_pork2" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
+        android:fontFamily="@font/arial"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="@string/firstconfirm"
@@ -39,6 +42,8 @@
         android:layout_margin="5dp"
         android:id="@+id/textView7"
         android:textAlignment="center"
+        android:fontFamily="@font/arial"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/openmail" />
@@ -47,7 +52,9 @@
         android:textAlignment="center"
         android:id="@+id/textView13"
 
-
+        android:fontFamily="@font/arial"
+        android:textColor="@color/black"
+        android:textSize="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/afterverifing" />
@@ -56,7 +63,7 @@
         android:id="@+id/resendcodetxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:text="@string/resendlink"
         android:textAlignment="center"
         android:textColor="@color/greendark" />
@@ -76,11 +83,49 @@
         <Button
             android:textColor="@color/white"
             android:layout_margin="3dp"
+
+            android:visibility="gone"
+            android:fontFamily="@font/arial"
             android:background="@android:color/transparent"
             android:id="@+id/closeappbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/exitapp" />
     </androidx.cardview.widget.CardView>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/porkpitimg2"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/porkpitlogo" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/tuwashowmimg2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/tuwashowlogo" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/techkeyimg2"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                app:srcCompat="@drawable/techkey" />
+        </TableRow>
+
+
+    </TableLayout>
 
 </LinearLayout>

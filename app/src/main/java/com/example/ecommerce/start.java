@@ -35,6 +35,12 @@ ProgressDialog loadBar;
 String takeusermail,takeuserpass,takeuserphone,takephonepass,takechecklock;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        //loadBar.hide();
+    }
+
+    @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
@@ -89,8 +95,10 @@ callpassword();
         howwe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),howwework.class));
-                overridePendingTransition(R.anim.slide_up,R.anim.slide_out_up);
+                bottomsheet bottomSheet = new bottomsheet();
+                bottomSheet.show(getSupportFragmentManager(), "bottomsheet");
+//                startActivity(new Intent(getApplicationContext(),howwework.class));
+//                overridePendingTransition(R.anim.slide_up,R.anim.slide_out_up);
             }
         });
 

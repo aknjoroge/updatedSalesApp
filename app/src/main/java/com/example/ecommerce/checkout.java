@@ -35,21 +35,26 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 public class checkout extends AppCompatActivity {
     ImageView settingdp;
     String takenews;
     TextView town,estate,changeloc,shipping,cart,total;
     TextView formenuone,formenutwo,formenuthree;
     FirebaseFirestore fStore;
+    String initialbalance;
     String userid;
     Uri imageuri;
     ImageButton call;
     Button topayment;
+
     public RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     String locationone,locationtwo,locationthree,locationfour,locationfive,locationsix;
     String generallocation;
-    String setprice,data;
+    String setprice;
 
     Button setforname,setforphone,setforpass,setforemail,setforlocation;
     FirebaseAuth fAuth;
@@ -72,12 +77,13 @@ public class checkout extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         using=fAuth.getCurrentUser();
         userid = fAuth.getCurrentUser().getUid();
+
         town=findViewById(R.id.checkouttowntxt);
         total=findViewById(R.id.checkouttotaltxt);
         topayment=findViewById(R.id.topaybtn);
 
         estate=findViewById(R.id.checkoutestatetxt);
-        data=getIntent().getStringExtra("ttprice");
+
 
 
         shipping=findViewById(R.id.checkoutshippingfee);
@@ -104,6 +110,7 @@ public class checkout extends AppCompatActivity {
                 intent.putExtra("shipping",shipping.getText().toString());
                 intent.putExtra("cart",cart.getText().toString());
                 intent.putExtra("total",total.getText().toString());
+
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
@@ -130,6 +137,7 @@ confirm();
         });
 
         try {
+            getbalance();
             shippingprices();
             autochangeprofile2();
             loadaction();
@@ -151,6 +159,20 @@ confirm();
 
 
 
+    }
+    public void getbalance() {
+
+        final DocumentReference documentReference = fStore.collection("CartList")
+                .document("cartamounts").collection("general").document(userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                initialbalance=documentSnapshot.getString("cartamount");
+
+
+            }
+        });
     }
 
     private void shippingprices() {
@@ -202,14 +224,13 @@ confirm();
 
     private void totalcalculations() {
         shipping.setText(setprice);
-        cart.setText(data);
+        cart.setText(initialbalance);
 
         int one= Integer.parseInt(setprice);
-        int two=Integer.parseInt(data);
+        int two=Integer.parseInt(initialbalance);
         int three =one+two;
         String amount=String.valueOf(three);
         total.setText(amount);
-
 
 
     }
@@ -277,13 +298,15 @@ confirm();
         //To load products to the page
 
         FirestoreRecyclerOptions<forcheckout> options = new FirestoreRecyclerOptions.Builder<forcheckout>()
-                .setQuery(fStore.collection("CartList").document("orders").collection(userid),forcheckout.class).build();
+                .setQuery(fStore.collection("CartList").document(userid).collection("Cartiems"),forcheckout.class).build();
         FirestoreRecyclerAdapter<forcheckout,checkoutviewholder> adapter= new FirestoreRecyclerAdapter<forcheckout, checkoutviewholder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull checkoutviewholder holder, int position, @NonNull final forcheckout model) {
                 holder.txtname.setText("Item: "+model.getName()+".");
                 holder.txtprice.setText(model.getPrice()+"/=");
                 holder.txtamount.setText("No: "+model.getAmount()+".");
+
+
 
             }
 

@@ -59,6 +59,7 @@ android:fontFamily="@font/arial"
                 android:text="@string/mail" />
 
             <Button
+                android:visibility="gone"
                 android:background="@drawable/inputtwo"
                 android:layout_margin="3dp"
                 android:layout_weight="1"

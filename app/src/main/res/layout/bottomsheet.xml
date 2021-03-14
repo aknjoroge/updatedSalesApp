@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView27"
+        android:fontFamily="@font/arialbd"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:text="@string/how"
+        tools:layout_editor_absoluteX="177dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:textAlignment="center"
+        android:fontFamily="@font/arial"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content"
+        android:text="@string/howone" />
+
+    <TextView
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:id="@+id/textView30"
+        android:fontFamily="@font/arial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/howtwo" />
+
+    <TextView
+        android:layout_margin="4dp"
+        android:padding="4dp"
+        android:id="@+id/textView49"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/arial"
+        android:layout_height="wrap_content"
+        android:text="@string/howthree" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="8dp"
+        app:srcCompat="@drawable/porkpitlogo" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/textView50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/poweredby"
+        android:textAlignment="center"
+        android:fontFamily="@font/arial"
+        android:textSize="9dp"
+        />
+
+</LinearLayout>

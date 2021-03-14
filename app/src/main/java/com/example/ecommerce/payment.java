@@ -16,12 +16,13 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 public class payment extends AppCompatActivity {
-String cart,total,shippping;
+String cart,total,shippping,paymentmethod;
 EditText voucher;
 Button next;
 TextView formenuone,formenutwo,formenuthree;
     String vouchernumber="none";
-Switch aSwitch;
+Switch mpesaSwitch,deliveryswitch;
+String mpesa = "off",deliver ="off";
 TextView forshipping,forcart,fortotal;
     @Override
     public void finish() {
@@ -74,14 +75,25 @@ startActivity(new Intent(getApplicationContext(),cart.class));
         forshipping=findViewById(R.id.paymentshippingfee);
         forcart=findViewById(R.id.paymentfromcarttxt);
         fortotal=findViewById(R.id.paymenttotaltxt);
-        aSwitch=findViewById(R.id.mpesaswitch);
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mpesaSwitch=findViewById(R.id.mpesaswitch);
+        deliveryswitch=findViewById(R.id.deliveryswitch);
+        deliveryswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(aSwitch.isChecked()){
-                    Toast.makeText(payment.this, "mpesa", Toast.LENGTH_SHORT).show();
-                }if(!aSwitch.isChecked()){
-                    Toast.makeText(payment.this, "none", Toast.LENGTH_SHORT).show();
+                if (deliveryswitch.isChecked()){
+                    deliver="on";
+                }else {
+                    deliver="off";
+                }
+            }
+        });
+        mpesaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(mpesaSwitch.isChecked()){
+                   mpesa="on";
+                }if(!mpesaSwitch.isChecked()){
+                    mpesa="off";
                 }
                 else {
 
@@ -104,13 +116,35 @@ startActivity(new Intent(getApplicationContext(),cart.class));
                 }else {
 
                 }
+                if (mpesa =="off" && deliver=="off"){
+                    Snackbar.make(findViewById(R.id.paymentlayout), "Select a Payment scheme M-pesa OR Pay on Delivery", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    return;
+                }
+                if (mpesa =="on" && deliver=="on"){
+                    Snackbar.make(findViewById(R.id.paymentlayout), "ONLY ONE Payment scheme M-pesa OR Pay on Delivery is Required" , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    return;
+                }
 
-                Toast.makeText(payment.this, "No Voucher ", Toast.LENGTH_SHORT).show();
+
+                if( mpesa =="on"){
+                    paymentmethod="mpesa";
+                }else {
+
+                }
+                if(deliver=="on"){
+                    paymentmethod = "delivery";
+                }else {
+
+                }
+
 
                 Intent intent=new Intent(payment.this,finalcheckout.class);
                 intent.putExtra("shipping",forshipping.getText().toString());
                 intent.putExtra("cart",forcart.getText().toString());
                 intent.putExtra("total",fortotal.getText().toString());
+                intent.putExtra("paymentmethod",paymentmethod);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 

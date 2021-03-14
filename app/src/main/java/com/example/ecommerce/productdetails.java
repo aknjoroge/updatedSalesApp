@@ -34,6 +34,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -53,6 +54,7 @@ public class productdetails extends AppCompatActivity {
     String amounts;
     ElegantNumberButton add;
     ImageButton call;
+    String initialbalance;
     public RecyclerView recyclerView;
     String nametake;
     String pricetake;
@@ -120,6 +122,7 @@ callone();
         cid=getIntent().getStringExtra("cid");
 
         try{
+            getbalance();
             uploaddate();
             loadaction();
         }catch (Exception e){
@@ -131,6 +134,7 @@ callone();
             @Override
             public void onClick(View v) {
 loadBar.show();
+
                 Calendar calendar= Calendar.getInstance();
                 SimpleDateFormat currentdate = new SimpleDateFormat("MMM dd,yyyy");
                 cdate =currentdate.format(calendar.getTime());
@@ -144,6 +148,25 @@ loadBar.show();
                 takecat=txtdetailcategory.getText().toString();
                 productid=pid;
                 amounts=add.getNumber();
+
+                //item math
+                try {
+                    int initial=Integer.parseInt(initialbalance);
+                    int cartpice = Integer.parseInt(takeprice);
+                    int cartamount=Integer.parseInt(amounts);
+                    int sum = cartpice*cartamount;
+                    int finalsum = initial+sum;
+                    updatesum(finalsum);
+
+                }catch (Exception e){
+                    Toast.makeText(productdetails.this, "math error do not continue", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+
+
+
                 final Map<String,Object> pdets =new HashMap<>();
                 pdets.put("name",takename);
                 pdets.put("time",ctime);
@@ -155,7 +178,8 @@ loadBar.show();
                 pdets.put("productid",pid);
 
 
-                fStore.collection("CartList").document("orders").collection(userid).document(cartkey).set(pdets).addOnSuccessListener(new OnSuccessListener<Void>() {
+                fStore.collection("CartList").document(userid).collection("orders")
+                        .document(cartkey).set(pdets).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Calendar calendar= Calendar.getInstance();
@@ -170,11 +194,12 @@ loadBar.show();
                         Map<String,Object> cartitem = new HashMap<>();
                         cartitem.put("key",cartkey);
                         cartitem.put("name",takename);
-                        pdets.put("amount",amounts);
+                        cartitem.put("amount",amounts);
                         cartitem.put("price",takeprice);
                         cartitem.put("date",cdate);
                         cartitem.put("time",ctime);
-                        fStore.collection("CartList").document("usercartlistitems").collection(userid).document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        fStore.collection("CartList").document(userid)
+                                .collection("Cartiems").document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(productdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
@@ -188,10 +213,6 @@ loadBar.show();
                                 Toast.makeText(productdetails.this, "Cart list item failed to upload", Toast.LENGTH_LONG).show();
                             }
                         });
-
-
-
-
 
 
                     }
@@ -209,6 +230,27 @@ loadBar.show();
 
             }
         });
+
+
+    }
+
+    private void updatesum(int finalsum) {
+        try {
+            int data = finalsum;
+            String updatesum =String.valueOf(data);
+
+            Map<String,Object> newsum =new HashMap<>();
+            newsum.put("cartamount",updatesum);
+            final DocumentReference documentReference = fStore.collection("CartList")
+                    .document("cartamounts").collection("general").document(userid);
+
+            documentReference.set(newsum, SetOptions.merge());
+
+
+
+        }catch (Exception e){
+            Toast.makeText(this, "update error", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -235,6 +277,20 @@ loadBar.show();
                 Picasso.get().load(htmls).into(detailimage);
 
 
+
+            }
+        });
+    }
+
+    public void getbalance() {
+
+        final DocumentReference documentReference = fStore.collection("CartList")
+                .document("cartamounts").collection("general").document(userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                initialbalance=documentSnapshot.getString("cartamount");
 
             }
         });

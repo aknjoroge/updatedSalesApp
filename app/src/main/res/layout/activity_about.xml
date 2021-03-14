@@ -50,16 +50,17 @@
                         android:fontFamily="@font/fontone"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="23sp" />
 
                     <TextView
                         android:id="@+id/textView68"
-                        android:fontFamily="@font/arial"
+                        android:fontFamily="@font/arialbd"
                         android:layout_margin="10dp"
+                        android:textSize="18dp"
                         android:layout_width="match_parent"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/red"
                         android:layout_height="wrap_content"
-                        android:text="Support" />
+                        android:text="@string/support" />
 
                     <Button
                         android:id="@+id/button1c"
@@ -88,15 +89,15 @@
                         android:layout_marginLeft="5dp"
                         android:text="ABOUT:"
                         android:textColor="@color/red"
-                        android:textSize="24sp" />
+                        android:textSize="19sp" />
 
                     <TextView
                         android:id="@+id/textView18"
                         android:layout_width="wrap_content"
                         android:fontFamily="@font/arial"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="DESIGN AND BUILT BY TECHKEY A HAVEN FOR TECHNOLOGY"
+                        android:layout_margin="8dp"
+                        android:text="@string/poweredby"
                         android:textColor="@color/black" />
 
 
@@ -106,21 +107,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:fontFamily="@font/arial"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_marginRight="8dp"
-                        android:text="www.techkey.co.ke"
+                        android:text="@string/www.t"
                         android:textColor="@color/black" />
-                    <TextView
-                        android:id="@+id/textView20"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="5dp"
 
-android:textAlignment="center"
-                        android:fontFamily="@font/arialbd"
-                        android:layout_marginRight="8dp"
-                        android:text="A DIGITAL PLATFORM est MMXVIII"
-                        />
 
                     <TextView
                         android:id="@+id/textView37SSS"
@@ -131,7 +124,7 @@ android:textAlignment="center"
                         android:text="LICENSE:"
                         android:fontFamily="@font/arialbd"
                         android:textColor="@color/red"
-                        android:textSize="24sp" />
+                        android:textSize="19sp" />
 
                     <TextView
                         android:id="@+id/textView4"
@@ -190,15 +183,27 @@ android:textAlignment="center"
             <TextView
                 android:textAlignment="center"
                 android:id="@+id/textVkiew15"
+                android:fontFamily="@font/arialbd"
                 android:layout_width="match_parent"
                 android:text="Developed By Techkey A Company Of Tuwashow_Africa"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"></TextView>
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="5dp"
 
+                android:textAlignment="center"
+                android:fontFamily="@font/arialbd"
+                android:layout_marginRight="8dp"
+                android:text="A DIGITAL PLATFORM est MMXVIII"
+                />
             <ImageView
                 android:id="@+id/imageView14"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:layout_margin="10dp"
                 app:srcCompat="@drawable/techkey" />
 
