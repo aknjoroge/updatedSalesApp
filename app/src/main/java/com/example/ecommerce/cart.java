@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,10 +59,17 @@ public class cart extends AppCompatActivity {
     String userid;
     int totalprice=0;
     TextView pname,pmail,fortotalview;
+
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getbalance();
     }
 
     @Override
@@ -233,39 +241,48 @@ generalstate=documentSnapshot.getString("orders");
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        deletesingleitem(key);
-                        int revprice=Integer.parseInt(price);
-                        int revamount =Integer.parseInt(amount);
-                        int sum = revamount*revprice;
-                        totalprice=totalprice-sum;
-                        String rem=String.valueOf(totalprice);
-                        fortotalview.setText("Total: "+rem);
+                        getbalance();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
 
-                        Map<String,Object> newsum =new HashMap<>();
-                        newsum.put("cartamount",rem);
-                        final DocumentReference documentReference = fStore.collection("CartList")
-                                .document("cartamounts").collection("general").document(userid);
+                                deletesingleitem(key);
+                                int revprice=Integer.parseInt(price);
+                                int revamount =Integer.parseInt(amount);
+                                int sum = revamount*revprice;
+                                totalprice=totalprice-sum;
+                                String rem=String.valueOf(totalprice);
+                                fortotalview.setText("Total: "+rem);
 
-                        documentReference.set(newsum, SetOptions.merge());
+                                Map<String,Object> newsum =new HashMap<>();
+                                newsum.put("cartamount",rem);
+                                final DocumentReference documentReference = fStore.collection("CartList")
+                                        .document("cartamounts").collection("general").document(userid);
 
-                        fStore.collection("CartList").document(userid).collection("orders").document(key)
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
+                                documentReference.set(newsum, SetOptions.merge());
+                                fStore.collection("CartList").document("all").collection("peruser").document(userid).collection("orders")
+                                        .document(key)
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
 
-                                        Snackbar.make(findViewById(R.id.cartlayout), "Item Deleted", Snackbar.LENGTH_LONG)
-                                                .setAction("Action", null).show();
-                                        //Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
-                                        loaddocs();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(cart.this, "Error deleting document", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                                Snackbar.make(findViewById(R.id.cartlayout), "Item Deleted", Snackbar.LENGTH_LONG)
+                                                        .setAction("Action", null).show();
+                                                //Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                                                loaddocs();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(cart.this, "Error deleting document", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
+                            }
+                        },200);
 
 
                     }
@@ -287,8 +304,8 @@ generalstate=documentSnapshot.getString("orders");
 
     private void deletesingleitem(String keymain) {
 
-
-        fStore.collection("CartList").document(userid).collection("Cartiems").document(keymain)
+        fStore.collection("CartList").document("individual").collection("items")
+                .document(userid).collection("Cartiems").document(keymain)
                 .delete();
 
     }
@@ -299,6 +316,7 @@ generalstate=documentSnapshot.getString("orders");
 
         try {
             loaddocs();
+            getbalance();
         }catch (Exception e){
             Toast.makeText(this, "Error: "+e, Toast.LENGTH_LONG).show();
         }

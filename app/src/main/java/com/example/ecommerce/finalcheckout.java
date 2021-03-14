@@ -17,8 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +29,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -93,6 +97,7 @@ TextView finalshipping,finalcart,finaltotal;
         finalpay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                test();
                 process();
 
             }
@@ -129,6 +134,10 @@ TextView finalshipping,finalcart,finaltotal;
 autochangeprofile2();
     }
 
+    private void test() {
+
+    }
+
     private void process() {
 loadBar.show();
 
@@ -141,9 +150,10 @@ loadBar.show();
 
            }
            else {
+               deletecart();
                setordersatte();
                sendtoadmin();
-               deletecart();
+
                validated();
            }
        }
@@ -153,12 +163,35 @@ loadBar.show();
     }
 
     private void deletecart() {
-        fStore.collection("CartList").document("all").collection("peruser").document(userid).delete().addOnFailureListener(new OnFailureListener() {
+
+        fStore.collection("CartList").document("all").collection("peruser").document(userid).collection("orders")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        document.getData();
+                        document.getId();
+                        String info= document.getId();
+                        fStore.collection("CartList").document("all")
+                                .collection("peruser").document(userid).collection("orders")
+                                .document(info).delete();
+
+
+                    }
+
+                }else {
+                    Toast.makeText(finalcheckout.this, "task failed", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(finalcheckout.this, "Error deleting Cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(finalcheckout.this, "data not replaced", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private void setordersatte() {
@@ -243,6 +276,7 @@ loadBar.show();
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
         Snackbar.make(findViewById(R.id.finallinear), "ORDER PLACED", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
+        startActivity(new Intent(getApplicationContext(),home.class));
     }
 
     private void autochangeprofile2() {

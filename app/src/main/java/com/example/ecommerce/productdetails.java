@@ -199,7 +199,8 @@ getbalance();
                         cartitem.put("price",takeprice);
                         cartitem.put("date",cdate);
                         cartitem.put("time",ctime);
-                        fStore.collection("CartList").document("individual").collection("items").document(userid).collection("Cartiems").document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        fStore.collection("CartList").document("individual").collection("items")
+                                .document(userid).collection("Cartiems").document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(productdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
