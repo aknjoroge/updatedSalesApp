@@ -298,7 +298,7 @@ confirm();
         //To load products to the page
 
         FirestoreRecyclerOptions<forcheckout> options = new FirestoreRecyclerOptions.Builder<forcheckout>()
-                .setQuery(fStore.collection("CartList").document(userid).collection("Cartiems"),forcheckout.class).build();
+                .setQuery(fStore.collection("CartList").document("individual").collection("items").document(userid).collection("Cartiems"),forcheckout.class).build();
         FirestoreRecyclerAdapter<forcheckout,checkoutviewholder> adapter= new FirestoreRecyclerAdapter<forcheckout, checkoutviewholder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull checkoutviewholder holder, int position, @NonNull final forcheckout model) {

@@ -167,7 +167,7 @@ generalstate=documentSnapshot.getString("orders");
     private void loaddocs() {
 
         FirestoreRecyclerOptions<forcart> options = new FirestoreRecyclerOptions.Builder<forcart>()
-                .setQuery(fStore.collection("CartList").document(userid).collection("orders"),forcart.class).build();
+                .setQuery(fStore.collection("CartList").document("all").collection("peruser").document(userid).collection("orders"),forcart.class).build();
         FirestoreRecyclerAdapter<forcart,cartviewholder> adapter= new FirestoreRecyclerAdapter<forcart, cartviewholder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull cartviewholder holder, int position, @NonNull final forcart model) {
@@ -248,7 +248,7 @@ generalstate=documentSnapshot.getString("orders");
 
                         documentReference.set(newsum, SetOptions.merge());
 
-                        fStore.collection("CartList").document("orders").collection(userid).document(key)
+                        fStore.collection("CartList").document(userid).collection("orders").document(key)
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -284,49 +284,11 @@ generalstate=documentSnapshot.getString("orders");
     }
 
 
-//    public void oncartclick(final String key){
-//
-//        android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
-//                .setTitle("Cart Opptions")
-//                .setMessage("Remove Product?")
-//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        deletesingleitem(key);
-//
-//
-//                        fStore.collection("CartList").document("orders").collection(userid).document(key)
-//                                .delete()
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void aVoid) {
-//                                        Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
-//                                        loaddocs();
-//                                    }
-//                                })
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        Toast.makeText(cart.this, "Error deleting document", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//
-//
-//                    }
-//                })
-//                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                })
-//                .show();
-//    }
 
     private void deletesingleitem(String keymain) {
 
 
-        fStore.collection("CartList").document("usercartlistitems").collection(userid).document(keymain)
+        fStore.collection("CartList").document(userid).collection("Cartiems").document(keymain)
                 .delete();
 
     }

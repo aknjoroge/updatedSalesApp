@@ -132,8 +132,6 @@ autochangeprofile2();
     private void process() {
 loadBar.show();
 
-
-
    new Handler().postDelayed(new Runnable() {
        @Override
        public void run() {
@@ -145,12 +143,22 @@ loadBar.show();
            else {
                setordersatte();
                sendtoadmin();
+               deletecart();
                validated();
            }
        }
    },500);
 
 
+    }
+
+    private void deletecart() {
+        fStore.collection("CartList").document("all").collection("peruser").document(userid).delete().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(finalcheckout.this, "Error deleting Cart", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setordersatte() {
@@ -199,7 +207,8 @@ loadBar.show();
 
 
 
-        fStore.collection("AdminOrders").document(userid).collection("data").document(cartkey).set(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
+        fStore.collection("AdminOrders").document("Foradmin")
+                .collection("all").document(cartkey).set(admin).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
@@ -214,12 +223,7 @@ loadBar.show();
             }
         });
 
-        fStore.collection("CartList").document(userid).delete().addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(finalcheckout.this, "Error deleting Cart", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
 
     }

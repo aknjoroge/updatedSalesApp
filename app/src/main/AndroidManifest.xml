@@ -27,7 +27,7 @@
         <activity android:name=".checkout" android:noHistory="true" android:screenOrientation="portrait"/>
         <activity android:name=".account" android:screenOrientation="portrait"/>
         <activity android:name=".feed" android:screenOrientation="portrait"/>
-        <activity android:name=".productdetails" android:screenOrientation="portrait"/>
+        <activity android:name=".productdetails" android:screenOrientation="portrait" android:noHistory="true"/>
         <activity android:name=".cart" android:screenOrientation="portrait"/>
         <activity
             android:screenOrientation="portrait"

@@ -134,6 +134,7 @@ callone();
             @Override
             public void onClick(View v) {
 loadBar.show();
+getbalance();
 
                 Calendar calendar= Calendar.getInstance();
                 SimpleDateFormat currentdate = new SimpleDateFormat("MMM dd,yyyy");
@@ -178,7 +179,7 @@ loadBar.show();
                 pdets.put("productid",pid);
 
 
-                fStore.collection("CartList").document(userid).collection("orders")
+                fStore.collection("CartList").document("all").collection("peruser").document(userid).collection("orders")
                         .document(cartkey).set(pdets).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -198,8 +199,7 @@ loadBar.show();
                         cartitem.put("price",takeprice);
                         cartitem.put("date",cdate);
                         cartitem.put("time",ctime);
-                        fStore.collection("CartList").document(userid)
-                                .collection("Cartiems").document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        fStore.collection("CartList").document("individual").collection("items").document(userid).collection("Cartiems").document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(productdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
