@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/cartlayout"
+
     android:background="@color/white"
     tools:context=".cart">
 
@@ -15,9 +16,9 @@
         android:textAlignment="center"
         android:fontFamily="@font/fontone"
 
-        android:textSize="19dp"
-        android:textColor="@color/white"
-        android:background="@color/blue"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+
         android:paddingTop="10dp"
         android:layout_height="40dp"
         android:text="@string/cart" />

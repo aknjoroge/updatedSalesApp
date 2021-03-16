@@ -23,6 +23,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class changepassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changepassword);
-
+        StatusBarUtil.setTransparent(this);
 
         setpasschanges = findViewById(R.id.setchangeppbtn);
         oldpassqordget = findViewById(R.id.confirmoldpass);

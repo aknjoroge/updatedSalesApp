@@ -27,6 +27,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -37,6 +38,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.jaeger.library.StatusBarUtil;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -50,10 +52,11 @@ public class productdetails extends AppCompatActivity {
     String takeprice;
     String productid;
     String takename;
+    String generalstate;
     String cartkey;
     String amounts;
     ElegantNumberButton add;
-    ImageButton call;
+    Button call;
     String initialbalance;
     public RecyclerView recyclerView;
     String nametake;
@@ -80,11 +83,13 @@ ProgressDialog loadBar;
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productdetails);
-
+        StatusBarUtil.setTransparent(this);
         fAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
         fStore = FirebaseFirestore.getInstance();
@@ -125,6 +130,7 @@ callone();
             getbalance();
             uploaddate();
             loadaction();
+            getorderstate();
         }catch (Exception e){
             Toast.makeText(this, "Error: "+e, Toast.LENGTH_LONG).show();
         }
@@ -133,6 +139,19 @@ callone();
         tocart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                if (generalstate.equals("present")){
+                    Snackbar.make(findViewById(R.id.productdetaillayout), "YOU HAVE A PENDING ORDER WAIT UNTIL ORDER IS COMPLETED", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    loadBar.hide();
+
+                    return;
+
+                }else{
+
+                }
+
 loadBar.show();
 getbalance();
 
@@ -233,6 +252,20 @@ getbalance();
         });
 
 
+    }
+
+    public void getorderstate() {
+
+        final DocumentReference documentReference = fStore.collection("CartList")
+                .document("orderdetails").collection(userid).document("state");
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                generalstate=documentSnapshot.getString("orders");
+
+
+            }
+        });
     }
 
     private void updatesum(int finalsum) {

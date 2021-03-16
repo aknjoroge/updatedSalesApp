@@ -34,6 +34,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
+import com.jaeger.library.StatusBarUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -76,6 +77,7 @@ public class cart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        StatusBarUtil.setTransparent(this);
         fAuth = FirebaseAuth.getInstance();
         recyclerView=findViewById(R.id.cartrecycler);
         recyclerView.setHasFixedSize(true);

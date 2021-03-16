@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.jaeger.library.StatusBarUtil;
+
 import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,6 +18,7 @@ lanchermanager lanchermanager;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatusBarUtil.setTransparent(this);
         lanchermanager=new lanchermanager(this);
         Paper.init(this);
         if(lanchermanager.isFirstTime()){

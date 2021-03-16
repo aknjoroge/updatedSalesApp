@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.jaeger.library.StatusBarUtil;
 
 import io.paperdb.Paper;
 
@@ -50,7 +51,9 @@ String takeusermail,takeuserpass,takeuserphone,takephonepass,takechecklock;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        StatusBarUtil.setTransparent(this);
         Paper.init(this);
+
         fAuth = FirebaseAuth.getInstance();
 
         tologin=findViewById(R.id.loginbutton);

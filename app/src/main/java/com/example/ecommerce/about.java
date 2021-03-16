@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.jaeger.library.StatusBarUtil;
+
 public class about extends AppCompatActivity {
 Button one,two;
 
@@ -24,6 +26,7 @@ Button one,two;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        StatusBarUtil.setTransparent(this);
         one = findViewById(R.id.button1c);
         two = findViewById(R.id.button2c);
         one.setOnClickListener(new View.OnClickListener() {

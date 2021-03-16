@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.jaeger.library.StatusBarUtil;
 import com.squareup.picasso.Picasso;
 
 import io.paperdb.Paper;
@@ -68,6 +69,8 @@ Button dells,updates;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         Paper.init(this);
+        StatusBarUtil.setTransparent(this);
+
         fAuth = FirebaseAuth.getInstance();
         darkmode=findViewById(R.id.dakmodeswitch);
         fStore=FirebaseFirestore.getInstance();

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +21,35 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.jaeger.library.StatusBarUtil;
 import com.squareup.picasso.Picasso;
 
 public class categories extends AppCompatActivity {
     public RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     FirebaseUser using;
+    boolean doubleBackToExitPressedOnce = false;
     FirebaseAuth fAuth;
     StorageReference storageReference;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+
     FirebaseFirestore fStore;
     String keptkey;
 
@@ -42,6 +64,7 @@ public class categories extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        StatusBarUtil.setTransparent(this);
         //firebese declarations
         fAuth = FirebaseAuth.getInstance();
         using=fAuth.getCurrentUser();

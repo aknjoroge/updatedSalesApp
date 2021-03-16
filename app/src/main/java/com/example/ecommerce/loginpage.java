@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.jaeger.library.StatusBarUtil;
+
 public class loginpage extends AppCompatActivity {
 Button showphone,showemail;
 
@@ -20,6 +22,7 @@ Button showphone,showemail;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginpage);
+        StatusBarUtil.setTransparent(this);
         showphone=findViewById(R.id.phoneloginbtn);
         showemail=findViewById(R.id.mailloginbtn);
         showphone.setOnClickListener(new View.OnClickListener() {

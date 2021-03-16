@@ -33,6 +33,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
+import com.jaeger.library.StatusBarUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -66,6 +67,7 @@ TextView finalshipping,finalcart,finaltotal;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalcheckout);
+        StatusBarUtil.setTransparent(this);
 
         cart=getIntent().getStringExtra("cart");
         total=getIntent().getStringExtra("total");
@@ -276,7 +278,7 @@ loadBar.show();
         Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
         Snackbar.make(findViewById(R.id.finallinear), "ORDER PLACED", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        startActivity(new Intent(getApplicationContext(),home.class));
+        startActivity(new Intent(getApplicationContext(),categories.class));
     }
 
     private void autochangeprofile2() {

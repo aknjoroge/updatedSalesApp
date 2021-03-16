@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.jaeger.library.StatusBarUtil;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
@@ -76,6 +77,7 @@ public class feed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
+        StatusBarUtil.setTransparent(this);
         bottomNavigation=findViewById(R.id.bottomnavnew);
         bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.category_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.feed_24));

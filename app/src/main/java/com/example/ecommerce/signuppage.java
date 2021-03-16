@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.jaeger.library.StatusBarUtil;
+
 public class signuppage extends AppCompatActivity {
 Button sigupmail,signupphone;
     @Override
@@ -20,7 +22,7 @@ Button sigupmail,signupphone;
         setContentView(R.layout.activity_signuppage);
         sigupmail=findViewById(R.id.mailsignupbtn);
         signupphone=findViewById(R.id.phonesignupbtn);
-
+        StatusBarUtil.setTransparent(this);
         sigupmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

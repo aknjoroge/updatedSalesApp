@@ -19,6 +19,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +41,7 @@ String name,estate,password,phone;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phoneverification);
-
+        StatusBarUtil.setTransparent(this);
         fAuth = FirebaseAuth.getInstance();
         name=getIntent().getStringExtra("username");
         estate=getIntent().getStringExtra("estate");

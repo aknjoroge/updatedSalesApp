@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.jaeger.library.StatusBarUtil;
 
 public class payment extends AppCompatActivity {
 String cart,total,shippping,paymentmethod;
@@ -34,6 +35,7 @@ TextView forshipping,forcart,fortotal;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+        StatusBarUtil.setTransparent(this);
         cart=getIntent().getStringExtra("cart");
         total=getIntent().getStringExtra("total");
         shippping=getIntent().getStringExtra("shipping");

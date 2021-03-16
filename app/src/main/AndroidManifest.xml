@@ -35,7 +35,7 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".howwework" android:screenOrientation="portrait"/>
-        <activity android:name=".categories" android:screenOrientation="portrait"/>
+        <activity android:name=".categories" android:screenOrientation="portrait" android:noHistory="true"/>
         <activity android:name=".resendverificationpage" android:screenOrientation="portrait"/>
         <activity
             android:screenOrientation="portrait"
@@ -45,8 +45,8 @@
             android:name=".emailverification"
             android:screenOrientation="portrait"
             android:noHistory="true" />
-        <activity android:name=".signuppage" android:screenOrientation="portrait" android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".loginpage" android:screenOrientation="portrait"/>
+        <activity android:name=".signuppage" android:noHistory="true" android:screenOrientation="portrait" android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".loginpage" android:noHistory="true" android:screenOrientation="portrait"/>
         <activity android:name=".start" android:screenOrientation="portrait" />
         <activity
             android:screenOrientation="portrait"

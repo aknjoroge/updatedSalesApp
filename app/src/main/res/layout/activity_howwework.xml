@@ -9,6 +9,8 @@
     android:layout_height="match_parent"
     tools:context=".howwework">
 
+
+
     <TextView
         android:id="@+id/textView27"
         android:fontFamily="@font/arialbd"

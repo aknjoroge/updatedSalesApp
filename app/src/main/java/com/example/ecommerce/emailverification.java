@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.jaeger.library.StatusBarUtil;
 
 public class emailverification extends AppCompatActivity {
 TextView code,emailwarning;
@@ -34,6 +35,7 @@ ProgressBar progressBar;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emailverification);
+        StatusBarUtil.setTransparent(this);
         code=findViewById(R.id.resendcodetxt);
 emailwarning=findViewById(R.id.textView6);
 progressBar=findViewById(R.id.emaiwarnprogressbar);

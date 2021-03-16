@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/productdetaillayout"
     tools:context=".productdetails">
     <TextView
         android:layout_alignParentTop="true"
@@ -39,25 +41,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
-                <ImageButton
+                <Button
                     android:id="@+id/placecallimage"
-                    android:layout_width="wrap_content"
+                    android:layout_width="350dp"
                     android:layout_height="40dp"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:drawablePadding="2dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/arial"
+                    android:text="CALL TO PLACE ORDER "
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/call_24" />
+                    android:drawableStart="@drawable/call_24" />
 
-                <Button
-                    android:id="@+id/addtocartbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:fontFamily="@font/arialbd"
-                    android:layout_weight="2"
-                    android:background="@drawable/custominput"
-                    android:text="@string/addtocart"
-                    android:textColor="@color/greendark" />
+
+
             </TableRow>
 
         </TableLayout>
@@ -94,28 +92,22 @@ android:background="@color/white"
                     android:id="@+id/detailproductimage"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    app:srcCompat="@drawable/techkey" />
+                    app:srcCompat="@drawable/porkpitlogo" />
 
-                <View
-                    android:id="@+id/divider2"
-                    android:layout_width="300dp"
-                    android:layout_gravity="center"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="2dp"
-                    android:background="#5C151515" />
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
 
 
-                    android:elevation="10dp"
+                    android:elevation="0dp"
                     app:cardBackgroundColor="@color/white">
 
 
                     <LinearLayout
                         android:gravity="center"
+                        android:layout_margin="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
@@ -156,6 +148,8 @@ android:background="@color/white"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                              />
+
+
                         <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                             android:id="@+id/elegandadd"
                             android:layout_width="wrap_content"
@@ -163,15 +157,13 @@ android:background="@color/white"
                             android:layout_margin="5dp"
                             android:layout_gravity="center"
 
-
                             app:finalNumber="10"
                             app:initialNumber="1"
 
                             app:textSize="16dp"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
-
                         <RatingBar
-android:layout_gravity="left"
+                            android:layout_gravity="left"
                             android:layout_margin="4dp"
                             android:id="@+id/ratingBar"
                             android:layout_width="wrap_content"
@@ -179,11 +171,23 @@ android:layout_gravity="left"
                             android:numStars="5"
 
 
-                            android:progressTint="#A6FF00"
+                            android:progressTint="#ffaa1d"
                             android:isIndicator="true"
                             android:rating="3"
                             />
+
+                        <Button
+                            android:id="@+id/addtocartbtn"
+                            android:layout_width="300dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="2dp"
+                            android:fontFamily="@font/arialbd"
+                            android:background="@drawable/custominput"
+                            android:text="@string/addtocart"
+                            android:textColor="@color/blue" />
+
                     </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -191,7 +195,7 @@ android:layout_gravity="left"
                     android:textSize="14dp"
                     android:layout_marginLeft="13dp"
                     android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
+                    android:layout_marginBottom="9dp"
                     android:layout_marginTop="8dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/arial"
@@ -199,15 +203,15 @@ android:layout_gravity="left"
                     android:layout_height="wrap_content"
                     android:text="@string/empydescription" />
 
-                <View
-                    android:id="@+id/dikvidesr2"
-                    android:layout_width="300dp"
-                    android:layout_gravity="center"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
+<!--                <View-->
+<!--                    android:id="@+id/dikvidesr2"-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:layout_marginTop="10dp"-->
 
-                    android:layout_marginBottom="10dp"
-                    android:background="#5C151515" />
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:background="#5C151515" />-->
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -284,14 +288,14 @@ android:layout_gravity="left"
 
                 </TableLayout>
 
-                <View
-                    android:id="@+id/dikvider2"
-                    android:layout_width="300dp"
-                    android:layout_gravity="center"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="2dp"
-                    android:background="#5C151515" />
+<!--                <View-->
+<!--                    android:id="@+id/dikvider2"-->
+<!--                    android:layout_width="300dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginBottom="2dp"-->
+<!--                    android:background="#5C151515" />-->
                 <TextView
                     android:layout_marginTop="10dp"
                     android:textSize="17dp"
@@ -316,10 +320,22 @@ android:layout_gravity="left"
                     android:textAlignment="center"
                     android:id="@+id/textView24"
                     android:layout_width="match_parent"
+android:fontFamily="@font/arial"
                     android:layout_height="wrap_content"
                     android:text="@string/copyright" />
 
+
+                <com.imankur.analogclockview.AnalogClock
+                    android:layout_width="100dp"
+                    app:showSecondHand="true"
+                    android:layout_gravity="center"
+                    android:layout_height="100dp">
+
+                </com.imankur.analogclockview.AnalogClock>
+
             </LinearLayout>
+
+
         </ScrollView>
 
     </RelativeLayout>

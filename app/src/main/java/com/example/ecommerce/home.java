@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.jaeger.library.StatusBarUtil;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -60,11 +62,14 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     FirebaseUser using;
     FirebaseFirestore fStore;
     ImageView himage;
+    boolean doubleBackToExitPressedOnce = false;
     String userid;
     MeowBottomNavigation bottomNavigation;
     String aq;
     TextView pname,pmail;
     private AppBarConfiguration mAppBarConfiguration;
+
+
 
     @Override
     public void finish() {
@@ -85,6 +90,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
 
         Paper.init(this);
+        StatusBarUtil.setTransparent(this);
         //bottom nav
         bottomNavigation=findViewById(R.id.bottomnavnew);
         bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.category_24));
@@ -268,10 +274,30 @@ try{
 //    }
     @Override
     public void onBackPressed() {
+
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
         if(nav.isDrawerOpen(GravityCompat.START)){
             nav.closeDrawer(GravityCompat.START);
-        }else {super.onBackPressed();}
+        }else {
 
+        }
+        doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     @Override
