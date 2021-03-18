@@ -213,16 +213,18 @@ callpassword();
                 fAuth.signInWithEmailAndPassword(takeusermail,takeuserpass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        loadBar.hide();
+
                         startActivity(new Intent(getApplicationContext(),emailverification.class));
+                        loadBar.hide();
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        loadBar.hide();
+
                         startActivity(new Intent(getApplicationContext(),loginpage.class));
+                        loadBar.hide();
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         Toast.makeText(start.this, "Auto Login Failed", Toast.LENGTH_SHORT).show();
                     }

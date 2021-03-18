@@ -19,10 +19,10 @@
         tools:replace="android:icon">
         <activity android:name=".offers"></activity>
         <activity
-            android:name=".signuppagethree"
+            android:name=".signuppagethree" android:screenOrientation="portrait"
             android:noHistory="true" />
         <activity
-            android:name=".signuppagetwo"
+            android:name=".signuppagetwo" android:screenOrientation="portrait"
             android:noHistory="true" />
         <activity
             android:name=".finalcheckout"

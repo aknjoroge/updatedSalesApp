@@ -67,7 +67,7 @@ android:textSize="16dp"
 
             </TableRow>
             <TableRow
-                android:layout_margin="2dp"
+                android:layout_margin=".2dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
@@ -75,10 +75,10 @@ android:textSize="16dp"
                 <ImageView
                     android:layout_margin="7dp"
                     android:id="@+id/imageView6"
-                    android:scaleType="centerInside"
+                    android:scaleType="fitCenter"
                     android:layout_width="wrap_content"
                     android:layout_height="160dp"
-                    app:srcCompat="@drawable/porkpitlogo" />
+                    app:srcCompat="@drawable/cropmain" />
             </TableRow>
 
 

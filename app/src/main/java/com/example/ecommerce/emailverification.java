@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -80,16 +83,47 @@ togmail=findViewById(R.id.closeappbtn);
         tuwashow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(findViewById(R.id.verifylayout), "TUWASHOW AFRICA", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                final Snackbar snackbar= Snackbar.make(findViewById(R.id.verifylayout), "TUWASHOW AFRICA", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View snackbarView = snackbar.getView();
+
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                params.topMargin =50;
+                params.gravity = Gravity.TOP;
+                snackbarView.setLayoutParams(params);
+                snackbar.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        snackbar.dismiss();
+                    }
+                },2000);
+
+
             }
         });
 
         techkey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(findViewById(R.id.verifylayout), "TECHKEY Ltd", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                final Snackbar snackbar= Snackbar.make(findViewById(R.id.verifylayout), "TECHKEY Ltd", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View snackbarView = snackbar.getView();
+
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                params.topMargin =50;
+                params.gravity = Gravity.TOP;
+                snackbarView.setLayoutParams(params);
+                snackbar.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        snackbar.dismiss();
+                    }
+                },2000);
+
             }
         });
 

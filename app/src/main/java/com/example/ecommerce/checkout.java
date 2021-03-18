@@ -74,6 +74,7 @@ public class checkout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         StatusBarUtil.setTransparent(this);
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -141,8 +142,15 @@ confirm();
         try {
             getbalance();
             shippingprices();
-            autochangeprofile2();
-            loadaction();
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    autochangeprofile2();
+                    loadaction();
+                }
+            },300);
+
 
         }catch (Exception e){
             Toast.makeText(this, "error: "+e, Toast.LENGTH_SHORT).show();

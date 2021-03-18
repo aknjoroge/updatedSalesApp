@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +17,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +44,12 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.jaeger.library.StatusBarUtil;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
@@ -70,7 +79,18 @@ public class feed extends AppCompatActivity {
     TextView pname, pmail;
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                requestperm();
+            }
+        },1000);
 
+
+    }
 
     @Override
     public void finish() {
@@ -113,7 +133,25 @@ public class feed extends AppCompatActivity {
 
     }
 
+    public void requestperm(){
+        Dexter.withActivity(this).withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE).withListener(new PermissionListener() {
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
 
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                permissionToken.continuePermissionRequest();
+            }
+        }).check();
+
+    }
 
 
     private void loaditems() {
@@ -252,7 +290,28 @@ public class feed extends AppCompatActivity {
             outStream.close();
 
         }catch (Exception e){
-            Toast.makeText(feed.this, "Error "+e, Toast.LENGTH_SHORT).show();
+
+            (new AlertDialog.Builder(this)).setTitle("File Permission Not Granted!")
+                    .setMessage("You Need To Enable The permissions in settings." +
+                            "Go To Settings > Apps > Porkpit > Permissions : and turn on permissions.")
+                    .setPositiveButton("open Settings", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                        Uri.parse("package:"+BuildConfig.APPLICATION_ID));
+                                startActivity(intent);
+                            }catch (Exception e){
+                                Toast.makeText(feed.this, "Error "+e, Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    }).show();
+
+                    //.setPositiveButton("OK", null).create().show();
+
+
             return;
         }
         Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();

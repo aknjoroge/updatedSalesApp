@@ -13,10 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -118,24 +120,72 @@ Button dells,updates,toaccount;
         pit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(findViewById(R.id.settinglayout), "THE PORK PIT", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                final Snackbar snackbar= Snackbar.make(findViewById(R.id.settinglayout), "THE PORK PIT", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View snackbarView = snackbar.getView();
+
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                params.topMargin =50;
+                params.gravity = Gravity.TOP;
+                snackbarView.setLayoutParams(params);
+                snackbar.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        snackbar.dismiss();
+                    }
+                },2000);
+
+
             }
         });
 
         tuwashow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(findViewById(R.id.settinglayout), "TUWASHOW AFRICA", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+                final Snackbar snackbar= Snackbar.make(findViewById(R.id.settinglayout), " TUWASHOW AFRICA", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View snackbarView = snackbar.getView();
+
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                params.topMargin =50;
+                params.gravity = Gravity.TOP;
+                snackbarView.setLayoutParams(params);
+                snackbar.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        snackbar.dismiss();
+                    }
+                },2000);
+
+
             }
         });
 
         techkey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(findViewById(R.id.settinglayout), "TECHKEY Ltd", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                final Snackbar snackbar= Snackbar.make(findViewById(R.id.settinglayout), " TECHKEY Ltd", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View snackbarView = snackbar.getView();
+
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                params.topMargin =50;
+
+                params.gravity = Gravity.TOP;
+                snackbarView.setLayoutParams(params);
+                snackbar.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        snackbar.dismiss();
+                    }
+                },2000);
+
             }
         });
 

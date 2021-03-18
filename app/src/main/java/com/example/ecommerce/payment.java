@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,13 +122,45 @@ startActivity(new Intent(getApplicationContext(),cart.class));
 
                 }
                 if (mpesa =="off" && deliver=="off"){
-                    Snackbar.make(findViewById(R.id.paymentlayout), "Select a Payment scheme M-pesa OR Pay on Delivery", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+
+                    final Snackbar snackbar=  Snackbar.make(findViewById(R.id.paymentlayout), "Select a Payment scheme M-pesa OR Pay on Delivery", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View snackbarView = snackbar.getView();
+
+                    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                    params.topMargin =50;
+                    params.gravity = Gravity.TOP;
+                    snackbarView.setLayoutParams(params);
+                    snackbar.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            snackbar.dismiss();
+                        }
+                    },2000);
+
+
                     return;
                 }
                 if (mpesa =="on" && deliver=="on"){
-                    Snackbar.make(findViewById(R.id.paymentlayout), "ONLY ONE Payment scheme M-pesa OR Pay on Delivery is Required" , Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+
+                    final Snackbar snackbar=    Snackbar.make(findViewById(R.id.paymentlayout), "ONLY ONE Payment scheme M-pesa OR Pay on Delivery is Required" , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View snackbarView = snackbar.getView();
+
+                    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                    params.topMargin =50;
+                    params.gravity = Gravity.TOP;
+                    snackbarView.setLayoutParams(params);
+                    snackbar.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            snackbar.dismiss();
+                        }
+                    },2000);
+
+
                     return;
                 }
 
