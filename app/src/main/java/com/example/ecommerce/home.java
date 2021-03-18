@@ -20,9 +20,9 @@ import android.widget.Toast;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,7 +64,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     RecyclerView.LayoutManager layoutManager;
     FirebaseUser using;
     FirebaseFirestore fStore;
-    FloatingActionMenu main;
+    FloatingActionMenu fmain;
     FloatingActionButton floatcart,floatsetting,floatfeed;
     ImageView himage;
     boolean doubleBackToExitPressedOnce = false;
@@ -119,35 +119,41 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
 
+       fmain=  findViewById(R.id.floatmenu);
+
+       try {
+           floatcart=findViewById(R.id.fcartbtn);
+           floatfeed=findViewById(R.id.ffeedbtn);
+           floatsetting=findViewById(R.id.fsettingbtn);
+       }catch (Exception e){
+           Toast.makeText(this, "error"+e, Toast.LENGTH_LONG).show();
+       }
 
 
-//        floatcart=findViewById(R.id.fcartbtn);
-//        floatsetting=findViewById(R.id.fsettingbtn);
-//        floatfeed=findViewById(R.id.ffeedbtn);
-//
-//        main=  findViewById(R.id.floatmenu);
-//
-//        floatfeed.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(),feed.class));
-//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-//            }
-//        });
-//        floatsetting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(),settings.class));
-//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-//            }
-//        });
-//        floatcart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(),cart.class));
-//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-//            }
-//        });
+
+
+
+        floatfeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),feed.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
+        floatsetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),settings.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
+        floatcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),cart.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
 
 
 

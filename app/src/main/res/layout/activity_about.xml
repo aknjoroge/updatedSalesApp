@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="@string/aboutus"
-                        android:textColor="@color/black" />
+                        />
 
                     <TextView
                         android:id="@+id/textView18"
@@ -114,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="@string/poweredby"
-                        android:textColor="@color/black" />
+                        />
 
 
                     <TextView
@@ -128,7 +128,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginRight="8dp"
                         android:text="@string/www.tuwa"
-                        android:textColor="@color/black" />
+                        />
 
                     <TextView
 
@@ -141,7 +141,7 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginRight="8dp"
                         android:text="@string/www.tech"
-                        android:textColor="@color/black" />
+                         />
 
 
                     <TextView
@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         android:text="@string/license"
-                        android:textColor="@color/black" />
+                        />
 
 
 
@@ -170,6 +170,17 @@
 
 
             </androidx.cardview.widget.CardView>
+
+            <com.imankur.analogclockview.AnalogClock
+                android:layout_width="130dp"
+                app:showSecondHand="true"
+
+
+                android:layout_gravity="center"
+                android:layout_height="130dp">
+
+            </com.imankur.analogclockview.AnalogClock>
+
             <TextView
                 android:textAlignment="center"
                 android:id="@+id/textVkiew15"
