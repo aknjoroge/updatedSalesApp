@@ -7,11 +7,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +45,9 @@ import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,6 +131,31 @@ public class feed extends AppCompatActivity {
                 globalrandomkey=model.getRandomKey();
 
 
+                holder.download.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        android.app.AlertDialog dialog = new AlertDialog.Builder(feed.this,R.style.AlertDialogStyle)
+                                .setMessage("Download image?")
+
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                       downloadpic(holder.profile.getDrawable());
+                                    }
+                                })
+                                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .show();
+
+
+                    }
+                });
+
                 holder.viewmore.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -140,9 +178,6 @@ public class feed extends AppCompatActivity {
                         intent.putExtra(Intent.EXTRA_TEXT,sharebody);
                         startActivity(Intent.createChooser(intent,"Share via"));
 
-
-//                        Snackbar.make(findViewById(R.id.feedrecysler), "techkey is working on it", Snackbar.LENGTH_LONG)
-//                     .setAction("Action", null).show();
 
                     }
                 });
@@ -180,50 +215,6 @@ public class feed extends AppCompatActivity {
                     }
                 });
 
-
-
-
-//                        if(!holder.isliked){
-//
-//
-//                            String likestake = model.getLikes();
-//                            int getlikes = Integer.parseInt(likestake);
-//                            int add = getlikes + 1;
-//                            String value = String.valueOf(add);
-//                            holder.likesno.setText(value);
-//                            model.isliked=true;
-//
-//                            try {
-//                                updatedata(add, model.getRandomKey());
-//                            } catch (Exception e) {
-//                                Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
-//                            }
-//                            holder.isliked=true;
-//                        }else {
-//
-//
-//
-//                            String likestake = holder.likesno.getText().toString();
-//                            int getlikes = Integer.parseInt(likestake);
-//                            int minus = getlikes - 1;
-//                            String valuenew = String.valueOf(minus);
-//                            holder.likesno.setText(valuenew);
-//                            model.isliked=false;
-//
-//                            try {
-//                                updatedata(minus, model.getRandomKey());
-//                            } catch (Exception e) {
-//                                Toast.makeText(feed.this, "error in likes: " + e, Toast.LENGTH_SHORT).show();
-//                            }
-//                            holder.isliked=false;
-//                        }
-
-
-
-
-
-
-
             }
 
             @NonNull
@@ -241,6 +232,33 @@ public class feed extends AppCompatActivity {
 
     }
 
+    private void downloadpic(Drawable drawable) {
+        OutputStream outStream = null;
+        try {
+            BitmapDrawable draw = (BitmapDrawable) drawable;
+            Bitmap bitmap = draw.getBitmap();
+
+            File sdCard = Environment.getExternalStorageDirectory();
+            File dir = new File(sdCard.getAbsolutePath() + "/PorkPit_images");
+            dir.mkdirs();
+
+            String fileName = String.format("%d.jpg", System.currentTimeMillis());
+            File outFile = new File(dir, fileName);
+            outStream= new FileOutputStream(outFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
+
+            outStream.flush();
+
+            outStream.close();
+
+        }catch (Exception e){
+            Toast.makeText(feed.this, "Error "+e, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+
+
+    }
 
 
     private void updatedata(int taken,String keys) {
@@ -258,4 +276,5 @@ public class feed extends AppCompatActivity {
 
 
     }
+
 }

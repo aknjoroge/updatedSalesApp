@@ -83,7 +83,6 @@
                         android:layout_marginBottom="10dp"
                         android:layout_height="wrap_content"
                         android:text="@string/accounts" />
-
                     <TextView
                         android:id="@+id/dpchangetxt"
                         android:layout_width="match_parent"
@@ -93,6 +92,7 @@
                         android:textSize="11sp"
                         android:text="@string/setpic"
                         android:textColor="#DD0E26FF" />
+
 
                     <TableLayout
                         android:layout_width="match_parent"

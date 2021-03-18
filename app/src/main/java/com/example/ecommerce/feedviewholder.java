@@ -17,13 +17,14 @@ public class feedviewholder extends RecyclerView.ViewHolder implements View.OnCl
     TextView name,likesno;
     LikeButton like;
 
-    ImageButton share;
+    ImageButton share,download;
     itemclicklistener listener;
 
     public feedviewholder(@NonNull View itemView) {
         super(itemView);
 
         profile = itemView.findViewById(R.id.imageView6);
+        download=itemView.findViewById(R.id.downloadimg);
         viewmore = itemView.findViewById(R.id.feedmorebtn);
         likesno=(itemView).findViewById(R.id.feedlikeno);
         name=(itemView).findViewById(R.id.feednametxt);
