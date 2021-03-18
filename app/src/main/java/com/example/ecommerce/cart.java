@@ -12,10 +12,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -97,8 +99,24 @@ public class cart extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (generalstate.equals("present")){
-                    Snackbar.make(findViewById(R.id.cartlayout), "YOU HAVE A PENDING ORDER WAIT UNTIL ORDER IS COMPLETED", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+
+
+                    final Snackbar snackbar=  Snackbar.make(findViewById(R.id.cartlayout), "YOU HAVE A PENDING ORDER WAIT UNTIL ORDER IS COMPLETED", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View snackbarView = snackbar.getView();
+
+                    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                    params.topMargin =50;
+                    params.gravity = Gravity.TOP;
+                    snackbarView.setLayoutParams(params);
+                    snackbar.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            snackbar.dismiss();
+                        }
+                    },2000);
+
                     fortotalview.setText("You have Pending Order");
                     tocheck.setVisibility(View.INVISIBLE);
 
@@ -269,8 +287,22 @@ generalstate=documentSnapshot.getString("orders");
                                             @Override
                                             public void onSuccess(Void aVoid) {
 
-                                                Snackbar.make(findViewById(R.id.cartlayout), "Item Deleted", Snackbar.LENGTH_LONG)
-                                                        .setAction("Action", null).show();
+                                                final Snackbar snackbar=   Snackbar.make(findViewById(R.id.cartlayout), "Item Deleted", Snackbar.LENGTH_LONG)
+                                                        .setAction("Action", null);
+                                                View snackbarView = snackbar.getView();
+
+                                                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+                                                params.topMargin =50;
+                                                params.gravity = Gravity.TOP;
+                                                snackbarView.setLayoutParams(params);
+                                                snackbar.show();
+                                                new Handler().postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        snackbar.dismiss();
+                                                    }
+                                                },2000);
+
                                                 //Toast.makeText(cart.this, "Item Deleted", Toast.LENGTH_SHORT).show();
                                                 loaddocs();
                                             }

@@ -51,7 +51,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".account"
-            android:noHistory="true"
+           
             android:screenOrientation="portrait" />
         <activity
             android:name=".feed"

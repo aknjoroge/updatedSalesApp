@@ -85,7 +85,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onStart() {
         super.onStart();
-
+fmain.close(false);
     }
 
     @Override

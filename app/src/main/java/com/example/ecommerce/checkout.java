@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -60,6 +61,7 @@ public class checkout extends AppCompatActivity {
     Button setforname,setforphone,setforpass,setforemail,setforlocation;
     FirebaseAuth fAuth;
     FirebaseUser using;
+    ProgressDialog loadBar;
 
     StorageReference storageReference;
 
@@ -81,11 +83,28 @@ public class checkout extends AppCompatActivity {
         using=fAuth.getCurrentUser();
         userid = fAuth.getCurrentUser().getUid();
 
+
         town=findViewById(R.id.checkouttowntxt);
         total=findViewById(R.id.checkouttotaltxt);
         topayment=findViewById(R.id.topaybtn);
 
+        getbalance();
+        autochangeprofile2();
+        shippingprices();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setlocationprice();
+            }
+        },200);
+
+
         estate=findViewById(R.id.checkoutestatetxt);
+        loadBar=new ProgressDialog(this,R.style.ProgressbarStyle);
+        loadBar.setMessage("Reading Data");
+        loadBar.setCanceledOnTouchOutside(false);
+        loadBar.show();
 
 
 
@@ -139,22 +158,35 @@ confirm();
             }
         });
 
-        try {
-            getbalance();
-            shippingprices();
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    autochangeprofile2();
-                    loadaction();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    loadBar.hide();
+
+
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            loadaction();
+                        }
+                    },500);
+
+
+                }catch (Exception e){
+                    loadBar.hide();
+                    Toast.makeText(checkout.this, "error: "+e, Toast.LENGTH_SHORT).show();
                 }
-            },300);
+            }
+        },3000);
 
 
-        }catch (Exception e){
-            Toast.makeText(this, "error: "+e, Toast.LENGTH_SHORT).show();
-        }
+
+
+
         topayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,12 +254,7 @@ confirm();
 
 
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setlocationprice();
-            }
-        },500);
+
 
 
     }
