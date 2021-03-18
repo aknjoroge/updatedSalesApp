@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,7 +40,7 @@ import com.squareup.picasso.Picasso;
 import io.paperdb.Paper;
 
 public class settings extends AppCompatActivity {
-Button dells,updates;
+Button dells,updates,toaccount;
     FirebaseUser using;
     String userid;
     FirebaseFirestore fStore;
@@ -87,6 +88,15 @@ Button dells,updates;
         loadBar.hide();
 
         updates=findViewById(R.id.checkupdatebtn);
+        toaccount=findViewById(R.id.accountsbtn);
+
+        toaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),account.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+            }
+        });
         updates.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

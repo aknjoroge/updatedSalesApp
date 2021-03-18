@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
 
-    android:layout_margin="8dp"
-
+    android:layout_margin="1dp"
+app:cardBackgroundColor="#4DFFFFFF"
     app:cardElevation="1dp"
     app:cardMaxElevation="1dp"
     app:cardCornerRadius="5dp"
@@ -97,7 +97,7 @@
             android:layout_marginBottom="5dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/custominputtwo"
+            android:background="@drawable/custominputnew"
             android:id="@+id/cartremovebtn"
             android:fontFamily="@font/arial"
             android:textColor="@color/red"

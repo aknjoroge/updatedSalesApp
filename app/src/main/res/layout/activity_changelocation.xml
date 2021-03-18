@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/location_on_24" />
+        app:srcCompat="@drawable/location_" />
 
 
     <Spinner
@@ -26,7 +26,7 @@
         android:layout_width="260dp"
         android:layout_height="60dp"
         android:layout_margin="10dp"
-
+android:fontFamily="@font/arial"
         android:background="@drawable/custominput"
         android:drawableStart="@drawable/location_on_24"
         android:drawablePadding="15dp"
@@ -47,6 +47,7 @@
         app:cardElevation="20dp">
 
         <Button
+            android:fontFamily="@font/arial"
             android:id="@+id/setsignupbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -41,6 +41,7 @@ String takeusermail,takeuserpass,takeuserphone,takephonepass,takechecklock;
         //loadBar.hide();
     }
 
+
     @Override
     public void finish() {
         super.finish();
@@ -61,7 +62,6 @@ String takeusermail,takeuserpass,takeuserphone,takephonepass,takechecklock;
         howwe=findViewById(R.id.howtxt);
 
         loadBar=new ProgressDialog(this,R.style.ProgressbarStyle);
-        loadBar.setTitle("LOADING.");
         loadBar.setMessage("Logging in please wait...");
         loadBar.setCanceledOnTouchOutside(false);
         loadBar.hide();
@@ -181,14 +181,15 @@ callpassword();
                 fAuth.signInWithEmailAndPassword(takeuserphone,takephonepass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-loadBar.hide();
-                        startActivity(new Intent(getApplicationContext(),phoneverification.class));
                         loadBar.hide();
+                        startActivity(new Intent(getApplicationContext(),phoneverification.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
+                        loadBar.hide();
                         startActivity(new Intent(getApplicationContext(),loginpage.class));
                         Toast.makeText(start.this, "Auto Login Failed", Toast.LENGTH_SHORT).show();
                     }
@@ -198,7 +199,7 @@ loadBar.hide();
 
             }
         }else {
-
+            loadBar.hide();
         }
 
 
@@ -212,14 +213,17 @@ loadBar.hide();
                 fAuth.signInWithEmailAndPassword(takeusermail,takeuserpass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-
+                        loadBar.hide();
                         startActivity(new Intent(getApplicationContext(),emailverification.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
+                        loadBar.hide();
                         startActivity(new Intent(getApplicationContext(),loginpage.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         Toast.makeText(start.this, "Auto Login Failed", Toast.LENGTH_SHORT).show();
                     }
                 });

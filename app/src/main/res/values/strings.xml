@@ -3,6 +3,11 @@
     <string name="welcome">WELCOME</string>
     <string name="logintxt">LOGIN</string>
     <string name="signuptxt">SIGNUP</string>
+
+    <string name="personaldetails">PERSONAL DETAILS</string>
+    <string name="policy">I Agree To The Terms And Policies</string>
+    <string name="passworddetails">SECURITY DETAILS</string>
+    <string name="locationdetails">LOCATION DETAILS</string>
     <string name="loginlabel1">LOGIN WITH EMAIL.</string>
     <string name="signuplabel1">SIGNUP WITH EMAIL. </string>
     <string name="signuplabel2">YOU WILL HAVE TO VERIFY THE  EMAIL BEFORE CONTINUING</string>
@@ -12,8 +17,10 @@
     <string name="remove">REMOVE</string>
     <string name="nav_closer">close_nav</string>
     <string name="soup">SOUP</string>
+    <string name="offers">Weekly Offers</string>
+    <string name="offer">OFFERS</string>
     <string name="logout">LOGOUT</string>
-    <string name="setpic">set proflle picture?</string>
+    <string name="setpic">SET PROFILE PICTURE?</string>
     <string name="total">TOTAL</string>
     <string name="checkout">CHECKOUT</string>
     <string name="name">NAME</string>
@@ -23,9 +30,16 @@
     <string name="feed">FEED</string>
     <string name="gotopayment">GO TO PAYMENT</string>
     <string name="settings">SETTINGS</string>
+    <string name="version">Version 1.0.0.0.0.0.A.1</string>
+    <string name="account">Account Settings</string>
     <string name="pay">PAY</string>
     <string name="exit">EXIT</string>
     <string name="lock">LOCK APP?</string>
+    <string name="aboutus">provides access to the PorkPit Ruaka Products ie Meals, Drinks etc.
+    Check out more of our products in the product feed.
+    </string>
+    <string name="license">EULA End User License Agreement legally binding and protect This intellectual property of Techkey
+        and prohibit  re-selling This software</string>
     <string name="howone">This app provides direct access to the PorkPit Ruaka Products ie Meals, Drinks etc.</string>
     <string name="howtwo">Create an account with us that we use to identify you so as to give our value to you and only to you.
     Your information is kept private from third parties and due to our customer passion this App is Add free and will remain to be
@@ -36,7 +50,8 @@
     <string name="shipp">shippingfee</string>
     <string name="support">SUPPORT</string>
     <string name="call">Call to Order</string>
-    <string name="www.t">WWW.TUWASHOWMEDIA.CO.KE</string>
+    <string name="www.tuwa">WWW.TUWASHOWMEDIA.CO.KE</string>
+    <string name="www.tech">WWW.TECHKEY.CO.KE</string>
     <string name="next">NEXT</string>
     <string name="entervoucher">VOUCHER</string>
     <string name="copyvoucher">ENTER A PIT VOUCHER</string>
@@ -61,7 +76,7 @@
     <string name="ugali">UGALI</string>
     <string name="addressdetail">ADDRESS DETAILS</string>
     <string name="fed">FEED</string>
-    <string name="viewproduct">VIEW CATEGORY</string>
+    <string name="viewproduct">VIEW</string>
     <string name="payondelivery">PAY ON DELIVERY</string>
     <string name="socialfeed">SOCIAL F E E D</string>
     <string name="addtocart">ADD TO CART</string>
@@ -78,6 +93,7 @@
     <string name="verifycode">ENTER VERIFICATION CODE SENT TO YOUR PHONE AS AN SMS</string>
     <string name="resendcode">RESEND CODE?</string>
     <string name="verify">VERIFY > </string>
+    <string name="accounts">ACCOUNTS</string>
     <string name="mail">EMAIL</string>
     <string name="co">CO</string>
     <string name="lo">LOG</string>
@@ -86,6 +102,7 @@
     <string name="i">I</string>
     <string name="DE">DE</string>
     <string name="code">CODE</string>
+    <string name="contact">Contact us if you have a problem </string>
     <string name="how">HOW WE WORK?</string>
     <string name="loginadvertisement">GET YOUR DAILY MEAL SERVED TO YOU COMFORTABLY AT YOUR HOME.</string>
     <string name="exitapp">CLOSE APP AND OPEN EMAIL</string>

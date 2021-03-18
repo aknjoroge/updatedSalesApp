@@ -56,7 +56,7 @@ public class feed extends AppCompatActivity {
     String userid;
     TextView pname, pmail;
 
-    MeowBottomNavigation bottomNavigation;
+
 
 
     @Override
@@ -68,8 +68,7 @@ public class feed extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        bottomNavigation.show(2,true);
-        bottomNavigation.setCount(2,"1");
+
     }
 
     @Override
@@ -78,47 +77,6 @@ public class feed extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
 
         StatusBarUtil.setTransparent(this);
-        bottomNavigation=findViewById(R.id.bottomnavnew);
-        bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.category_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.feed_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.account_box_24));
-
-        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
-            @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-
-            }
-        });
-        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
-            @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()){
-                    case 1:
-                        startActivity(new Intent(getApplicationContext(),categories.class));
-                        break;
-                    case 2:
-                        startActivity(new Intent(getApplicationContext(),feed.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(getApplicationContext(),account.class));
-                        break;
-
-                }
-            }
-        });
-
-        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
-            @Override
-            public void onReselectItem(MeowBottomNavigation.Model item) {
-//                switch (item.getId()){
-//                    case 2:
-//                        startActivity(new Intent(getApplicationContext(),feed.class));
-//                        break;
-//                }
-
-            }
-        });
-        bottomNavigation.setCount(1,"4");
 
 
 
@@ -152,7 +110,7 @@ public class feed extends AppCompatActivity {
         FirestoreRecyclerAdapter<forfeed, feedviewholder> adapter = new FirestoreRecyclerAdapter<forfeed, feedviewholder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final feedviewholder holder, int position, @NonNull final forfeed model) {
-                holder.name.setText("Name: " + model.getName());
+                holder.name.setText(model.getName());
 
 
                 Picasso.get().load(model.getFilepath()).into(holder.profile);

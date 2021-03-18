@@ -4,33 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/wall2"
+    android:background="@drawable/cropmain"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/bottomnavnew"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-app:mbn_rippleColor="#2f424242"
-android:layout_alignParentBottom="true"
-        app:mbn_backgroundBottomColor="@color/blue"
-        android:layout_marginBottom="0.2dp"
-        app:mbn_circleColor="@color/white"
-        app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_countTextColor="@color/white"
-        app:mbn_defaultIconColor="@color/white"
-        app:mbn_selectedIconColor="#3c415e"
-        tools:layout_editor_absoluteY="675dp">
-
-    </com.etebarian.meowbottomnavigation.MeowBottomNavigation>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclermenumain"
         android:layout_width="match_parent"
-        android:layout_above="@id/bottomnavnew"
+
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
+
+
+
 
 </RelativeLayout>

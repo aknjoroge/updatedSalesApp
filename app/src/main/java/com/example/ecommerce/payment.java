@@ -65,12 +65,12 @@ startActivity(new Intent(getApplicationContext(),cart.class));
         formenuthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(payment.this,finalcheckout.class);
-                intent.putExtra("shipping",forshipping.getText().toString());
-                intent.putExtra("cart",forcart.getText().toString());
-                intent.putExtra("total",fortotal.getText().toString());
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+//                Intent intent=new Intent(payment.this,finalcheckout.class);
+//                intent.putExtra("shipping",forshipping.getText().toString());
+//                intent.putExtra("cart",forcart.getText().toString());
+//                intent.putExtra("total",fortotal.getText().toString());
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
 
@@ -154,4 +154,5 @@ startActivity(new Intent(getApplicationContext(),cart.class));
         });
 
     }
+
 }

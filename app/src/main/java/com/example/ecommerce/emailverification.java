@@ -25,7 +25,7 @@ public class emailverification extends AppCompatActivity {
 TextView code,emailwarning;
 String userid;
 ProgressBar progressBar;
-    ImageView pit,tuwashow,techkey;
+    ImageView tuwashow,techkey;
     FirebaseAuth fAuth;
     Button togmail;
     ProgressDialog loadBar;
@@ -40,7 +40,7 @@ ProgressBar progressBar;
 emailwarning=findViewById(R.id.textView6);
 progressBar=findViewById(R.id.emaiwarnprogressbar);
 togmail=findViewById(R.id.closeappbtn);
-        pit=findViewById(R.id.porkpitimg2);
+
         tuwashow=findViewById(R.id.tuwashowmimg2);
         techkey=findViewById(R.id.techkeyimg2);
         fAuth = FirebaseAuth.getInstance();
@@ -75,13 +75,7 @@ togmail=findViewById(R.id.closeappbtn);
             }
         });
 
-        pit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(findViewById(R.id.verifylayout), "THE PORK PIT", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+      
 
         tuwashow.setOnClickListener(new View.OnClickListener() {
             @Override

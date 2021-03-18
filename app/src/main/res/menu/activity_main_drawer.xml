@@ -6,11 +6,19 @@
 
     <group android:checkableBehavior="single">
 
+
         <item
+
             android:id="@+id/nav_category"
             android:iconTint="@color/white"
             android:icon="@drawable/category_24"
             android:title="@string/category" />
+
+        <item
+            android:id="@+id/nav_offer"
+            android:iconTint="@color/white"
+            android:icon="@drawable/offers_24"
+            android:title="@string/offers" />
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/cart_24"

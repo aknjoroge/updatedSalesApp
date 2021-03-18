@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 
-    android:background="@color/white"
+    android:background="@drawable/cropmain"
     android:layout_height="match_parent"
     tools:context=".feed">
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:id="@+id/textView26"
         android:layout_width="match_parent"
+       android:drawablePadding="5dp"
+        android:drawableTint="@color/white"
+        android:drawableStart="@drawable/feed_24"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:background="@color/white"
+        android:textColor="@color/white"
+        android:background="@android:color/transparent"
         android:fontFamily="@font/fontone"
         android:textSize="25dp"
         android:paddingTop="1dp"
@@ -27,31 +31,15 @@
         android:id="@+id/feedrecysler"
         android:layout_width="match_parent"
         android:layout_below="@id/textView26"
-      android:layout_above="@id/bottomnavnew"
+
         android:layout_height="match_parent"
 
-        android:background="@color/white"
+
         android:scrollbars="vertical">
 
     </androidx.recyclerview.widget.RecyclerView>
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/bottomnavnew"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:mbn_rippleColor="#2f424242"
-
-        android:layout_alignParentBottom="true"
-        app:mbn_backgroundBottomColor="@color/blue"
-        android:layout_marginBottom="0.2dp"
-        app:mbn_circleColor="@color/white"
-        app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_countTextColor="@color/white"
-        app:mbn_defaultIconColor="@color/white"
-        app:mbn_selectedIconColor="#3c415e"
-        tools:layout_editor_absoluteY="675dp">
 
 
-    </com.etebarian.meowbottomnavigation.MeowBottomNavigation>
 
 
 </RelativeLayout>

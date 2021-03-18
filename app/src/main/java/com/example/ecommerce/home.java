@@ -1,5 +1,7 @@
 package com.example.ecommerce;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -61,10 +64,12 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     RecyclerView.LayoutManager layoutManager;
     FirebaseUser using;
     FirebaseFirestore fStore;
+    FloatingActionMenu main;
+    FloatingActionButton floatcart,floatsetting,floatfeed;
     ImageView himage;
     boolean doubleBackToExitPressedOnce = false;
     String userid;
-    MeowBottomNavigation bottomNavigation;
+
     String aq;
     TextView pname,pmail;
     private AppBarConfiguration mAppBarConfiguration;
@@ -80,8 +85,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onStart() {
         super.onStart();
-        bottomNavigation.show(1,true);
-        bottomNavigation.setCount(2,"1");
+
     }
 
     @Override
@@ -91,54 +95,11 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
 
         Paper.init(this);
         StatusBarUtil.setTransparent(this);
-        //bottom nav
-        bottomNavigation=findViewById(R.id.bottomnavnew);
-        bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.category_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.feed_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.account_box_24));
+
+
+
 
          aq=getIntent().getStringExtra("categoryname");
-        bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
-            @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-
-            }
-        });
-        bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
-            @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()){
-                    case 1:
-                       startActivity(new Intent(getApplicationContext(),categories.class));
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                        break;
-                    case 2:
-                        startActivity(new Intent(getApplicationContext(),feed.class));
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                        break;
-                    case 3:
-                        startActivity(new Intent(getApplicationContext(),account.class));
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                        break;
-
-                }
-            }
-        });
-
-        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
-            @Override
-            public void onReselectItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()){
-                    case 1:
-                        startActivity(new Intent(getApplicationContext(),categories.class));
-                        break;
-                }
-
-            }
-        });
-bottomNavigation.setCount(1,"4");
-bottomNavigation.show(1,true);
-
 
 
 
@@ -151,20 +112,53 @@ bottomNavigation.show(1,true);
         setSupportActionBar(toolbar);
         dataloc=aq;
 
+
+
         recyclerView=findViewById(R.id.recyclermenumain);
         recyclerView.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              startActivity(new Intent(getApplicationContext(),cart.class));
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-            }
-        });
+
+//        floatcart=findViewById(R.id.fcartbtn);
+//        floatsetting=findViewById(R.id.fsettingbtn);
+//        floatfeed=findViewById(R.id.ffeedbtn);
+//
+//        main=  findViewById(R.id.floatmenu);
+//
+//        floatfeed.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(),feed.class));
+//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+//            }
+//        });
+//        floatsetting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(),settings.class));
+//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+//            }
+//        });
+//        floatcart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(),cart.class));
+//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+//            }
+//        });
+
+
+
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//              startActivity(new Intent(getApplicationContext(),cart.class));
+//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+//            }
+//        });
 
 
         nav = findViewById(R.id.drawer_layout);
@@ -193,6 +187,31 @@ try{
 
 
     }
+
+    private void logout() {
+        android.app.AlertDialog dialog = new AlertDialog.Builder(this,R.style.AlertDialogStyle)
+                .setTitle("LOG OUT")
+                .setMessage("Hope You Remember Your Password!!")
+                .setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Paper.book().write(prevalent.userpasskey,"");
+                        Paper.book().write(prevalent.useremailkey,"");
+                        startActivity(new Intent(getApplicationContext(),start.class));
+                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        finish();
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+    }
+
 
     private void loaddetails2() {
         final DocumentReference documentReference = fStore.collection("users").document(userid);
@@ -328,11 +347,15 @@ try{
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             case R.id.nav_logout:
-                Paper.book().write(prevalent.userpasskey,"");
-                Paper.book().write(prevalent.useremailkey,"");
-                startActivity(new Intent(getApplicationContext(),start.class));
+               logout();
+                break;
+            case R.id.nav_offer:
+
+                Intent intent=new Intent(home.this,offers.class);
+                intent.putExtra("categoryname","Lunch");
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                finish();
+
                 break;
 
         }

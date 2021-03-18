@@ -312,7 +312,7 @@ android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="10dp"
                     android:layout_height="300dp"
-                    android:layout_above="@id/bottomnavnew"
+
                     android:scrollbars="vertical" />
 
                 <TextView

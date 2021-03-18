@@ -19,45 +19,142 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <Button
-                android:id="@+id/mailloginbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:textColor="@color/white"
-                android:background="@drawable/inputtwo"
-                android:fontFamily="@font/arialbd"
-                android:text="@string/mail" />
 
-            <Button
-                android:visibility="gone"
-                android:id="@+id/phoneloginbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:textColor="@color/white"
-                android:background="@drawable/inputtwo"
-                android:fontFamily="@font/arialbd"
-                android:text="@string/phone" />
+
+
         </TableRow>
 
     </TableLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_below="@id/tablelogin"
         android:id="@+id/framelogin"
-android:background="@drawable/inputtwo"
         android:layout_width="match_parent"
-        android:layout_margin="6dp"
+android:gravity="center"
         android:padding="5dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:orientation="vertical">
 
-       >
 
-    </FrameLayout>
+        <EditText
+
+            android:id="@+id/loginemailtxt"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:textColorHint="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="6dp"
+            android:textColor="@color/white"
+            android:background="@drawable/inputtwo"
+            android:ems="10"
+            android:fontFamily="@font/arial"
+            android:hint="@string/mail"
+            android:inputType="textEmailAddress"
+            android:padding="5dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/loginpasswordtxt"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/inputtwo"
+            android:ems="10"
+            android:fontFamily="@font/arial"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:hint="@string/Password"
+            android:inputType="textPassword"
+            android:padding="5dp"
+            android:textAlignment="center" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:id="@+id/textView4"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="@font/arial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/remembermettxt" />
+
+                <CheckBox
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"
+                    android:id="@+id/checkBox"
+                    android:layout_margin="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp" />
+
+
+            </TableRow>
+
+        </TableLayout>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/blue"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <Button
+                android:id="@+id/emailloginbtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/arialbd"
+                android:text="@string/logintxt"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/forgotpasswordtxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/arial"
+            android:textAlignment="center"
+            android:text="@string/forgotxt"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/resendmailverification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arial"
+            android:textSize="13dp"
+            android:visibility="gone"
+            android:text="@string/resendverification"
+            android:textAlignment="center"
+            android:textColor="#54AA07" />
+
+
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +170,7 @@ android:background="@drawable/inputtwo"
             android:id="@+id/imageView3"
             android:layout_width="100dp"
             android:scaleType="centerCrop"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             app:srcCompat="@drawable/porkpitlogo" />
     </LinearLayout>
 
@@ -102,7 +199,7 @@ android:background="@drawable/inputtwo"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="4dp"
         android:textSize="12dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
         android:textColor="@color/white"
