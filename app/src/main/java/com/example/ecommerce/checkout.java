@@ -90,11 +90,15 @@ public class checkout extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         StatusBarUtil.setTransparent(this);
+
+
+
 
         CaocConfig.Builder.create()
                 .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
@@ -122,15 +126,17 @@ public class checkout extends AppCompatActivity {
         topayment=findViewById(R.id.topaybtn);
 
         getbalance();
-        autochangeprofile2();
-        shippingprices();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                setlocationprice();
+                runtwo();
+                loadaction();
+              loadBar.hide();
             }
-        },200);
+        },2000);
+
+
+
 
 
         estate=findViewById(R.id.checkoutestatetxt);
@@ -179,8 +185,6 @@ public class checkout extends AppCompatActivity {
         });
 
 
-
-
         changeloc=findViewById(R.id.checkoutchangetxt);
 
         changeloc.setOnClickListener(new View.OnClickListener() {
@@ -190,32 +194,6 @@ confirm();
 
             }
         });
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    loadBar.hide();
-
-
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            loadaction();
-                        }
-                    },500);
-
-
-                }catch (Exception e){
-                    loadBar.hide();
-                    Toast.makeText(checkout.this, "error: "+e, Toast.LENGTH_SHORT).show();
-                }
-            }
-        },3000);
-
 
 
 
@@ -237,42 +215,7 @@ confirm();
     }
     public void getbalance() {
 
-        final DocumentReference documentReference = fStore.collection("CartList")
-                .document("cartamounts").collection("general").document(userid);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-
-                initialbalance=documentSnapshot.getString("cartamount");
-
-
-            }
-        });
-    }
-
-    private void shippingprices() {
-
-        final DocumentReference documentReference = fStore.collection("locations").document("prices");
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-
-
-               locationone=documentSnapshot.getString("Nairobi");
-                 locationtwo=documentSnapshot.getString("Ruaka");
-                locationthree=documentSnapshot.getString("Kikuyu");
-                locationfour=documentSnapshot.getString("Dagoretti");
-                locationfive=documentSnapshot.getString("Uthiru");
-                locationsix=documentSnapshot.getString("Wangige");
-
-            }
-        });
-
-
-    }
-
-    private void autochangeprofile2() {
-        final DocumentReference documentReference = fStore.collection("users").document(userid);
+         DocumentReference documentReference = fStore.collection("users").document(userid);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
@@ -286,60 +229,85 @@ confirm();
         });
 
 
+         documentReference = fStore.collection("CartList")
+                .document("cartamounts").collection("general").document(userid);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                initialbalance=documentSnapshot.getString("cartamount");
+
+
+            }
+        });
+
+
+         documentReference = fStore.collection("locations").document("prices");
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+
+                locationone=documentSnapshot.getString("Nairobi");
+                locationtwo=documentSnapshot.getString("Ruaka");
+                locationthree=documentSnapshot.getString("Kikuyu");
+                locationfour=documentSnapshot.getString("Dagoretti");
+                locationfive=documentSnapshot.getString("Uthiru");
+                locationsix=documentSnapshot.getString("Wangige");
+
+            }
+        });
+
+
 
 
 
 
     }
-
-    private void totalcalculations() {
-        shipping.setText(setprice);
-        cart.setText(initialbalance);
-
-        int one= Integer.parseInt(setprice);
-        int two=Integer.parseInt(initialbalance);
-        int three =one+two;
-        String amount=String.valueOf(three);
-        total.setText(amount);
-
-
-    }
-
-    private void setlocationprice() {
-
+    public void runtwo(){
         switch (generallocation){
             case "Nairobi":
-                 setprice=locationone;
+                setprice=locationone;
                 break;
             case "Ruaka":
-                 setprice=locationtwo;
+                setprice=locationtwo;
                 break;
             case "Kikuyu":
-                 setprice=locationthree;
+                setprice=locationthree;
                 break;
             case "Dagoretti":
-                 setprice=locationfour;
+                setprice=locationfour;
                 break;
             case "Uthiru":
-                 setprice=locationfive;
+                setprice=locationfive;
                 break;
             case "Wangige":
-                 setprice=locationsix;
+                setprice=locationsix;
                 break;
-
-
         }
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                totalcalculations();
-            }
-        },500);
 
+                shipping.setText(setprice);
+                cart.setText(initialbalance);
+
+                int one= Integer.parseInt(setprice);
+                int two=Integer.parseInt(initialbalance);
+                int three =one+two;
+                String amount=String.valueOf(three);
+                total.setText(amount);
+
+            }
+        },200);
 
 
     }
+
+
+
+
 
     private void confirm() {
 
@@ -386,8 +354,6 @@ confirm();
                 View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.checkoutitem,parent,false);
                 checkoutviewholder holder =new checkoutviewholder(view);
                 return holder;
-
-
 
             }
         };
