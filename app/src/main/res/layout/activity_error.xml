@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    tools:context=".ErrorActivity">
+    <ImageView
+        android:id="@+id/imageView19"
+android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="240dp"
+        app:srcCompat="@drawable/data_setting_24" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_margin="8dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/arialbd"
+        android:textAlignment="center"
+        android:id="@+id/textView52"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/letuswork" />
+
+    <TextView
+        android:layout_margin="8dp"
+        android:textSize="14dp"
+        android:fontFamily="@font/arialbd"
+        android:textAlignment="center"
+        android:id="@+id/sd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Creatingdb" />
+    <TextView
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+
+        android:id="@+id/textViNew21"
+        android:textSize="13dp"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/arial"
+        android:layout_height="wrap_content"
+        android:text="@string/happensonce" />
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+
+        android:id="@+id/textView21"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:fontFamily="@font/arial"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright" />
+
+    <ImageView
+        android:id="@+id/imageView20"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="8dp"
+        app:srcCompat="@drawable/techkey" />
+
+
+</LinearLayout>
