@@ -222,10 +222,14 @@ getbalance();
                                 .document(userid).collection("Cartiems").document(cartkey).set(cartitem).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(productdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
+
                                 loadBar.hide();
-                                startActivity(new Intent(getApplicationContext(),cart.class));
+                                Toast.makeText(productdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(productdetails.this,home.class);
+                                intent.putExtra("categoryname",cid);
+                                startActivity(intent);
                                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

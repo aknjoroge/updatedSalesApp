@@ -24,6 +24,9 @@
     <string name="total">TOTAL</string>
     <string name="checkout">CHECKOUT</string>
     <string name="name">NAME</string>
+    <string name="happensonce">THIS ONLY HAPPENS ONCE</string>
+    <string name="letuswork">LET US WORK</string>
+    <string name="Creatingdb">CREATING YOUR DATABASE...</string>
     <string name="similar">OTHER PRODUCTS</string>
     <string name="update">CHECK UPDATE</string>
     <string name="cart">CART</string>

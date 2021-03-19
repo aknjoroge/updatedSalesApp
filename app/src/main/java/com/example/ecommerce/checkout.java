@@ -40,6 +40,9 @@ import com.squareup.picasso.Picasso;
 import java.sql.Array;
 import java.util.ArrayList;
 
+import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import cat.ereza.customactivityoncrash.config.CaocConfig;
+
 public class checkout extends AppCompatActivity {
     ImageView settingdp;
     String takenews;
@@ -70,12 +73,42 @@ public class checkout extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
+    private static  class CustomEventListener implements CustomActivityOnCrash.EventListener{
+        @Override
+        public void onLaunchErrorActivity() {
+
+        }
+
+        @Override
+        public void onRestartAppFromErrorActivity() {
+        }
+
+        @Override
+        public void onCloseAppFromErrorActivity() {
+
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         StatusBarUtil.setTransparent(this);
+
+        CaocConfig.Builder.create()
+                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
+                .enabled(true) //default: true
+                .showErrorDetails(false) //default: true
+                .showRestartButton(false) //default: true
+                .logErrorOnRestart(false) //default: true
+                .trackActivities(false) //default: false
+                .minTimeBetweenCrashesMs(2000) //default: 3000
+                .errorDrawable(null) //default: bug image
+                .restartActivity(home.class) //default: null (your app's launch activity)
+                .errorActivity(ErrorActivity.class) //default: null (default error activity)
+                .eventListener(new CustomEventListener()) //default: null
+                .apply();
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();

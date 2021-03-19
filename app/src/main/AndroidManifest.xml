@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ecommerce">
-<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,13 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".offers"></activity>
+        <activity android:name=".ErrorActivity"></activity>
+        <activity android:name=".offers" />
         <activity
-            android:name=".signuppagethree" android:screenOrientation="portrait"
-            android:noHistory="true" />
+            android:name=".signuppagethree"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".signuppagetwo" android:screenOrientation="portrait"
-            android:noHistory="true" />
+            android:name=".signuppagetwo"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".finalcheckout"
             android:noHistory="true"
@@ -51,7 +55,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".account"
-           
             android:screenOrientation="portrait" />
         <activity
             android:name=".feed"
