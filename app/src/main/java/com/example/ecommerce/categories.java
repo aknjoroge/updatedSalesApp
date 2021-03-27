@@ -85,9 +85,6 @@ try {
     Toast.makeText(this, "error" +e, Toast.LENGTH_LONG).show();
 }
 
-
-
-
     }
 
     private void loadaction() {
@@ -127,18 +124,18 @@ try {
                             return;
                         }
                         if (model.getName().equals("Platters")){
-                            Toast.makeText(categories.this, "platter", Toast.LENGTH_SHORT).show();
-//                            Intent intent=new Intent(categories.this,platter.class);
-//                            startActivity(intent);
-//                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                           // Toast.makeText(categories.this, "platter", Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(categories.this,platerhome.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                             return;
 
                         }
                         if (model.getName().equals("Choma")){
-                            Toast.makeText(categories.this, "choma", Toast.LENGTH_SHORT).show();
-//                            Intent intent=new Intent(categories.this,choma.class);
-//                            startActivity(intent);
-//                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                            //Toast.makeText(categories.this, "choma", Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(categories.this,chomahome.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                             return;
                         }
                         else {

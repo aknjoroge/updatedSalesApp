@@ -46,7 +46,7 @@ import com.squareup.picasso.Picasso;
 
 import io.paperdb.Paper;
 
-public class fryhome extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
+public class chomahome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout nav;
     FirebaseAuth fAuth;
     String htm;
@@ -76,14 +76,15 @@ public class fryhome extends AppCompatActivity  implements NavigationView.OnNavi
         super.finish();
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fryhome);
+        setContentView(R.layout.activity_chomahome);
         Paper.init(this);
 
 
-        aq="Pork_Fry";
+        aq="Choma";
         fAuth = FirebaseAuth.getInstance();
         using=fAuth.getCurrentUser();
         fStore = FirebaseFirestore.getInstance();
@@ -93,7 +94,7 @@ public class fryhome extends AppCompatActivity  implements NavigationView.OnNavi
         setSupportActionBar(toolbar);
         dataloc=aq;
 
-        recyclerView=findViewById(R.id.fryrecycler);
+        recyclerView=findViewById(R.id.chomarecycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
@@ -108,9 +109,9 @@ public class fryhome extends AppCompatActivity  implements NavigationView.OnNavi
         }catch (Exception e){
             Toast.makeText(this, "error"+e, Toast.LENGTH_LONG).show();
         }
-
-
-
+//
+//
+//
         floatfeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,10 +209,9 @@ public class fryhome extends AppCompatActivity  implements NavigationView.OnNavi
         });
     }
 
-    //  fStore.collection("Products").document("allforchicken").collection(dataloc)
     private void loadaction() {
         FirestoreRecyclerOptions<forchicken> options = new FirestoreRecyclerOptions.Builder<forchicken>()
-                .setQuery(fStore.collection("Products").document("allforpork").collection(dataloc),forchicken.class).build();
+                .setQuery(fStore.collection("Products").document("allforchoma").collection(dataloc),forchicken.class).build();
         FirestoreRecyclerAdapter<forchicken,chickenviewholder> adapter= new FirestoreRecyclerAdapter<forchicken, chickenviewholder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull chickenviewholder holder, int position, @NonNull final forchicken model) {
@@ -225,7 +225,7 @@ public class fryhome extends AppCompatActivity  implements NavigationView.OnNavi
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(fryhome.this,frydetails.class);
+                        Intent intent=new Intent(chomahome.this,chomadetails.class);
                         intent.putExtra("pid",model.getRandomKey());
                         intent.putExtra("cid",model.getCategory());
 
@@ -239,7 +239,7 @@ public class fryhome extends AppCompatActivity  implements NavigationView.OnNavi
             @NonNull
             @Override
             public chickenviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.fryitem,parent,false);
+                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.chomaitem,parent,false);
                 chickenviewholder holder =new chickenviewholder(view);
                 return holder;
 
@@ -321,7 +321,7 @@ public class fryhome extends AppCompatActivity  implements NavigationView.OnNavi
                 break;
             case R.id.nav_offer:
 
-                Intent intent=new Intent(fryhome.this,offers.class);
+                Intent intent=new Intent(chomahome.this,offers.class);
                 intent.putExtra("categoryname","Lunch");
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);

@@ -105,12 +105,16 @@
     <string name="i">I</string>
     <string name="quantity">Quantity:</string>
     <string name="chicken">CHICKEN</string>
+    <string name="platter">PLATTER</string>
     <string name="porkfry">Pork Fry</string>
     <string name="home">HOME</string>
+    <string name="choma">Choma</string>
     <string name="half">HALF</string>
     <string name="full">FULL</string>
     <string name="gram1">200g</string>
     <string name="gram2">500g</string>
+    <string name="gram3">350g</string>
+    <string name="gram4">500g</string>
     <string name="DE">DE</string>
     <string name="code">CODE</string>
     <string name="contact">Contact us if you have a problem </string>

@@ -215,8 +215,8 @@ callpassword();
                     public void onSuccess(AuthResult authResult) {
 
                         startActivity(new Intent(getApplicationContext(),emailverification.class));
-                        loadBar.hide();
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        loadBar.hide();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -224,8 +224,8 @@ callpassword();
                     public void onFailure(@NonNull Exception e) {
 
                         startActivity(new Intent(getApplicationContext(),loginpage.class));
-                        loadBar.hide();
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        loadBar.hide();
                         Toast.makeText(start.this, "Auto Login Failed", Toast.LENGTH_SHORT).show();
                     }
                 });

@@ -57,7 +57,7 @@ public class chickenhome extends AppCompatActivity implements NavigationView.OnN
     FirebaseUser using;
     FirebaseFirestore fStore;
     FloatingActionMenu fmain;
-    FloatingActionButton floatcart,floatsetting,floatfeed,floatcategory;
+    FloatingActionButton floatcart,floatsetting,floatfeed;
     ImageView himage;
     boolean doubleBackToExitPressedOnce = false;
     String userid;
@@ -83,14 +83,14 @@ public class chickenhome extends AppCompatActivity implements NavigationView.OnN
 
         Paper.init(this);
 
-        StatusBarUtil.setTransparent(this);
+
         aq="Chicken";
         fAuth = FirebaseAuth.getInstance();
         using=fAuth.getCurrentUser();
         fStore = FirebaseFirestore.getInstance();
         userid = fAuth.getCurrentUser().getUid();
         storageReference = FirebaseStorage.getInstance().getReference();
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.maintools);
         setSupportActionBar(toolbar);
         dataloc=aq;
 
@@ -105,7 +105,7 @@ public class chickenhome extends AppCompatActivity implements NavigationView.OnN
             floatcart=findViewById(R.id.fcartbtn);
             floatfeed=findViewById(R.id.ffeedbtn);
             floatsetting=findViewById(R.id.fsettingbtn);
-            floatcategory=findViewById(R.id.fcatbtn);
+
         }catch (Exception e){
             Toast.makeText(this, "error"+e, Toast.LENGTH_LONG).show();
         }
@@ -119,13 +119,7 @@ public class chickenhome extends AppCompatActivity implements NavigationView.OnN
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
-        floatcategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),categories.class));
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-            }
-        });
+
         floatsetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

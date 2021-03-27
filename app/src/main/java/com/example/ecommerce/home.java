@@ -65,7 +65,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     FirebaseUser using;
     FirebaseFirestore fStore;
     FloatingActionMenu fmain;
-    FloatingActionButton floatcart,floatsetting,floatfeed,floatcategory;
+    FloatingActionButton floatcart,floatsetting,floatfeed;
     ImageView himage;
     boolean doubleBackToExitPressedOnce = false;
     String userid;
@@ -125,7 +125,7 @@ fmain.close(false);
            floatcart=findViewById(R.id.fcartbtn);
            floatfeed=findViewById(R.id.ffeedbtn);
            floatsetting=findViewById(R.id.fsettingbtn);
-           floatcategory=findViewById(R.id.fcatbtn);
+
        }catch (Exception e){
            Toast.makeText(this, "error"+e, Toast.LENGTH_LONG).show();
        }
@@ -141,13 +141,7 @@ fmain.close(false);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             }
         });
-        floatcategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),categories.class));
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-            }
-        });
+
         floatsetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

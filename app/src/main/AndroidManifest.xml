@@ -18,7 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".frydetails"></activity>
+        <activity android:name=".platterdetails"></activity>
+        <activity android:name=".platerhome" />
+        <activity android:name=".chomadetails" />
+        <activity android:name=".chomahome" />
+        <activity android:name=".frydetails" />
         <activity android:name=".fryhome" />
         <activity android:name=".chickendetails" />
         <activity android:name=".chickenhome" />
