@@ -44,6 +44,14 @@
             app:menu_labels_textColor="#FFFFFF" />
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fcatbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/category_24"
+            app:fab_label="Categories"
+            app:menu_labels_textColor="#FFFFFF" />
+
+        <com.github.clans.fab.FloatingActionButton
             android:id="@+id/ffeedbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

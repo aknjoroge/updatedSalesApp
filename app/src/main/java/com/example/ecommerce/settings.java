@@ -123,12 +123,12 @@ Button dells,updates,toaccount;
                 final Snackbar snackbar= Snackbar.make(findViewById(R.id.settinglayout), "THE PORK PIT", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
                 View snackbarView = snackbar.getView();
-
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
                 params.topMargin =50;
                 params.gravity = Gravity.TOP;
                 snackbarView.setLayoutParams(params);
                 snackbar.show();
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

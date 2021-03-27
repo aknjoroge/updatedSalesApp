@@ -1,5 +1,16 @@
 package com.example.ecommerce;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,20 +21,16 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,24 +44,9 @@ import com.google.firebase.storage.StorageReference;
 import com.jaeger.library.StatusBarUtil;
 import com.squareup.picasso.Picasso;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import io.paperdb.Paper;
 
-public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class chickenhome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
     DrawerLayout nav;
     FirebaseAuth fAuth;
     String htm;
@@ -74,35 +66,25 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     TextView pname,pmail;
     private AppBarConfiguration mAppBarConfiguration;
 
-
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fmain.close(false);
+    }
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-fmain.close(false);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_chickenhome);
 
         Paper.init(this);
+
         StatusBarUtil.setTransparent(this);
-
-
-
-
-         aq=getIntent().getStringExtra("categoryname");
-
-
-
+        aq="Chicken";
         fAuth = FirebaseAuth.getInstance();
         using=fAuth.getCurrentUser();
         fStore = FirebaseFirestore.getInstance();
@@ -112,25 +94,21 @@ fmain.close(false);
         setSupportActionBar(toolbar);
         dataloc=aq;
 
-
-
-        recyclerView=findViewById(R.id.recyclermenumain);
+        recyclerView=findViewById(R.id.chickenrecycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
 
-       fmain=  findViewById(R.id.floatmenu);
+        fmain=  findViewById(R.id.floatmenu);
 
-       try {
-           floatcart=findViewById(R.id.fcartbtn);
-           floatfeed=findViewById(R.id.ffeedbtn);
-           floatsetting=findViewById(R.id.fsettingbtn);
-           floatcategory=findViewById(R.id.fcatbtn);
-       }catch (Exception e){
-           Toast.makeText(this, "error"+e, Toast.LENGTH_LONG).show();
-       }
-
-
+        try {
+            floatcart=findViewById(R.id.fcartbtn);
+            floatfeed=findViewById(R.id.ffeedbtn);
+            floatsetting=findViewById(R.id.fsettingbtn);
+            floatcategory=findViewById(R.id.fcatbtn);
+        }catch (Exception e){
+            Toast.makeText(this, "error"+e, Toast.LENGTH_LONG).show();
+        }
 
 
 
@@ -163,18 +141,6 @@ fmain.close(false);
             }
         });
 
-
-
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//              startActivity(new Intent(getApplicationContext(),cart.class));
-//                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-//            }
-//        });
-
-
         nav = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, nav, toolbar, R.string.nav_opener, R.string.nav_closer);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -190,15 +156,13 @@ fmain.close(false);
         pmail=headerview.findViewById(R.id.profilemail);
         himage=headerview.findViewById(R.id.profileimage);
 
-try{
-    loadaction();
-   loaddetails2();
-    loadprofile();
-}catch (Exception e){
-    Toast.makeText(this, "Error: "+e, Toast.LENGTH_LONG).show();
-}
-
-
+        try{
+            loadaction();
+            loaddetails2();
+            loadprofile();
+        }catch (Exception e){
+            Toast.makeText(this, "Error: "+e, Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -214,7 +178,6 @@ try{
                         startActivity(new Intent(getApplicationContext(),start.class));
                         overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         finish();
-
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -252,14 +215,15 @@ try{
         });
     }
 
+    //  fStore.collection("Products").document("allforchicken").collection(dataloc)
     private void loadaction() {
-        FirestoreRecyclerOptions<forproduct> options = new FirestoreRecyclerOptions.Builder<forproduct>()
-                .setQuery(fStore.collection("Products").document("all").collection(dataloc),forproduct.class).build();
-        FirestoreRecyclerAdapter<forproduct,productviewholder> adapter= new FirestoreRecyclerAdapter<forproduct, productviewholder>(options) {
+        FirestoreRecyclerOptions<forchicken> options = new FirestoreRecyclerOptions.Builder<forchicken>()
+                .setQuery(fStore.collection("Products").document("allforchicken").collection(dataloc),forchicken.class).build();
+        FirestoreRecyclerAdapter<forchicken,chickenviewholder> adapter= new FirestoreRecyclerAdapter<forchicken, chickenviewholder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull productviewholder holder, int position, @NonNull final forproduct model) {
+            protected void onBindViewHolder(@NonNull chickenviewholder holder, int position, @NonNull final forchicken model) {
                 holder.txtpname.setText(model.getName()+".");
-                holder.txtpprice.setText("Price: "+model.getPrice());
+
                 holder.txtpdescription.setText("Category: "+model.getCategory());
 
 
@@ -268,7 +232,7 @@ try{
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(home.this,productdetails.class);
+                        Intent intent=new Intent(chickenhome.this,chickendetails.class);
                         intent.putExtra("pid",model.getRandomKey());
                         intent.putExtra("cid",model.getCategory());
 
@@ -281,11 +245,10 @@ try{
 
             @NonNull
             @Override
-            public productviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.productitem,parent,false);
-                productviewholder holder =new productviewholder(view);
+            public chickenviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.chickenitem,parent,false);
+                chickenviewholder holder =new chickenviewholder(view);
                 return holder;
-
 
 
             }
@@ -299,7 +262,7 @@ try{
 
     }
 
-//    @Override
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.home, menu);
@@ -361,11 +324,11 @@ try{
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                 break;
             case R.id.nav_logout:
-               logout();
+                logout();
                 break;
             case R.id.nav_offer:
 
-                Intent intent=new Intent(home.this,offers.class);
+                Intent intent=new Intent(chickenhome.this,offers.class);
                 intent.putExtra("categoryname","Lunch");
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);

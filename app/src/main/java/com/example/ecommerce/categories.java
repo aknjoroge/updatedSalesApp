@@ -108,10 +108,49 @@ try {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(categories.this,home.class);
-                        intent.putExtra("categoryname",model.getCategory());
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
+                        if(model.getName().equals("Pork_Fry")){
+
+                            Intent intent=new Intent(categories.this,fryhome.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
+                            return;
+
+                        }if (model.getName().equals("Chicken")){
+
+                           // Toast.makeText(categories.this, "chicken", Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(categories.this,chickenhome.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+
+                            return;
+                        }
+                        if (model.getName().equals("Platters")){
+                            Toast.makeText(categories.this, "platter", Toast.LENGTH_SHORT).show();
+//                            Intent intent=new Intent(categories.this,platter.class);
+//                            startActivity(intent);
+//                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                            return;
+
+                        }
+                        if (model.getName().equals("Choma")){
+                            Toast.makeText(categories.this, "choma", Toast.LENGTH_SHORT).show();
+//                            Intent intent=new Intent(categories.this,choma.class);
+//                            startActivity(intent);
+//                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                            return;
+                        }
+                        else {
+
+                            Intent intent=new Intent(categories.this,home.class);
+                            intent.putExtra("categoryname",model.getCategory());
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                        }
+
+
+
                     }
                 });
             }

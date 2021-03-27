@@ -18,7 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ErrorActivity"></activity>
+        <activity android:name=".frydetails"></activity>
+        <activity android:name=".fryhome" />
+        <activity android:name=".chickendetails" />
+        <activity android:name=".chickenhome" />
+        <activity android:name=".ErrorActivity" />
         <activity android:name=".offers" />
         <activity
             android:name=".signuppagethree"
