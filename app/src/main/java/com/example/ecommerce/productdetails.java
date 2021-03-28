@@ -180,6 +180,8 @@ getbalance();
 
                 }catch (Exception e){
                     Toast.makeText(productdetails.this, "math error do not continue", Toast.LENGTH_SHORT).show();
+                    loadBar.hide();
+                    return;
                 }
 
 

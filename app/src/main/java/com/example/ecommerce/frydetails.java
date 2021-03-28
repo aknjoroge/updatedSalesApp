@@ -238,6 +238,8 @@ public class frydetails extends AppCompatActivity {
 
                 }catch (Exception e){
                     Toast.makeText(frydetails.this, "math error do not continue", Toast.LENGTH_SHORT).show();
+                    loadBar.hide();
+                    return;
                 }
 
 

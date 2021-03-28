@@ -209,7 +209,7 @@ android:visibility="invisible"
 
                             android:progressTint="#ffaa1d"
                             android:isIndicator="true"
-                            android:rating="3"
+                            android:rating="4.5"
                             />
 
                         <Button

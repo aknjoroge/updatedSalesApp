@@ -20,8 +20,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +31,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -52,7 +56,7 @@ public class account extends AppCompatActivity {
     String dpstate;
     String takechecklock;
 
-    Button setforname,setforphone,setforpass,setforemail,setforlocation;
+    Button setforname,setforphone,setforpass,setforemail,setforlocation,cartreset;
     FirebaseAuth fAuth;
     FirebaseUser using;
     StorageReference storageReference;
@@ -82,6 +86,13 @@ call=findViewById(R.id.placecallaccounts);
         userid = fAuth.getCurrentUser().getUid();
         forphonename=findViewById(R.id.setphonename);
         forlocname=findViewById(R.id.setlocationname);
+        cartreset=findViewById(R.id.resetcart);
+        cartreset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirm();
+            }
+        });
 
 
         foremailname=findViewById(R.id.setemailname);
@@ -156,6 +167,47 @@ call=findViewById(R.id.placecallaccounts);
         autochangeprofile2();
     }
 
+    private void confirm() {
+        final EditText dellac = new EditText(this);
+        android.app.AlertDialog dialog = new AlertDialog.Builder(this, R.style.AlertDialogStyle)
+                .setTitle("RESET YOUR CART ITEMS!!!")
+                .setMessage("Enter The Word 'RESET' TO CONFIRM")
+                .setView(dellac)
+                .setPositiveButton("RESET", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!TextUtils.isEmpty(dellac.getText().toString())) {
+                            String in = dellac.getText().toString();
+                            if (in.equals("RESET")) {
+
+deletecart();
+setordersatte();
+cartmodify();
+
+
+
+                            } else {
+                                Toast.makeText(account.this, "RESET not typed Correctly", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } else {
+                            Toast.makeText(account.this, "Field is empty", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(account.this, " Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
+
+
+    }
+
     private void settingphone() {
 
         final EditText resetpassw= new EditText(this);
@@ -194,6 +246,79 @@ call=findViewById(R.id.placecallaccounts);
 
 
     }
+    private void deletecart() {
+        fStore.collection("CartList").document("all").collection("peruser").document(userid).collection("orders")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        document.getData();
+                        document.getId();
+                        String info= document.getId();
+                        fStore.collection("CartList").document("all")
+                                .collection("peruser").document(userid).collection("orders")
+                                .document(info).delete();
+                    }
+
+                }else {
+                    Toast.makeText(account.this, "task failed", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(account.this, "data not replaced", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void setordersatte() {
+        Map<String,Object> newsum =new HashMap<>();
+        newsum.put("cartamount","0");
+
+        DocumentReference doc = fStore.collection("CartList")
+                .document("cartamounts").collection("general").document(userid);
+        doc.set(newsum, SetOptions.merge());
+
+    }
+
+    public void cartmodify(){
+
+        fStore.collection("CartList").document("individual").collection("items")
+                .document(userid).collection("Cartiems")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for (QueryDocumentSnapshot document : task.getResult()){
+                        document.getData();
+                        document.getId();
+                        String info= document.getId();
+                        fStore.collection("CartList").document("individual").collection("items")
+                                .document(userid).collection("Cartiems")
+                                .document(info).delete();
+                    }
+
+                }else {
+                    Toast.makeText(account.this, "task failed", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(account.this, "data not replaced", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+
 
     private void settingnmails() {
 

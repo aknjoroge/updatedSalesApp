@@ -105,8 +105,8 @@ public class platterdetails extends AppCompatActivity {
 
         recyclerViewtwo=findViewById(R.id.detailrecycler);
         recyclerViewtwo.setHasFixedSize(true);
-        layoutManagertwo = new GridLayoutManager(this,2);
-        recyclerViewtwo.setLayoutManager(layoutManager);
+        layoutManagertwo = new LinearLayoutManager(this);
+        recyclerViewtwo.setLayoutManager(layoutManagertwo);
 
 
         call.setOnClickListener(new View.OnClickListener() {
@@ -189,7 +189,7 @@ public class platterdetails extends AppCompatActivity {
 
                 cartkey= ctime+cdate;
                 takename=txtdetailname.getText().toString();
-
+                takeprice= txtdetailprice.getText().toString();
                 takecat=txtdetailcategory.getText().toString();
                 productid=pid;
                 amounts=add.getNumber();
@@ -204,7 +204,9 @@ public class platterdetails extends AppCompatActivity {
                     updatesum(finalsum);
 
                 }catch (Exception e){
+                    loadBar.hide();
                     Toast.makeText(platterdetails.this, "math error do not continue", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
 
@@ -249,7 +251,7 @@ public class platterdetails extends AppCompatActivity {
 
                                 loadBar.hide();
                                 Toast.makeText(platterdetails.this, "Added to cart Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(platterdetails.this,chomahome.class);
+                                Intent intent=new Intent(platterdetails.this,platerhome.class);
                                 startActivity(intent);
                                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
@@ -291,7 +293,7 @@ public class platterdetails extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull platterdetailitemviewholder holder, int position, @NonNull final platterfordetailitem model) {
                 holder.txtpname.setText(model.getName()+".");
                 holder.txtamount.setText("Amount: "+model.getPrice());
-                Toast.makeText(platterdetails.this, model.getName(), Toast.LENGTH_LONG).show();
+
             }
 
             @NonNull
@@ -300,8 +302,6 @@ public class platterdetails extends AppCompatActivity {
                 View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.platterdetailitem,parent,false);
                 platterdetailitemviewholder holder =new platterdetailitemviewholder(view);
                 return holder;
-
-
             }
         };
 

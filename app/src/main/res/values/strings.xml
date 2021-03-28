@@ -110,6 +110,7 @@
     <string name="home">HOME</string>
     <string name="choma">Choma</string>
     <string name="half">HALF</string>
+    <string name="resetcart">RESET AND EMPTY CART?</string>
     <string name="full">FULL</string>
     <string name="gram1">200g</string>
     <string name="gram2">500g</string>

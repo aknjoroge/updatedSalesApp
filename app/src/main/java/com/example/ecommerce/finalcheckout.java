@@ -178,8 +178,6 @@ loadBar.show();
                         fStore.collection("CartList").document("all")
                                 .collection("peruser").document(userid).collection("orders")
                                 .document(info).delete();
-
-
                     }
 
                 }else {

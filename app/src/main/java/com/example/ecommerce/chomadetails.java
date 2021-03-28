@@ -238,7 +238,9 @@ public class chomadetails extends AppCompatActivity {
                     updatesum(finalsum);
 
                 }catch (Exception e){
+                    loadBar.hide();
                     Toast.makeText(chomadetails.this, "math error do not continue", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
 

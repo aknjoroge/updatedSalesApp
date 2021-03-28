@@ -360,7 +360,7 @@ try{
             case R.id.nav_offer:
 
                 Intent intent=new Intent(home.this,offers.class);
-                intent.putExtra("categoryname","Lunch");
+                intent.putExtra("categoryname","offers");
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 

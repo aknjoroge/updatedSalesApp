@@ -237,7 +237,10 @@ public class chickendetails extends AppCompatActivity {
                     updatesum(finalsum);
 
                 }catch (Exception e){
+                    loadBar.hide();
+
                     Toast.makeText(chickendetails.this, "math error do not continue", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
 

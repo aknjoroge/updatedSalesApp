@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +76,7 @@ public class offers extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclermenuoffers);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new GridLayoutManager(this,2);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         try{
@@ -87,14 +89,15 @@ public class offers extends AppCompatActivity {
     }
 
     private void loadaction() {
-        FirestoreRecyclerOptions<forproduct> options = new FirestoreRecyclerOptions.Builder<forproduct>()
-                .setQuery(fStore.collection("Products").document("all").collection(dataloc),forproduct.class).build();
-        FirestoreRecyclerAdapter<forproduct,productviewholder> adapter= new FirestoreRecyclerAdapter<forproduct, productviewholder>(options) {
+        FirestoreRecyclerOptions<foroffer> options = new FirestoreRecyclerOptions.Builder<foroffer>()
+                .setQuery(fStore.collection("Products").document("all").collection("offers"),foroffer.class).build();
+        FirestoreRecyclerAdapter<foroffer,offerviewholder> adapter= new FirestoreRecyclerAdapter<foroffer, offerviewholder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull productviewholder holder, int position, @NonNull final forproduct model) {
+            protected void onBindViewHolder(@NonNull offerviewholder holder, int position, @NonNull final foroffer model) {
                 holder.txtpname.setText(model.getName()+".");
                 holder.txtpprice.setText("Price: "+model.getPrice());
                 holder.txtpdescription.setText("Category: "+model.getCategory());
+                holder.txtoldprice.setText("OLD Price: "+model.getOldprice());
 
 
                 Picasso.get().load(model.getFilepath()).into(holder.pimage);
@@ -115,9 +118,9 @@ public class offers extends AppCompatActivity {
 
             @NonNull
             @Override
-            public productviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public offerviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.offeritem,parent,false);
-                productviewholder holder =new productviewholder(view);
+                offerviewholder holder =new offerviewholder(view);
                 return holder;
 
 
